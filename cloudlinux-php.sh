@@ -1,6 +1,6 @@
 #!/bin/bash
 
 yum install -y lvemanager
-yum groupinstall alt-php
-yum update cagefs lvemanager
+yum groupinstall -y alt-php
+yum update -y cagefs lvemanager
 
