@@ -9,4 +9,5 @@ sh install.sh
 rm -f /etc/csf/csf.conf
 cd /etc/csf
 wget https://github.com/HostOnNet/server-setup/raw/master/data/csf.conf
+csf -r
 
