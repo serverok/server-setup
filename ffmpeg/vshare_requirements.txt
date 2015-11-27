@@ -12,7 +12,6 @@ echo "/usr/lib" >> /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
 cat /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
 ldconfig
 
-# yum -y install subversion
 # Don't run on Cpanel (use /scripts/installruby)
 #yum -y install ruby
 
@@ -305,40 +304,3 @@ which qt-faststart
 
 ldconfig
 cagefsctl --force-update
-
-
-============================================================================
-BELOW IS SOME NOTES, NOT PART OF INSTALL
-============================================================================
-
-
---enable-libfaad
-
-
-
-
---------------
-ERROR in compiling ffmpeg with libx264
---------------
-
-libavcodec/libavcodec.so: undefined reference to `x264_encoder_open_129'
-
-This is caused by multiple version of x264
-
-ls /usr/lib | grep 264
-ls /usr/lib64 | grep 264
-
-In server10 (wiredtree), i had 125 and 129 versions, also some other versions in /usr/lib64, i delete them, install x264 again fixed problem
-
-root@server10 [/usr/local/src/ffmpeg]# ls /usr/lib | grep 264
-libx264.so@
-libx264.so.125*
-libx264.so.129*
-root@server10 [/usr/local/src/ffmpeg]#
-
-
-yum remove x264-0.0.20111220-2.x86_64  x264-0.0.20111220-1.x86_64
-yum remove libvorbis
-
--------------
-
