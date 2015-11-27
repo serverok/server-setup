@@ -12,10 +12,6 @@ service sshd restart
 
 yum -y remove mlocate
 
-cat /root/cpanel3-skel/.cpanel-logs
-echo "archive-logs=1" > /root/cpanel3-skel/.cpanel-logs
-echo "remove-old-archived-logs=1" >> /root/cpanel3-skel/.cpanel-logs
-
 echo "Installing basic system tools"
 
 yum install -y nmap lynx wget curl telnet screen jwhois
@@ -30,6 +26,3 @@ yum install -y ncurses-devel automake autoconf gcc gmake patch make
 yum install -y libcpp libgcc libstdc++ gcc4 gcc4-c++ gcc4-gfortran
 yum install -y dos2unix libtool gcc-c++ gcc-c++ compat-gcc-32 compat-gcc-32-c++
 
-# disable mail from mailer-daemon
-
-/bin/sed -i "s/mailer-daemon:\tpostmaster/mailer-daemon: \/dev\/null/g" /etc/aliases
