@@ -36,17 +36,20 @@ make
 make install
 
 cd /usr/local/src
-git clone --depth 1 http://git.chromium.org/webm/libvpx.git
-cd /usr/local/src/libvpx
-./configure --prefix=/usr --enable-shared
+wget http://webm.googlecode.com/files/libvpx-v0.9.7-p1.tar.bz2
+tar xvjf libvpx-v0.9.7-p1.tar.bz2
+cd libvpx-v0.9.7-p1
+./configure --enable-shared
 make
 make install
 
 cd /usr/local/src
 git clone --depth 1 git://source.ffmpeg.org/ffmpeg
 cd /usr/local/src/ffmpeg
+make clean && make distclean
 ./configure --prefix=/usr  --enable-gpl --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-x11grab
 make
 make install
+ldconfig
 
 hash -r

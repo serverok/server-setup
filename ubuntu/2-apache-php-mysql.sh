@@ -1,13 +1,5 @@
 #!/bin/bash
 
-apt-get update
-apt-get -y upgrade
-apt-get -y install wget
-apt-get -y install curl
-apt-get -y install nmap
-apt-get -y install whois
-apt-get -y install vim
-
 apt-get -y install apache2
 update-rc.d apache2 enable
 a2enmod rewrite
@@ -17,5 +9,4 @@ php5enmod mcrypt
 
 apt-get -y install mariadb-client-5.5 mariadb-server-5.5
 update-rc.d mysql enable
-apt-get -y install screen
 
