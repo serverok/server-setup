@@ -29,9 +29,9 @@ yum -y install gcc-c++
 yum -y install gcc-c++ compat-gcc-32 compat-gcc-32-c++
 yum -y install unzip bzip2
 
-mkdir -p /usr/local/src/tmp
-chmod 777 /usr/local/src/tmp
-export TMPDIR=/usr/local/src/tmp
+mkdir -p /usr/local/src/hostonnet-ffmpeg/tmp
+chmod 777 /usr/local/src/hostonnet-ffmpeg/tmp
+export TMPDIR=/usr/local/src/hostonnet-ffmpeg/tmp
 
 if [ -f /usr/local/cpanel/version ];
 then
@@ -41,7 +41,7 @@ else
     cd /usr/local/src
     wget -c http://www.ijg.org/files/jpegsrc.v9a.tar.gz
     tar xvf jpegsrc.v9a.tar.gz
-    cd /usr/local/src/jpeg-9
+    cd /usr/local/src/hostonnet-ffmpeg/jpeg-9
     ./configure  --prefix=/usr
     make
     make install
@@ -49,7 +49,7 @@ fi
 
 # https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/tarball/master
 tar xzvf fdk-aac.tar.gz
 cd mstorsjo-fdk-aac*
@@ -62,56 +62,56 @@ ldconfig
 
 # http://sourceforge.net/projects/faac/files/
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.sourceforge.net/project/faac/faac-src/faac-1.28/faac-1.28.tar.gz
 tar -zxvf faac-1.28.tar.gz
-cd /usr/local/src/faac*
+cd /usr/local/src/hostonnet-ffmpeg/faac*
 sed -i '/char \*strcasestr(const char \*haystack, const char \*needle);/d' ./common/mp4v2/mpeg4ip.h
 ./bootstrap
 ./configure --prefix=/usr
 make && make install
 ldconfig
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.sourceforge.net/project/faac/faad2-src/faad2-2.7/faad2-2.7.tar.gz
 tar -zxvf faad2-2.7.tar.gz
-cd /usr/local/src/faad2*
+cd /usr/local/src/hostonnet-ffmpeg/faad2*
 autoreconf -vif
 ./configure --prefix=/usr
 make && make install
 
 # https://xiph.org/downloads/
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz
 tar zxvf libogg-1.3.2.tar.gz
-cd /usr/local/src/libogg-1.3.2
+cd /usr/local/src/hostonnet-ffmpeg/libogg-1.3.2
 ./configure && make && make install
 ldconfig
 
 # http://www.xiph.org/downloads/
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz
 tar zxvf libvorbis-1.3.5.tar.gz
-cd /usr/local/src/libvorbis-1.3.5
+cd /usr/local/src/hostonnet-ffmpeg/libvorbis-1.3.5
 ./configure && make && make install
 
 # http://lame.sourceforge.net/download.php
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
 tar xf lame-3.99.5.tar.gz
-cd /usr/local/src/lame-3.99.5
+cd /usr/local/src/hostonnet-ffmpeg/lame-3.99.5
 ./configure --enable-shared --prefix=/usr
 make && make install
 
 # http://www.xvid.org/Downloads.43.0.html
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.xvid.org/downloads/xvidcore-1.3.4.tar.gz
 tar xvf xvidcore-1.3.4.tar.gz
-cd /usr/local/src/xvidcore/build/generic/
+cd /usr/local/src/hostonnet-ffmpeg/xvidcore/build/generic/
 ./configure --prefix=/usr && make && make install
 
 # http://rubyforge.org/projects/flvtool2/
@@ -120,7 +120,7 @@ cd /usr/local/src/xvidcore/build/generic/
 cd /usr/local/src
 wget https://github.com/unnu/flvtool2/archive/master.zip -O flvtool2.zip
 unzip flvtool2.zip
-cd /usr/local/src/flvtool2-master/
+cd /usr/local/src/hostonnet-ffmpeg/flvtool2-master/
 ruby setup.rb config --prefix=/usr
 ruby setup.rb setup
 ruby setup.rb install
@@ -130,7 +130,7 @@ ruby setup.rb install
 cd /usr/local/src
 wget -c http://downloads.sourceforge.net/project/yamdi/yamdi/1.9/yamdi-1.9.tar.gz
 tar -zxvf yamdi-1.9.tar.gz
-cd /usr/local/src/yamdi-1.9
+cd /usr/local/src/hostonnet-ffmpeg/yamdi-1.9
 gcc yamdi.c -o yamdi -O2 -Wall
 mv yamdi /usr/bin/
 
@@ -140,23 +140,23 @@ mv yamdi /usr/bin/
 cd /usr/local/src
 wget -c http://liba52.sourceforge.net/files/a52dec-0.7.4.tar.gz
 tar xvf a52dec-0.7.4.tar.gz
-cd /usr/local/src/a52dec*
+cd /usr/local/src/hostonnet-ffmpeg/a52dec*
 ./configure
 make && make install
 
 # http://www.penguin.cz/~utx/amr#download
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://www.penguin.cz/~utx/ftp/amr/amrnb-11.0.0.0.tar.bz2
 tar jxvf amrnb-11.0.0.0.tar.bz2
-cd /usr/local/src/amrnb-11.0.0.0
+cd /usr/local/src/hostonnet-ffmpeg/amrnb-11.0.0.0
 ./configure
 make && make install
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget --no-check-certificate -c http://www.penguin.cz/~utx/ftp/amr/amrwb-11.0.0.0.tar.bz2
 tar jxvf amrwb-11.0.0.0.tar.bz2
-cd /usr/local/src/amrwb-11.0.0.0
+cd /usr/local/src/hostonnet-ffmpeg/amrwb-11.0.0.0
 ./configure
 make && make install
 
@@ -165,40 +165,16 @@ make && make install
 
 cd /usr/local/src
 git clone git://github.com/yasm/yasm.git
-cd /usr/local/src/yasm
-./configure
-make && make install
-
-# http://www.penguin.cz/~utx/amr#download
-
-cd /usr/local/src/
-wget -c http://www.penguin.cz/~utx/ftp/amr/amrnb-11.0.0.0.tar.bz2
-tar jxvf amrnb-11.0.0.0.tar.bz2
-cd /usr/local/src/amrnb-11.0.0.0
-./configure
-make && make install
-
-cd /usr/local/src/
-wget --no-check-certificate -c http://www.penguin.cz/~utx/ftp/amr/amrwb-11.0.0.0.tar.bz2
-tar jxvf amrwb-11.0.0.0.tar.bz2
-cd /usr/local/src/amrwb-11.0.0.0
-./configure
-make && make install
-
-# http://yasm.tortall.net/Download.html
-# 23-Oct-2015 09:01 AM
-
-cd /usr/local/src
-git clone git://github.com/yasm/yasm.git
-cd /usr/local/src/yasm
+cd /usr/local/src/hostonnet-ffmpeg/yasm
+./autogen.sh
 ./configure
 make && make install
 
 # http://www.videolan.org/developers/x264.html
 
 cd /usr/local/src
-git clone --depth 1 git://git.videolan.org/x264.git
-cd /usr/local/src/x264/
+git clone git://git.videolan.org/x264.git
+cd /usr/local/src/hostonnet-ffmpeg/x264/
 git pull
 make clean && make distclean
 ./configure --prefix=/usr --enable-shared
@@ -215,7 +191,7 @@ install -D -m755 neroAacEnc /usr/local/bin
 
 cd /usr/local/src
 git clone https://github.com/gpac/gpac.git
-cd /usr/local/src/gpac
+cd /usr/local/src/hostonnet-ffmpeg/gpac
 sh ./configure
 make
 make install
@@ -226,16 +202,16 @@ make install
 cd /usr/local/src
 wget -c http://liquidtelecom.dl.sourceforge.net/project/libdc1394/libdc1394-2/2.2.3/libdc1394-2.2.3.tar.gz
 tar zxfv libdc1394-2.2.3.tar.gz
-cd /usr/local/src/libdc1394-2.2.3
+cd /usr/local/src/hostonnet-ffmpeg/libdc1394-2.2.3
 make clean && make distclean
 ./configure
 make
 make install
 
-cd /usr/local/src/
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2
 tar -jxvf all-20071007.tar.bz2
-cd /usr/local/src/all-20071007
+cd /usr/local/src/hostonnet-ffmpeg/all-20071007
 mv /usr/local/lib/codecs /usr/local/lib/codecs-$(date +%m%d%Y%H%N)
 mkdir -p /usr/local/lib/codecs
 cp -f *.* /usr/local/lib/codecs/
@@ -245,3 +221,15 @@ ln -sf /usr/local/lib/codecs /usr/lib/codecs
 ln -sf /usr/local/lib/codecs /usr/local/lib/win32
 ln -sf /usr/local/lib/codecs /usr/lib/win32
 ldconfig
+
+cd /usr/local/src
+git clone git://git.videolan.org/ffmpeg.git
+cd /usr/local/src/hostonnet-ffmpeg/ffmpeg
+make clean && make distclean
+./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libmp3lame --enable-gpl --enable-libfaac --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
+make && make install && ldconfig
+
+cd /usr/local/src/hostonnet-ffmpeg/ffmpeg/
+make tools/qt-faststart
+cp -a tools/qt-faststart /usr/bin/
+
