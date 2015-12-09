@@ -29,7 +29,7 @@ yum -y install dos2unix
 yum -y install libtool
 yum -y install gcc-c++
 yum -y install gcc-c++ compat-gcc-32 compat-gcc-32-c++
-yum -y install unzip bzip2
+yum -y install unzip wget bzip2 curl
 
 mkdir -p /usr/local/src/hostonnet-ffmpeg/tmp
 chmod 777 /usr/local/src/hostonnet-ffmpeg/tmp
