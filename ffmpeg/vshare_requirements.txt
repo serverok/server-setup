@@ -1,14 +1,9 @@
-yum -y update
 yum -y install screen
 chmod 777 /var/run/screen
 screen
 
 uname -a
-# On 64 bit OS, run
 CFLAGS="-fPIC";export CFLAGS
-
-
-
 
 cd /usr/local/src
 git clone --depth 1 https://chromium.googlesource.com/webm/libvpx.git
@@ -16,22 +11,6 @@ cd libvpx
 make clean && make distclean
 ./configure --prefix=/usr --disable-examples
 make && make install
-
-
-ls -l /usr/local/lib/libdc1394*
-
-
-
-cd /usr/local/src
-wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-export-snapshot.tar.bz2
-tar xvf mplayer-export-snapshot.tar.bz2
-cd mplayer*
-./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/
-make && make install
-
-# http://ffmpeg.org/download.html
-
-
 
 
 ============================================================================

@@ -10,26 +10,13 @@ ldconfig
 
 yum update
 yum -y upgrade
-yum -y install lynx jwhois
-yum -y install nmap
-yum -y install ncurses-devel
-yum -y install automake
-yum -y install autoconf
-yum -y install gcc
-yum -y install gmake
-yum -y install patch
-yum -y install make
-yum -y install libcpp
-yum -y install libgcc
-yum -y install libstdc++
-yum -y install gcc4
-yum -y install gcc4-c++
-yum -y install gcc4-gfortran
-yum -y install dos2unix
-yum -y install libtool
-yum -y install gcc-c++
+yum -y install unzip wget bzip2 curl lynx jwhois
+yum -y install nmap patch dos2unix
+yum -y install ncurses-devel automake autoconf
+yum -y install gcc gmake make
+yum -y install libtool libcpp libgcc libstdc++
+yum -y install gcc4 gcc4-c++ gcc4-gfortran
 yum -y install gcc-c++ compat-gcc-32 compat-gcc-32-c++
-yum -y install unzip wget bzip2 curl
 
 mkdir -p /usr/local/src/hostonnet-ffmpeg/tmp
 chmod 777 /usr/local/src/hostonnet-ffmpeg/tmp
@@ -40,6 +27,7 @@ then
     /scripts/installruby
 else
     yum -y install ruby
+    yum -y install freetype-devel
     cd /usr/local/src
     wget -c http://www.ijg.org/files/jpegsrc.v9a.tar.gz
     tar xvf jpegsrc.v9a.tar.gz
@@ -209,6 +197,14 @@ make clean && make distclean
 ./configure
 make
 make install
+
+cd /usr/local/src/hostonnet-ffmpeg/
+wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-export-snapshot.tar.bz2
+tar xvf mplayer-export-snapshot.tar.bz2
+cd /usr/local/src/hostonnet-ffmpeg/mplayer*
+echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/
+make && make install
+
 
 cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2
