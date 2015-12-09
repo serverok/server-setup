@@ -31,23 +31,6 @@ make && make install
 
 # http://ffmpeg.org/download.html
 
-cd /usr/local/src
-git clone --depth 1 git://git.videolan.org/ffmpeg.git
-cd /usr/local/src/ffmpeg
-make clean && make distclean
-./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libmp3lame --enable-gpl --enable-libfaac --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
-make && make install
-
---enable-libvpx (gives some error)
-
-# after all installed, run
-
-ldconfig
-
-
-cd /usr/local/src/ffmpeg/
-make tools/qt-faststart
-cp -a tools/qt-faststart /usr/bin/
 
 
 
