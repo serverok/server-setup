@@ -8,6 +8,8 @@ echo "/usr/lib" >> /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
 cat /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
 ldconfig
 
+yum update
+yum -y upgrade
 yum -y install lynx jwhois
 yum -y install nmap
 yum -y install ncurses-devel
@@ -232,4 +234,6 @@ make && make install && ldconfig
 cd /usr/local/src/hostonnet-ffmpeg/ffmpeg/
 make tools/qt-faststart
 cp -a tools/qt-faststart /usr/bin/
+
+ldconfig
 
