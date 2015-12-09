@@ -41,3 +41,15 @@ which qt-faststart
 
 ldconfig
 cagefsctl --force-update
+
+
+
+sed -e "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini
+sed -e "s/max_input_time\s*=.*/max_input_time = 6000/g" php.ini
+sed -e "s/memory_limit\s*=.*/memory_limit = 128M/g" php.ini
+sed -e "s/display_errors\s*=.*/display_errors = On/g" php.ini
+sed -e "s/file_uploads\s*=.*/file_uploads = On/g" php.ini
+sed -e "s/post_max_size\s*=.*/post_max_size = 800M/g" php.ini
+sed -e "s/upload_max_filesize\s*=.*/upload_max_filesize = 800M/g" php.ini
+sed -e "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" php.ini
+sed -e "s/error_reporting\s*=.*/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" php.ini
