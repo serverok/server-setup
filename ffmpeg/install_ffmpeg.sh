@@ -54,7 +54,7 @@ fi
 cd /usr/local/src/hostonnet-ffmpeg/
 wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/tarball/master
 tar xzvf fdk-aac.tar.gz
-cd mstorsjo-fdk-aac*
+cd /usr/local/src/hostonnet-ffmpeg/mstorsjo-fdk-aac*
 autoreconf -fiv
 ./configure --prefix=/usr
 make
@@ -119,7 +119,7 @@ cd /usr/local/src/hostonnet-ffmpeg/xvidcore/build/generic/
 # http://rubyforge.org/projects/flvtool2/
 # http://www.inlet-media.de/2009/11/flvtool2.html
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 wget https://github.com/unnu/flvtool2/archive/master.zip -O flvtool2.zip
 unzip flvtool2.zip
 cd /usr/local/src/hostonnet-ffmpeg/flvtool2-master/
@@ -129,7 +129,7 @@ ruby setup.rb install
 
 # http://yamdi.sourceforge.net/
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://downloads.sourceforge.net/project/yamdi/yamdi/1.9/yamdi-1.9.tar.gz
 tar -zxvf yamdi-1.9.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/yamdi-1.9
@@ -139,7 +139,7 @@ mv yamdi /usr/bin/
 #cd /usr/local/src
 #git clone https://github.com/ioppermann/yamdi.git
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://liba52.sourceforge.net/files/a52dec-0.7.4.tar.gz
 tar xvf a52dec-0.7.4.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/a52dec*
@@ -165,7 +165,7 @@ make && make install
 # http://yasm.tortall.net/Download.html
 # 23-Oct-2015 09:01 AM
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 git clone git://github.com/yasm/yasm.git
 cd /usr/local/src/hostonnet-ffmpeg/yasm
 ./autogen.sh
@@ -174,7 +174,7 @@ make && make install
 
 # http://www.videolan.org/developers/x264.html
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 git clone git://git.videolan.org/x264.git
 cd /usr/local/src/hostonnet-ffmpeg/x264/
 git pull
@@ -182,16 +182,16 @@ make clean && make distclean
 ./configure --prefix=/usr --enable-shared
 make && make install
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://ftp6.nero.com/tools/NeroDigitalAudio.zip
 unzip NeroDigitalAudio.zip -d nero
-cd nero/linux
+cd /usr/local/src/hostonnet-ffmpeg/nero/linux
 install -D -m755 neroAacEnc /usr/local/bin
 
 # https://gpac.wp.mines-telecom.fr/
 # 23-Oct-2015 09:12 AM
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 git clone https://github.com/gpac/gpac.git
 cd /usr/local/src/hostonnet-ffmpeg/gpac
 sh ./configure
@@ -201,7 +201,7 @@ make install
 # http://sourceforge.net/projects/libdc1394/files/?source=navbar
 # updated on 12-May-2015 09:32 AM
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://liquidtelecom.dl.sourceforge.net/project/libdc1394/libdc1394-2/2.2.3/libdc1394-2.2.3.tar.gz
 tar zxfv libdc1394-2.2.3.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/libdc1394-2.2.3
@@ -224,7 +224,7 @@ ln -sf /usr/local/lib/codecs /usr/local/lib/win32
 ln -sf /usr/local/lib/codecs /usr/lib/win32
 ldconfig
 
-cd /usr/local/src
+cd /usr/local/src/hostonnet-ffmpeg/
 git clone git://git.videolan.org/ffmpeg.git
 cd /usr/local/src/hostonnet-ffmpeg/ffmpeg
 make clean && make distclean
@@ -236,4 +236,3 @@ make tools/qt-faststart
 cp -a tools/qt-faststart /usr/bin/
 
 ldconfig
-
