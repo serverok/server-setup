@@ -1,3 +1,3 @@
 alias vi='vim'
-
-#export PATH="$PATH:$HOME/www/honcpanel/bin"
+export VISUAL=vi
+export PATH="$PATH:/usr/honcpanel/bin"
