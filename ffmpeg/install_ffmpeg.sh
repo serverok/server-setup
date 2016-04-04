@@ -28,10 +28,10 @@ then
 else
     yum -y install ruby
     yum -y install freetype-devel
-    cd /usr/local/src
+    cd /usr/local/src/hostonnet-ffmpeg/
     wget -c http://www.ijg.org/files/jpegsrc.v9a.tar.gz
     tar xvf jpegsrc.v9a.tar.gz
-    cd /usr/local/src/hostonnet-ffmpeg/jpeg-9
+    cd /usr/local/src/hostonnet-ffmpeg/jpeg-*
     ./configure  --prefix=/usr
     make
     make install
