@@ -186,6 +186,16 @@ sh ./configure
 make
 make install
 
+# https://mediaarea.net/en/MediaInfo/Download/Source
+
+cd /usr/local/src/hostonnet-ffmpeg/
+wget http://mediaarea.net/download/binary/mediainfo/0.7.84/MediaInfo_CLI_0.7.84_GNU_FromSource.tar.gz
+tar xf MediaInfo_CLI_0.7.84_GNU_FromSource.tar.gz
+cd /usr/local/src/hostonnet-ffmpeg/MediaInfo_CLI_GNU_FromSource
+./CLI_Compile.sh
+cd /usr/local/src/hostonnet-ffmpeg/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI
+make install
+
 # http://sourceforge.net/projects/libdc1394/files/?source=navbar
 # updated on 12-May-2015 09:32 AM
 
