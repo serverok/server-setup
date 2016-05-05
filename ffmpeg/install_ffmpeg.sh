@@ -137,14 +137,14 @@ make && make install
 # http://www.penguin.cz/~utx/amr#download
 
 cd /usr/local/src/hostonnet-ffmpeg/
-wget -c http://www.penguin.cz/~utx/ftp/amr/amrnb-11.0.0.0.tar.bz2
+wget -c ftp://ftp.penguin.cz/pub/users/utx/amr/amrnb-11.0.0.0.tar.bz2
 tar jxvf amrnb-11.0.0.0.tar.bz2
 cd /usr/local/src/hostonnet-ffmpeg/amrnb-11.0.0.0
 ./configure
 make && make install
 
 cd /usr/local/src/hostonnet-ffmpeg/
-wget --no-check-certificate -c http://www.penguin.cz/~utx/ftp/amr/amrwb-11.0.0.0.tar.bz2
+wget -c ftp://ftp.penguin.cz/pub/users/utx/amr/amrwb-11.0.0.0.tar.bz2
 tar jxvf amrwb-11.0.0.0.tar.bz2
 cd /usr/local/src/hostonnet-ffmpeg/amrwb-11.0.0.0
 ./configure
