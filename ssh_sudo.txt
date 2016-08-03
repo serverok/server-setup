@@ -1,0 +1,28 @@
+groupadd -g 250 honadmin
+useradd -u 252 -g honadmin annie
+useradd -u 253 -g honadmin vineesh
+
+root@olds20 [~]# groups annie
+annie : honadmin
+root@olds20 [~]# id annie
+uid=252(annie) gid=250(honadmin) groups=250(honadmin)
+root@olds20 [~]# 
+
+
+ssh -p 3333 USER@SERVER_IP
+
+
+cagefsctl --list | grep deepak
+
+visudo -f /etc/sudoers.d/hostonnet
+
+%honadmin  ALL=/usr/sbin/exim
+%honadmin  ALL=/usr/honcpanel/bin/eximrm
+%honadmin  ALL=/usr/bin/uptime
+%honadmin  ALL=/sbin/reboot
+%honadmin  ALL=/usr/bin/top
+%honadmin  ALL=/usr/bin/atop
+%honadmin  ALL=/usr/sbin/lvetop
+%honadmin  ALL=/usr/sbin/dbtop
+%honadmin  ALL=/usr/sbin/csf
+%honeadmin ALL=/scripts/suspendacct
