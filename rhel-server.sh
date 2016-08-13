@@ -15,6 +15,7 @@ yum install -y atop iotop
 yum install -y strace
 yum install -y git
 yum install -y sysstat
+yum install -y vim
 
 echo "Installing build tools"
 
@@ -24,8 +25,7 @@ yum install -y dos2unix libtool gcc-c++ gcc-c++ compat-gcc-32 compat-gcc-32-c++
 
 # Copy .vimrc if not exists
 if ! [ -f /root/.vimrc ] ; then
-    cd /root/
-    wget https://github.com/HostOnNet/dotfiles/raw/master/.vimrc
+    cp data/.vimrc /root/.vimrc
 fi
 
 if ! grep .bash_aliases /root/.bashrc; then
