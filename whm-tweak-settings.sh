@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # WHM Tweaks for better CSF score
 
 # Disable SMTP Restrictions. WHM > Security Center > SMTP Restrictions
