@@ -6,7 +6,7 @@
 /bin/sed -i "s/^smtpmailgidonly=1$/smtpmailgidonly=0/g" /var/cpanel/cpanel.config
 
 # Check cPanel login is SSL only. WHM > Tweak Settings > Always redirect to SSL
-/bin/sed -i "s/^alwaysredirecttossl=0$/alwaysredirecttossl=1/g" /var/cpanel/cpanel.config
+# /bin/sed -i "s/^alwaysredirecttossl=0$/alwaysredirecttossl=1/g" /var/cpanel/cpanel.config
 
 # Check BoxTrapper is disabled in WHM > Tweak Settings > BoxTrapper spam trap
 /bin/sed -i "s/^skipboxtrapper=0$/skipboxtrapper=1/g" /var/cpanel/cpanel.config
