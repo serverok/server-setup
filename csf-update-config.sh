@@ -11,9 +11,6 @@
 # This option will notify you when a large amount of email is sent from a particular script on the server
 /bin/sed -i "s/LF_SCRIPT_ALERT\s*=.*$/LF_SCRIPT_ALERT = \"1\"/g" /etc/csf/csf.conf
 
-# This option can dramatically improve the startup time of csf and the rule loading speed of lfd
-/bin/sed -i "s/FASTSTART\s*=.*$/FASTSTART = \"1\"/g" /etc/csf/csf.conf
-
 # This option ensures that almost all Linux accounts are checked with Process Tracking, not just the cPanel ones
 /bin/sed -i "s/PT_ALL_USERS\s*=.*$/PT_ALL_USERS = \"1\"/g" /etc/csf/csf.conf
 
