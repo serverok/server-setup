@@ -87,6 +87,15 @@ tar zxvf libvorbis-1.3.5.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/libvorbis-1.3.5
 ./configure && make && make install
 
+# http://www.xiph.org/downloads/
+
+cd /usr/local/src/hostonnet-ffmpeg/
+wget -c http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2
+tar xf libtheora-1.1.1.tar.bz2
+cd libtheora-1.1.1
+./configure --prefix=/usr
+make && make install
+
 # http://lame.sourceforge.net/download.php
 
 cd /usr/local/src/hostonnet-ffmpeg/
@@ -215,7 +224,7 @@ cd /usr/local/src/hostonnet-ffmpeg/
 wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-export-snapshot.tar.bz2
 tar xvf mplayer-export-snapshot.tar.bz2
 cd /usr/local/src/hostonnet-ffmpeg/mplayer*
-echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/
+echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
 make && make install
 
 
@@ -237,7 +246,7 @@ cd /usr/local/src/hostonnet-ffmpeg/
 git clone git://git.videolan.org/ffmpeg.git
 cd /usr/local/src/hostonnet-ffmpeg/ffmpeg
 make clean && make distclean
-./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libmp3lame --enable-gpl --enable-libfaac --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
+./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfaac --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
 make && make install && ldconfig
 
 cd /usr/local/src/hostonnet-ffmpeg/ffmpeg/
