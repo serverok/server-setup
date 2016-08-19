@@ -170,11 +170,14 @@ make clean && make distclean
 ./configure --prefix=/usr --enable-shared
 make && make install
 
+# 32bit versions needed for neroAacEnc
+yum -y install glibc.i686 libstdc++.i686
+
 cd /usr/local/src/hostonnet-ffmpeg/
 wget -c http://ftp6.nero.com/tools/NeroDigitalAudio.zip
 unzip NeroDigitalAudio.zip -d nero
 cd /usr/local/src/hostonnet-ffmpeg/nero/linux
-install -D -m755 neroAacEnc /usr/local/bin
+install -D -m755 neroAacEnc /usr/bin
 
 # https://gpac.wp.mines-telecom.fr/
 # 23-Oct-2015 09:12 AM
@@ -182,7 +185,7 @@ install -D -m755 neroAacEnc /usr/local/bin
 cd /usr/local/src/hostonnet-ffmpeg/
 git clone https://github.com/gpac/gpac.git
 cd /usr/local/src/hostonnet-ffmpeg/gpac
-sh ./configure
+sh ./configure --prefix=/usr
 make
 make install
 
@@ -192,7 +195,7 @@ cd /usr/local/src/hostonnet-ffmpeg/
 wget http://mediaarea.net/download/binary/mediainfo/0.7.84/MediaInfo_CLI_0.7.84_GNU_FromSource.tar.gz
 tar xf MediaInfo_CLI_0.7.84_GNU_FromSource.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/MediaInfo_CLI_GNU_FromSource
-./CLI_Compile.sh
+./CLI_Compile.sh --prefix=/usr
 cd /usr/local/src/hostonnet-ffmpeg/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI
 make install
 
