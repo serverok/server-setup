@@ -8,8 +8,4 @@ tar zxvf maldetect-current.tar.gz
 cd maldetect-*
 ./install.sh
 
-# Download config
-cd /usr/local/maldetect/
-rm -f conf.maldet
-wget https://github.com/HostOnNet/server-setup/raw/master/data/conf.maldet
 
