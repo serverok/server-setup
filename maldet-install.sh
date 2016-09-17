@@ -8,4 +8,7 @@ tar zxvf maldetect-current.tar.gz
 cd maldetect-*
 ./install.sh
 
+# edit config file at /usr/local/maldetect/conf.maldet
+# email_alert="0"
+# email_addr="you@domain.com"
 
