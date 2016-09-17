@@ -194,7 +194,7 @@ install -D -m755 neroAacEnc /usr/bin
 cd /usr/local/src/hostonnet-ffmpeg/
 git clone https://github.com/gpac/gpac.git
 cd /usr/local/src/hostonnet-ffmpeg/gpac
-sh ./configure --prefix=/usr
+./configure --prefix=/usr
 make
 make install
 
