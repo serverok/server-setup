@@ -10,6 +10,7 @@ ldconfig
 
 yum update
 yum -y upgrade
+yum -y install git
 yum -y install unzip wget bzip2 curl lynx jwhois
 yum -y install nmap patch dos2unix
 yum -y install ncurses-devel automake autoconf
