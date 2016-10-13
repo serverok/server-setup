@@ -214,7 +214,7 @@ make install
 # updated on 12-May-2015 09:32 AM
 
 cd /usr/local/src/hostonnet-ffmpeg/
-wget -c http://iweb.dl.sourceforge.net/project/libdc1394/libdc1394-2/2.2.4/libdc1394-2.2.4.tar.gz
+wget -c http://downloads.sourceforge.net/project/libdc1394/libdc1394-2/2.2.4/libdc1394-2.2.4.tar.gz
 tar zxfv libdc1394-2.2.4.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/libdc1394-2.2.4
 make clean && make distclean
