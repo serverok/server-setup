@@ -10,12 +10,13 @@ yum -y remove mlocate
 
 echo "Installing basic system tools"
 
-yum install -y nmap lynx wget curl telnet screen jwhois
+yum install -y nmap lynx wget curl telnet jwhois
 yum install -y atop iotop
 yum install -y strace
 yum install -y git
 yum install -y sysstat
 yum install -y vim
+yum install -y tmux
 
 echo "Installing build tools"
 
