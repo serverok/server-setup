@@ -1,0 +1,31 @@
+cd /root
+git clone ssh://git@git.buyscripts.in:10022/buyscripts/server-setup.git
+cd ~/server-setup
+./rhel-server.sh
+./secure-sysctl.sh
+./secure-ssh.sh
+./cpanel-server.sh
+./cpanel-config.sh
+
+# Cpanel default page for HostOnNet servers ONLY.
+# ONLY DO THIS AFTER ALL SITES MOVED.
+# On s46, when we move, sites get index.html copied, that means live site started showing index.html, i deleted it with
+# find /home -name 'index.html' -exec grep 'https://www.hostonnet.com/cpanel3-skel/style.css' {} \; -print | grep "/home"
+
+mkdir -p /root/cpanel3-skel/public_html/
+cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_html/index.html
+
+./cloudlinux-cagefs.sh
+
+Home > Server Configuration > Server Time = UTC
+
+Home »Server Configuration »Statistics Software Configuration = disable Analog and Webalizer
+Home »Support »Legacy Configure Customer Contact = Disable
+
+
+Home »Software »EasyApache 4 > PHP Modules
+mbstring
+Provision = CloudLinux + All PHP Options + OpCache
+
+https://www.webhostingneeds.com/cpanel_server_setup
+

@@ -20,8 +20,9 @@ make clean && make distclean
 make && make install
 
 cd /usr/local/src
-git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
+git clone git://github.com/mstorsjo/fdk-aac.git
 cd /usr/local/src/fdk-aac
+make clean && make distclean
 autoreconf -fiv
 ./configure --prefix=/usr --enable-shared
 make
@@ -44,12 +45,16 @@ make
 make install
 
 cd /usr/local/src
-git clone --depth 1 git://source.ffmpeg.org/ffmpeg
+git clone git://source.ffmpeg.org/ffmpeg
 cd /usr/local/src/ffmpeg
 make clean && make distclean
-./configure --prefix=/usr  --enable-gpl --enable-libass --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-x11grab
+./configure --prefix=/usr  --enable-gpl  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-x11grab
+
+./configure --prefix=/usr  --enable-gpl  --enable-libfdk-aac --enable-libx264 --enable-nonfree
+
 make
 make install
 ldconfig
 
 hash -r
+
