@@ -1,0 +1,12 @@
+[ubuntu]
+vm705n:3333
+
+[cpanel]
+server20.hostonnet.com:3333
+server46.hostonnet.com:3333
+server48.hostonnet.com:3333
+server74.hostonnet.com:3333
+server78.hostonnet.com:3333
+
+[centos]
+209.236.74.192:3333

@@ -1,0 +1,25 @@
+sshd : 111.92.0.0/255.255.128.0 : allow
+# ASIANET KOCHI
+
+sshd : 59.98.128.0/255.255.240.0 : allow
+# BSNL ARTHUNKAL
+
+ssd : 117.192.0.0/255.255.240.0 : allow
+# BSNL KOCHI (ANGAMALLY)
+
+ssd : 117.208.224.0/255.255.240.0 : allow
+# BSNL KOCHI (HONE)
+
+sshd : 106.67.128.0/255.255.192.0 : allow
+# IDEA NETSELLER
+
+sshd : server10.hosthat.com : allow
+sshd : server12.hosthat.com : allow
+sshd : server20.hosthat.com : allow
+sshd : server36.hosthat.com : allow
+sshd : server46.hosthat.com : allow
+sshd : server48.hosthat.com : allow
+sshd : server70.hosthat.com : allow
+sshd : localhost : allow
+sshd : vpn.hostonnet.com : allow
+

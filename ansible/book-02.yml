@@ -1,0 +1,7 @@
+---
+  - hosts: cpanel 
+    user: root
+    sudo: no
+    tasks:
+        - name: upgrade all packages
+          yum: name=* state=latest
