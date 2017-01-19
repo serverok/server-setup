@@ -254,7 +254,7 @@ wget https://github.com/FFmpeg/FFmpeg/archive/n3.1.4.tar.gz
 tar zxf n3.1.4.tar.gz
 cd /usr/local/src/hostonnet-ffmpeg/FFmpeg-n3.1.4/
 make clean && make distclean
-./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfaac --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
+./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
 make && make install && ldconfig
 
 cd /usr/local/src/hostonnet-ffmpeg/FFmpeg-n3.1.4/
