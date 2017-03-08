@@ -2,7 +2,7 @@
 Copying Files to New Server
 ===============================================
 
-rsync -avz "-e ssh -p 22" ~/www/server-setup/ root@NEW-SERVER-IP:/root/server-setup/
+rsync -avz "-e ssh -p 22" --exclude=.git ~/www/server-setup/ root@NEW-SERVER-IP:/root/server-setup/
 
 Or clone it on server
 
