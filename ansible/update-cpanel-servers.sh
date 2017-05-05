@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ansible-playbook -i ansible.hosts book-02.yml
+ansible-playbook -i ansible.hosts update-cpanel-servers.yml

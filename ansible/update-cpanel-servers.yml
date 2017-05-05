@@ -1,0 +1,19 @@
+---
+  - hosts: cpanel
+    user: root
+    tasks:
+        - name: update system
+          yum: name=* state=latest
+
+        - name: check if reboot needed
+          shell: LAST_KERNEL=$(rpm -q --last kernel | perl -pe 's/^kernel-(\S+).*/$1/' | head -1); CURRENT_KERNEL=$(uname -r); if [ $LAST_KERNEL != $CURRENT_KERNEL ]; then echo 'yes'; else echo 'no'; fi
+          ignore_errors: true
+          register: reboot_needed
+        - debug: var=reboot_needed.stdout_lines
+
+        - name: reboot if needed
+          command: reboot
+          when: reboot_needed.stdout.find("yes") != -1
+          register: reboot_result
+        - debug: var=reboot_result.stdout_lines
+

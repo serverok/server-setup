@@ -1,9 +1,11 @@
+yum -y install git
 cd /root
-git clone ssh://git@git.buyscripts.in:10022/buyscripts/server-setup.git
+git clone http://git.buyscripts.in:10080/buyscripts/server-setup.git
 cd ~/server-setup
-./rhel-server.sh
+./rhel/basic.sh
 ./secure-sysctl.sh
 ./secure-ssh.sh
+./cpanel-install.sh
 ./cpanel-server.sh
 ./cpanel-config.sh
 
@@ -19,8 +21,7 @@ cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_ht
 
 Home > Server Configuration > Server Time = UTC
 
-Home »Server Configuration »Statistics Software Configuration = disable Analog and Webalizer
-Home »Support »Legacy Configure Customer Contact = Disable
+Home > Server Configuration > Statistics Software Configuration = disable Analog and Webalizer
 
 
 Home »Software »EasyApache 4 > PHP Modules
@@ -28,4 +29,34 @@ mbstring
 Provision = CloudLinux + All PHP Options + OpCache
 
 https://www.webhostingneeds.com/cpanel_server_setup
+
+
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /usr/local/lib/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php71/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php44/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php51/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php52/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php53/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php54/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php55/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php56/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php70/etc/php.ini
+
+
+[root@et-01-01-srv-002 cpanel]# cat /var/cpanel/killproc.conf
+BitchX
+bnc
+eggdrop
+generic-sniffers
+guardservices
+ircd
+psyBNC
+ptlink
+services
+[root@et-01-01-srv-002 cpanel]#
+
+/bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@hostonnet.com\"/g" /etc/csf/csf.conf
+
+
+cat /var/cpanel/backups/config
 
