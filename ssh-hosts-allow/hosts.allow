@@ -1,3 +1,6 @@
+sshd : 112.133.248.0/255.255.255.0 : allow
+# RAILWIRE BOBY
+
 sshd : 111.92.0.0/255.255.128.0 : allow
 # ASIANET KOCHI
 
@@ -22,4 +25,3 @@ sshd : server48.hosthat.com : allow
 sshd : server70.hosthat.com : allow
 sshd : localhost : allow
 sshd : vpn.hostonnet.com : allow
-

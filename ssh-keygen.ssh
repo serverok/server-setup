@@ -2,7 +2,7 @@
 
 if [ ! -f /root/.ssh/id_rsa.pub ] ; then
     echo "Generating ssh key:"
-    /usr/bin/ssh-keygen -t rsa -N '' -b 2048
+    /usr/bin/ssh-keygen -t rsa -b 4096 -C "admin@hostonnet.com" -N ''
 else
     cat ~/.ssh/id_rsa.pub
 fi
