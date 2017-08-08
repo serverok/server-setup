@@ -171,6 +171,14 @@ cd /usr/local/src/hostonnet/yasm
 ./configure --prefix=/usr
 make && make install
 
+# nasm needed for x264
+cd /usr/local/src/hostonnet/
+wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc0/nasm-2.14rc0.tar.xz
+tar xf nasm-2.14rc0.tar.xz
+cd /usr/local/src/hostonnet/nasm-2.14rc0/
+./configure --prefix=/usr
+make && make install
+
 # http://www.videolan.org/developers/x264.html
 # x264 --help
 
@@ -224,10 +232,13 @@ make clean && make distclean
 make
 make install
 
+# http://www.mplayerhq.hu/design7/dload.html
+# Updated on 2017-08-09
+
 cd /usr/local/src/hostonnet/
-wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-export-snapshot.tar.bz2
-tar xvf mplayer-export-snapshot.tar.bz2
-cd /usr/local/src/hostonnet/mplayer*
+wget http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz
+tar xvf MPlayer-1.3.0.tar.xz
+cd /usr/local/src/hostonnet/MPlayer-1.3.0
 echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
 make && make install
 
@@ -265,8 +276,6 @@ make install
 # Updated on 2016-10-13
 
 cd /usr/local/src/hostonnet/
-# git clone git://git.videolan.org/ffmpeg.git
-# cd /usr/local/src/hostonnet/ffmpeg
 wget https://github.com/FFmpeg/FFmpeg/archive/n3.1.4.tar.gz
 tar zxf n3.1.4.tar.gz
 cd /usr/local/src/hostonnet/FFmpeg-n3.1.4/
