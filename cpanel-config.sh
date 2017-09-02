@@ -35,4 +35,9 @@
 # Check Password ENV variable. WHM > Tweak Settings > Hide login password from cgi scripts
 /bin/sed -i "s/^cgihidepass=0$/cgihidepass=1/g" /var/cpanel/cpanel.config
 
+# set timezone to UTC
+
+rm -f /etc/localtime
+ln -s /usr/share/zoneinfo/UTC /etc/localtime
+
 service cpanel restart
