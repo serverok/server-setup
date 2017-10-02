@@ -1,0 +1,41 @@
+#!/usr/bin/python
+# Author: Yujin Boby
+# Blog: http://blog.hostonnet.com
+
+import os
+import sys
+
+if not os.path.isfile("new.txt") \
+    or not os.path.isfile("old.txt") :
+    print("Create 2 files, old.txt and new.txt with list of php modules in old ane new server to compare")
+    sys.exit(1)
+
+php_modules_old = []
+php_modules_new = []
+
+for line in open("old.txt"):
+    line = line.strip()
+    php_modules_old.append(line)
+
+for line in open("new.txt"):
+    line = line.strip()
+    php_modules_new.append(line)
+
+
+php_modules_old.sort()
+
+php_modules_missing = []
+
+for php_module in php_modules_old:
+    if php_module not in php_modules_new:
+        php_modules_missing.append(php_module)
+
+
+if len(php_modules_missing) > 0:
+    print("Modules missing = " + str(len(php_modules_missing)))
+    print("\n")
+    for module_missing in php_modules_missing:
+        print(module_missing)
+    print("\n")
+else:
+    print("Good job, all modules present in new server.")

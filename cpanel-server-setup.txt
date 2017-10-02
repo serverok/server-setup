@@ -19,8 +19,6 @@ cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_ht
 
 ./cloudlinux-cagefs.sh
 
-Home > Server Configuration > Server Time = UTC
-
 Home > Server Configuration > Statistics Software Configuration = disable Analog and Webalizer
 
 
@@ -59,4 +57,3 @@ services
 
 
 cat /var/cpanel/backups/config
-
