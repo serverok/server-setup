@@ -40,4 +40,9 @@
 rm -f /etc/localtime
 ln -s /usr/share/zoneinfo/UTC /etc/localtime
 
+# enable only awstats
+
+echo "DEFAULTGENS=AWSTATS" > /etc/stats.conf
+echo "allow_awstats_include=0" >> /etc/stats.conf
+
 service cpanel restart

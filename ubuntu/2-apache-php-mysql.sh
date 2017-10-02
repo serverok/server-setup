@@ -17,9 +17,17 @@ apt-get -y install libapache2-mod-php
 apt-get -y install mariadb-client mariadb-server
 update-rc.d mysql enable
 
+echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
+echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 
-apt -y install phpmyadmin
-apt -y install postfix
+apt-get install -y phpmyadmin
+
+debconf-set-selections <<< "postfix postfix/mailname string `hostname`"
+debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+apt-get install -y postfix
 
 service apache2 stop
 service apache2 start

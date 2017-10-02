@@ -19,15 +19,16 @@ cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_ht
 
 ./cloudlinux-cagefs.sh
 
-Home > Server Configuration > Statistics Software Configuration = disable Analog and Webalizer
-
-
 Home »Software »EasyApache 4 > PHP Modules
 mbstring
 Provision = CloudLinux + All PHP Options + OpCache
 
 https://www.webhostingneeds.com/cpanel_server_setup
 
+
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/cpanel/ea-php53/root/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php51/etc/php.ini
+sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/cpanel/ea-php52/root/etc/php.ini
 
 sed -i "s/^enable_dl = On/enable_dl = Off/g" /usr/local/lib/php.ini
 sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php71/etc/php.ini
@@ -57,3 +58,6 @@ services
 
 
 cat /var/cpanel/backups/config
+
+whmapi1 enable_monitor_all_enabled_services
+
