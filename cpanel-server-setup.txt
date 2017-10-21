@@ -9,6 +9,12 @@ cd ~/server-setup
 ./cpanel-server.sh
 ./cpanel-config.sh
 
+/scripts/install_lets_encrypt_autossl_provider
+
+Home »SSL/TLS »Manage AutoSSL
+
+
+
 # Cpanel default page for HostOnNet servers ONLY.
 # ONLY DO THIS AFTER ALL SITES MOVED.
 # On s46, when we move, sites get index.html copied, that means live site started showing index.html, i deleted it with
@@ -60,4 +66,46 @@ services
 cat /var/cpanel/backups/config
 
 whmapi1 enable_monitor_all_enabled_services
+
+
+* Limit SSH access to our IP
+* Home »Server Configuration »Server Time > UTC
+* Home »Server Configuration »Statistics Software ConfigurationDocumentation > Disable all other than awstats.
+* Home »Server Configuration »Update Preferences > RELEASE
+* Home »Service Configuration »Service Manager  => disable Mailman
+* Home »Service Configuration »FTP Server Configuration > Allow Logins with Root Password => NO
+* WHM > Security Center > Apache mod_userdir Tweak = ENABLE
+* WHM > Security Center > Compiler Access = DISABLE
+* WHM > Security Center > PHP open_basedir Tweak = ENABLE
+* Home »Security Center »Configure Security Policies > Password Age = 90
+* Home »Security Center »ModSecurity™ Vendors »Manage Vendors  => enable OSASP
+* Home »Security Center »PHP open_basedir Tweak => enable
+* WHM > Security Center > Shell Fork Bomb Protection = ENABLE
+* WHM > Security Center > SSH Password Authorization Tweak = DISABLED
+* WHM > Security Center > cPHulk Brute Force Protection = DISABLE (use CSF)
+* Home »Service Configuration »cPanel Log Rotation Configuration
+* Home »Service Configuration »Exim Configuration Manager  > Scan outgoing messages for spam and reject based on spamassassin® internal spam_score setting [?] on
+* main >> backup >> configure Backup
+* Home »Software »MultiPHP Manager > PHP Handlers = suphp
+* Home »Plugins »ConfigServer Security & Firewall
+
+
+cd /
+rm -f engintron.sh
+wget --no-check-certificate https://raw.githubusercontent.com/engintron/engintron/master/engintron.sh
+bash engintron.sh install
+
+
+cd /home/boby/www/projects/server-setup/ssh-hosts-allow
+
+Add entry for new server
+
+vi update-servers.sh
+
+./update-servers.sh
+
+
+cd /home/boby/www/projects/honcpanel/hosting_plans
+./get_latest.sh
+./update_servers.sh
 

@@ -25,8 +25,9 @@ echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf
 
 apt-get install -y phpmyadmin
 
-debconf-set-selections <<< "postfix postfix/mailname string `hostname`"
-debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
+echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
+
 apt-get install -y postfix
 
 service apache2 stop
