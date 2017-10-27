@@ -1,0 +1,17 @@
+#!/usr/bin/python
+# https://blog.hostonnet.com/python-script-to-update-yum
+
+import subprocess
+import os
+
+result = subprocess.Popen("yum check-update", shell=True, stdout=subprocess.PIPE).stdout.read()
+
+result_lines = result.split("\n")
+
+for line in result_lines:
+    line_parts = line.split()
+    if len(line_parts) == 3:
+        package_name = line_parts[0]
+        #process = subprocess.Popen(["yum", "-y", "upgrade", package_name])
+        #process.wait()
+        os.system("yum -y upgrade " + package_name)
