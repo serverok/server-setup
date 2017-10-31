@@ -1,25 +1,17 @@
 #!/bin/bash
 
-apt-get -y install apache2
-update-rc.d apache2 enable
-a2enmod rewrite
+apt-get -y install nginx
 
 apt-get -y install php php-cli php-curl php-gd \
            php-mysql php-imagick php-imap php-mcrypt \
            php-json php-xml php-mbstring php-zip \
-           php-xmlrpc php-soap php-intl php-bcmath
+           php-xmlrpc php-soap php-intl php-bcmath \
+           php-fpm
 
 phpenmod mcrypt
 
-# Debian 8
-# apt-get -y install php5 php5-cli php5-curl php5-gd php5-mysql php5-imagick php5-imap php5-mcrypt php5-json php5-xmlrpc  php5-intl
-
-#apt -y install php7.0-pgsql
-
-apt-get -y install libapache2-mod-php
-
 apt-get -y install mariadb-client mariadb-server
-update-rc.d mysql enable
+
 
 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
 echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
@@ -34,5 +26,6 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 
 apt-get install -y postfix
 
-service apache2 stop
-service apache2 start
+
+systemctl enable mysql
+systemctl enable nginx

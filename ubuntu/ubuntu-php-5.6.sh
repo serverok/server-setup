@@ -10,3 +10,4 @@ a2enmod rewrite
 
 /etc/php/5.6/apache2/php.ini
 service apache2 restart
+service php5.6-fpm restart
