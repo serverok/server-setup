@@ -10,6 +10,17 @@ apt-get -y install php php-cli php-curl php-gd \
 
 phpenmod mcrypt
 
+/bin/sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/max_input_time\s*=.*/max_input_time = 6000/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/memory_limit\s*=.*/memory_limit = 128M/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/display_errors\s*=.*/display_errors = On/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/file_uploads\s*=.*/file_uploads = On/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/post_max_size\s*=.*/post_max_size = 800M/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/upload_max_filesize\s*=.*/upload_max_filesize = 800M/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" /etc/php/7.0/fpm/php.ini
+/bin/sed -i "s/error_reporting\s*=.*/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" /etc/php/7.0/fpm/php.ini
+
+
 apt-get -y install mariadb-client mariadb-server
 
 
@@ -26,6 +37,10 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 
 apt-get install -y postfix
 
-
+systemctl enable php7.0-fpm
 systemctl enable mysql
 systemctl enable nginx
+
+systemctl restart php7.0-fpm
+systemctl restart mysql
+systemctl restart nginx
