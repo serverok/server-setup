@@ -8,16 +8,27 @@ echo "/usr/lib" >> /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
 cat /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
 ldconfig
 
-yum update
-yum -y upgrade
-yum -y install git
-yum -y install unzip wget bzip2 curl lynx jwhois
-yum -y install nmap patch dos2unix
-yum -y install ncurses-devel automake autoconf
-yum -y install gcc gmake make
-yum -y install libtool libcpp libgcc libstdc++
-yum -y install gcc4 gcc4-c++ gcc4-gfortran
-yum -y install gcc-c++ compat-gcc-32 compat-gcc-32-c++
+
+if [ -f /etc/redhat-release ]; then
+    yum update
+    yum -y upgrade
+    yum -y install git
+    yum -y install unzip wget bzip2 curl lynx jwhois
+    yum -y install nmap patch dos2unix
+    yum -y install ncurses-devel automake autoconf
+    yum -y install gcc gmake make
+    yum -y install libtool libcpp libgcc libstdc++
+    yum -y install gcc4 gcc4-c++ gcc4-gfortran
+    yum -y install gcc-c++ compat-gcc-32 compat-gcc-32-c++
+    yum -y install freetype-devel
+fi
+
+if [ -f /etc/lsb-release ]; then
+    apt-get -y install autotools-dev
+    apt -y install lynx nmap libncurses5-dev libncurses5 dos2unix
+    apt -y install autoconf automake build-essential git libass-dev
+    apt -y install libtool
+fi
 
 mkdir -p /usr/local/src/hostonnet/tmp
 chmod 777 /usr/local/src/hostonnet/tmp
@@ -28,15 +39,15 @@ then
     /scripts/installruby
 else
     yum -y install ruby
-    yum -y install freetype-devel
-    cd /usr/local/src/hostonnet/
-    wget -c http://www.ijg.org/files/jpegsrc.v9a.tar.gz
-    tar xvf jpegsrc.v9a.tar.gz
-    cd /usr/local/src/hostonnet/jpeg-*
-    ./configure  --prefix=/usr
-    make
-    make install
 fi
+
+cd /usr/local/src/hostonnet/
+wget -c http://www.ijg.org/files/jpegsrc.v9a.tar.gz
+tar xvf jpegsrc.v9a.tar.gz
+cd /usr/local/src/hostonnet/jpeg-*
+./configure  --prefix=/usr
+make
+make install
 
 # https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
 
@@ -44,11 +55,16 @@ cd /usr/local/src/hostonnet/
 wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/tarball/master
 tar xzvf fdk-aac.tar.gz
 cd /usr/local/src/hostonnet/mstorsjo-fdk-aac*
+make distclean
 autoreconf -fiv
 ./configure --prefix=/usr
-make
-make install
-make distclean
+make && make install
+
+if [ $? -ne 0 ]; then
+    echo "fdk-aac failed to install"
+    exit 1
+fi
+
 ldconfig
 
 # http://sourceforge.net/projects/faac/files/
@@ -61,6 +77,12 @@ sed -i '/char \*strcasestr(const char \*haystack, const char \*needle);/d' ./com
 ./bootstrap
 ./configure --prefix=/usr
 make && make install
+
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
+
 ldconfig
 
 cd /usr/local/src/hostonnet/
@@ -71,13 +93,26 @@ autoreconf -vif
 ./configure --prefix=/usr
 make && make install
 
+if [ $? -ne 0 ]; then
+    echo "faad2 failed to install"
+    exit 1
+fi
+
+
 # https://xiph.org/downloads/
 
 cd /usr/local/src/hostonnet/
-wget -c http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz
-tar zxvf libogg-1.3.2.tar.gz
-cd /usr/local/src/hostonnet/libogg-1.3.2
+wget -c http://downloads.xiph.org/releases/ogg/libogg-1.3.3.tar.gz
+tar zxvf libogg-1.3.3.tar.gz
+cd /usr/local/src/hostonnet/libogg-1.3.3
 ./configure && make && make install
+
+if [ $? -ne 0 ]; then
+    echo "libogg failed to install"
+    exit 1
+fi
+
+
 ldconfig
 
 # http://www.xiph.org/downloads/
@@ -88,21 +123,32 @@ tar zxvf libvorbis-1.3.5.tar.gz
 cd /usr/local/src/hostonnet/libvorbis-1.3.5
 ./configure && make && make install
 
+if [ $? -ne 0 ]; then
+    echo "libvorbis failed to install"
+    exit 1
+fi
+
 # http://www.xiph.org/downloads/
 
 cd /usr/local/src/hostonnet/
 wget -c http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2
 tar xf libtheora-1.1.1.tar.bz2
-cd libtheora-1.1.1
+cd /usr/local/src/hostonnet/libtheora-1.1.1
 ./configure --prefix=/usr
 make && make install
+
+if [ $? -ne 0 ]; then
+    echo "libtheora failed to install"
+    exit 1
+fi
+
 
 # http://lame.sourceforge.net/download.php
 
 cd /usr/local/src/hostonnet/
-wget -c http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
-tar xf lame-3.99.5.tar.gz
-cd /usr/local/src/hostonnet/lame-3.99.5
+wget -c http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz
+tar xf lame-3.100.tar.gz
+cd /usr/local/src/hostonnet/lame-3.100
 ./configure --enable-shared --prefix=/usr
 make && make install
 
@@ -200,21 +246,22 @@ cd /usr/local/src/hostonnet/nero/linux
 install -D -m755 neroAacEnc /usr/bin
 
 # https://gpac.wp.mines-telecom.fr/
-# 23-Oct-2015 09:12 AM
+# 2017-11-18
 
 cd /usr/local/src/hostonnet/
-wget https://github.com/gpac/gpac/archive/v0.6.1.tar.gz
-tar xf v0.6.1.tar.gz
-cd /usr/local/src/hostonnet/gpac-0.6.1
+wget https://github.com/gpac/gpac/archive/v0.7.1.tar.gz
+tar xf v0.7.1.tar.gz
+cd /usr/local/src/hostonnet/gpac-0.7.1
 ./configure --prefix=/usr
 make
 make install
 
 # https://mediaarea.net/en/MediaInfo/Download/Source
+# 2017-11-18
 
 cd /usr/local/src/hostonnet/
-wget http://mediaarea.net/download/binary/mediainfo/0.7.84/MediaInfo_CLI_0.7.84_GNU_FromSource.tar.gz
-tar xf MediaInfo_CLI_0.7.84_GNU_FromSource.tar.gz
+wget https://mediaarea.net/download/binary/mediainfo/17.10/MediaInfo_CLI_17.10_GNU_FromSource.tar.gz
+tar xf MediaInfo_CLI_17.10_GNU_FromSource.tar.gz
 cd /usr/local/src/hostonnet/MediaInfo_CLI_GNU_FromSource
 ./CLI_Compile.sh --prefix=/usr
 cd /usr/local/src/hostonnet/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI
@@ -276,14 +323,14 @@ make install
 # Updated on 2016-10-13
 
 cd /usr/local/src/hostonnet/
-wget https://github.com/FFmpeg/FFmpeg/archive/n3.1.4.tar.gz
-tar zxf n3.1.4.tar.gz
-cd /usr/local/src/hostonnet/FFmpeg-n3.1.4/
+wget https://github.com/FFmpeg/FFmpeg/archive/n3.3.5.tar.gz
+tar zxf n3.3.5.tar.gz
+cd /usr/local/src/hostonnet/FFmpeg-n3.3.5/
 make clean && make distclean
 ./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
 make && make install && ldconfig
 
-cd /usr/local/src/hostonnet/FFmpeg-n3.1.4/
+cd /usr/local/src/hostonnet/FFmpeg-n3.3.5/
 make tools/qt-faststart
 cp -a tools/qt-faststart /usr/bin/
 
