@@ -3,6 +3,7 @@
 apt-get -y install apache2
 update-rc.d apache2 enable
 a2enmod rewrite
+a2enmod ssl
 
 apt-get -y install php php-cli php-curl php-gd \
            php-mysql php-imagick php-imap php-mcrypt \

@@ -152,6 +152,11 @@ cd /usr/local/src/hostonnet/lame-3.100
 ./configure --enable-shared --prefix=/usr
 make && make install
 
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
+
 # http://www.xvid.org/Downloads.43.0.html
 
 cd /usr/local/src/hostonnet/
@@ -159,6 +164,11 @@ wget -c http://downloads.xvid.org/downloads/xvidcore-1.3.4.tar.gz
 tar xvf xvidcore-1.3.4.tar.gz
 cd /usr/local/src/hostonnet/xvidcore/build/generic/
 ./configure --prefix=/usr && make && make install
+
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
 
 # http://rubyforge.org/projects/flvtool2/
 # http://www.inlet-media.de/2009/11/flvtool2.html
@@ -170,6 +180,11 @@ cd /usr/local/src/hostonnet/flvtool2-master/
 ruby setup.rb config --prefix=/usr
 ruby setup.rb setup
 ruby setup.rb install
+
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
 
 # http://yamdi.sourceforge.net/
 
@@ -190,6 +205,11 @@ cd /usr/local/src/hostonnet/a52dec*
 ./configure
 make && make install
 
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
+
 # http://www.penguin.cz/~utx/amr#download
 
 cd /usr/local/src/hostonnet/
@@ -199,12 +219,22 @@ cd /usr/local/src/hostonnet/amrnb-11.0.0.0
 ./configure
 make && make install
 
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
+
 cd /usr/local/src/hostonnet/
 wget -c ftp://ftp.penguin.cz/pub/users/utx/amr/amrwb-11.0.0.0.tar.bz2
 tar jxvf amrwb-11.0.0.0.tar.bz2
 cd /usr/local/src/hostonnet/amrwb-11.0.0.0
 ./configure
 make && make install
+
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
 
 # http://yasm.tortall.net/Download.html
 # 23-Oct-2015 09:01 AM
@@ -217,6 +247,11 @@ cd /usr/local/src/hostonnet/yasm
 ./configure --prefix=/usr
 make && make install
 
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
+
 # nasm needed for x264
 cd /usr/local/src/hostonnet/
 wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc0/nasm-2.14rc0.tar.xz
@@ -225,16 +260,26 @@ cd /usr/local/src/hostonnet/nasm-2.14rc0/
 ./configure --prefix=/usr
 make && make install
 
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
+
 # http://www.videolan.org/developers/x264.html
 # x264 --help
 
 cd /usr/local/src/hostonnet/
-git clone git://git.videolan.org/x264.git
-cd /usr/local/src/hostonnet/x264/
-git pull
+wget ftp://ftp.videolan.org/pub/x264/snapshots/last_x264.tar.bz2
+tar xvf last_x264.tar.bz2
+cd /usr/local/src/hostonnet/x264-snapshot-*
 make clean && make distclean
 ./configure --prefix=/usr --enable-shared
 make && make install
+
+if [ $? -ne 0 ]; then
+    echo "faac-src failed to install"
+    exit 1
+fi
 
 # 32bit versions needed for neroAacEnc
 yum -y install glibc.i686 libstdc++.i686
