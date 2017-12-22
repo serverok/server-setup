@@ -14,4 +14,8 @@
 # This option ensures that almost all Linux accounts are checked with Process Tracking, not just the cPanel ones
 /bin/sed -i "s/PT_ALL_USERS\s*=.*$/PT_ALL_USERS = \"1\"/g" /etc/csf/csf.conf
 
+
+/bin/sed -i "s/TESTING = \"1\"/TESTING = \"0\"/g" /etc/csf/csf.conf
+
+
 /bin/systemctl restart csf.service
