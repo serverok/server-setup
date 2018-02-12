@@ -6,5 +6,8 @@ yum -y install php php-cli php-devel php-gd php-intl php-mbstring php-mysqlnd ph
 
 yum -y install mariadb mariadb-server
 
+
+systemctl enable mariadb
+systemctl enable httpd
 service mariadb start
 service httpd start
