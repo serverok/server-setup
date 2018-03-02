@@ -11,3 +11,6 @@ enable PHP 7.2
 a2enmod php7.2
 a2dismod php5.6
 service apache2 restart
+
+
+
