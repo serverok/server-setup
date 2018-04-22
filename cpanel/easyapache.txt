@@ -1,0 +1,3 @@
+yum -y install ea-php56-php-iconv.x86_64 ea-php70-php-iconv.x86_64 ea-php71-php-iconv.x86_64 ea-php72-php-iconv.x86_64
+yum -y install ea-php56-php-mbstring.x86_64  ea-php70-php-mbstring.x86_64 ea-php71-php-mbstring.x86_64  ea-php72-php-mbstring.x86_64
+

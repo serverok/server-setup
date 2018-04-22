@@ -23,6 +23,7 @@ sed -i "s/post_max_size\s*=.*/post_max_size = 800M/g" php.ini
 sed -i "s/upload_max_filesize\s*=.*/upload_max_filesize = 800M/g" php.ini
 sed -i "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" php.ini
 sed -i "s/error_reporting\s*=.*/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" php.ini
+sed -i "s/max_file_uploads = On/max_file_uploads = 1000/g" php.ini
 
 if [ -f /etc/debian_version ]; then
     service apache2 restart

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wget https://raw.githubusercontent.com/HostOnNet/server-setup/master/rhel/basic.sh && chmod 755 basic.sh && ./basic.sh
+# wget https://raw.githubusercontent.com/serverok/server-setup/master/rhel/basic.sh && chmod 755 basic.sh && ./basic.sh
 
 yum update -y
 yum upgrade -y

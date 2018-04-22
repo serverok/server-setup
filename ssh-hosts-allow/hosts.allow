@@ -1,24 +1,22 @@
-# RAILWIRE
-sshd : 112.133.248.0/255.255.255.0 : allow
-sshd : 112.133.236.0/255.255.255.0 : allow
-sshd : 112.133.229.0/255.255.255.0 : allow
+#railwire
+sshd : 112.133. : allow
 
-# ASIANET
-sshd : 111.92.0.0/255.255.128.0 : allow
+#asianet
+sshd : 111.92. : allow
 
-# BSNL
-ssd : 117.192.0.0/255.255.240.0 : allow
-ssd : 117.208.224.0/255.255.240.0 : allow
+#bsnl
+sshd : 117.192. : allow
+sshd : 117.208. : allow
 
-# IDEA NETSELLER
-sshd : 106.67.128.0/255.255.192.0 : allow
+#s12
+sshd : 188.40.131.92 : allow
+sshd : 158.69.53.72 : allow
+sshd : 149.56.240.40 : allow
+sshd : 192.99.18.195 : allow
+sshd : 158.69.124.221 : allow
 
-sshd : server10.hosthat.com : allow
-sshd : server12.hosthat.com : allow
-sshd : server20.hosthat.com : allow
-sshd : server36.hosthat.com : allow
-sshd : server46.hosthat.com : allow
-sshd : server48.hosthat.com : allow
-sshd : server70.hosthat.com : allow
-sshd : vpn.hostonnet.com : allow
+#vpn
+sshd : 198.50.234. : allow
+
 sshd : localhost : allow
+

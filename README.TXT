@@ -7,4 +7,5 @@ rsync -avz "-e ssh -p 22" --exclude=.git ~/www/server-setup/ root@NEW-SERVER-IP:
 Or clone it on server
 
 cd /root
-git clone http://git.buyscripts.in:10080/buyscripts/server-setup.git
+git clone https://github.com/serverok/server-setup/
+

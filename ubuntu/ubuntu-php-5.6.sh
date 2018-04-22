@@ -4,18 +4,19 @@ apt -y upgrade
 
 # remove other version of php 7 if installed.
 # dpkg -l | grep php | cut -d" " -f3 | xargs apt purge -y
-
-apt purge -y php php-bcmath php-cli php-common php-curl php-fpm php-gd
+# apt purge -y php php-bcmath php-cli php-common php-curl php-fpm php-gd
 
 apt install -y php5.6 php5.6-mysql php5.6-gd php5.6-mbstring php5.6-mcrypt php5.6-zip php5.6-curl php5.6-xml
+
+apt install libapache2-mod-php5.6
+a2enmod rewrite
+
 
 phpenmod -v 5.6 simplexml
 
 
 #apt install -y php5.6-fpm
 
-apt install libapache2-mod-php5.6
-a2enmod rewrite
 
 cd /etc/php/5.6/fpm/
 cd /etc/php/5.6/apache2/
