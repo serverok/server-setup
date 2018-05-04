@@ -5,6 +5,7 @@ yum -y install libxml2-devel libcurl-devel
 yum -y install libjpeg-turbo-devel libpng-devel freetype-devel
 yum -y install libmcrypt-devel
 yum -y install libtidy-devel
+yum -y install libicu-devel
 
 mkdir /usr/local/src
 cd /usr/local/src
@@ -37,6 +38,7 @@ make clean
 --enable-fpm
 make && make install
 
+ln -s /usr/serverok/php-7.2.1 /usr/serverok/php
 
 
 /usr/serverok/php-7.2.1/bin/php -m

@@ -24,13 +24,13 @@ cd /etc/php/7.0/fpm/
 
 apt-get -y install mariadb-client mariadb-server
 
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+# echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
+# echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
+# echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
+# echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
+# echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 
-apt-get install -y phpmyadmin
+# apt-get install -y phpmyadmin
 
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
