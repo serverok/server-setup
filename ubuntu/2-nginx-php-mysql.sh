@@ -23,6 +23,7 @@ cd /etc/php/7.0/fpm/
 /bin/sed -i "s/max_file_uploads = On/max_file_uploads = 1000/g" php.ini
 
 apt-get -y install mariadb-client mariadb-server
+apt install automysqlbackup -y
 
 # echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
 # echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
