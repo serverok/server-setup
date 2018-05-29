@@ -6,11 +6,10 @@ a2enmod rewrite
 a2enmod ssl
 
 apt-get -y install php php-cli php-curl php-gd \
-           php-mysql php-imagick php-imap php-mcrypt \
+           php-mysql php-imagick php-imap  \
            php-json php-xml php-mbstring php-zip \
            php-xmlrpc php-soap php-intl php-bcmath
 
-phpenmod mcrypt
 
 # Debian 8
 # apt-get -y install php5 php5-cli php5-curl php5-gd php5-mysql php5-imagick php5-imap php5-mcrypt php5-json php5-xmlrpc  php5-intl
@@ -33,7 +32,12 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 
 apt-get install -y phpmyadmin postfix
 
-cd /etc/php/7.0/apache2
+if [ -f /etc/php/7.2/apache2/php.ini ]; then
+    cd /etc/php/7.2/apache2
+elif [ -f /etc/php/7.0/apache2/php.ini ]; then
+    cd /etc/php/7.0/apache2
+fi
+
 sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini
 sed -i "s/max_input_time\s*=.*/max_input_time = 6000/g" php.ini
 sed -i "s/memory_limit\s*=.*/memory_limit = 256M/g" php.ini

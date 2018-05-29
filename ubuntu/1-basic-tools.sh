@@ -6,3 +6,4 @@ apt update
 apt -y upgrade
 apt -y install wget curl nmap whois vim screen git unzip atop htop telnet
 apt -y purge mlocate
+apt autoremove -y
