@@ -1,3 +1,7 @@
+#!/bin/bash
+# Author: admin@serverOk.in
+# Web: https://www.serverok.in
+
 add-apt-repository ppa:ondrej/php
 apt update
 apt -y upgrade

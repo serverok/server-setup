@@ -1,4 +1,6 @@
 #!/bin/bash
+# Author: admin@serverOk.in
+# Web: https://www.serverok.in
 
 apt-get -y install apache2
 update-rc.d apache2 enable

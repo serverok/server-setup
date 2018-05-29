@@ -1,3 +1,7 @@
+#!/bin/bash
+# Author: admin@serverOk.in
+# Web: https://www.serverok.in
+
 dd if=/dev/zero of=/swapfile bs=1M count=2048
 mkswap /swapfile
 chmod 0600 /swapfile
