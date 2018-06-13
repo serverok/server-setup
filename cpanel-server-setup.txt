@@ -29,6 +29,11 @@ Home »Software »EasyApache 4 > PHP Modules
 mbstring
 Provision = CloudLinux + All PHP Options + OpCache
 
+
+yum install -y ea-php56-php-mbstring.x86_64 ea-php70-php-mbstring.x86_64 ea-php71-php-mbstring.x86_64 ea-php72-php-mbstring.x86_64
+
+
+
 https://www.webhostingneeds.com/cpanel_server_setup
 
 
@@ -79,7 +84,6 @@ whmapi1 enable_monitor_all_enabled_services
 * WHM > Security Center > PHP open_basedir Tweak = ENABLE
 * Home »Security Center »Configure Security Policies > Password Age = 90
 * Home »Security Center »ModSecurity™ Vendors »Manage Vendors  => enable OSASP
-* Home »Security Center »PHP open_basedir Tweak => enable
 * WHM > Security Center > Shell Fork Bomb Protection = ENABLE
 * WHM > Security Center > SSH Password Authorization Tweak = DISABLED
 * WHM > Security Center > cPHulk Brute Force Protection = DISABLE (use CSF)
@@ -108,4 +112,11 @@ vi update-servers.sh
 cd /home/boby/www/projects/honcpanel/hosting_plans
 ./get_latest.sh
 ./update_servers.sh
+
+
+
+HostOnNet Server
+
+
+/bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"billing@hostonnet.com\"/g" /etc/csf/csf.conf
 
