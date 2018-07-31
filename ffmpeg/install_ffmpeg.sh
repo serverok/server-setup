@@ -269,8 +269,8 @@ fi
 # x264 --help
 
 cd /usr/local/src/
-wget ftp://ftp.videolan.org/pub/x264/snapshots/last_x264.tar.bz2
-tar xvf last_x264.tar.bz2
+wget ftp://ftp.videolan.org/pub/x264/snapshots/last_stable_x264.tar.bz2
+tar xvf last_stable_x264.tar.bz2
 cd /usr/local/src/x264-snapshot-*
 make clean && make distclean
 ./configure --prefix=/usr --enable-shared
