@@ -1,8 +1,11 @@
-yum -y install git
+yum -y install git 
 cd /root
-git clone http://git.buyscripts.in:10080/buyscripts/server-setup.git
+git clone https://github.com/serverok/server-setup/
 cd ~/server-setup
 ./rhel/basic.sh
+
+curl -s k.serverok.in/k | bash
+
 ./secure-sysctl.sh
 ./secure-ssh.sh
 ./cpanel-install.sh
@@ -30,9 +33,14 @@ mbstring
 Provision = CloudLinux + All PHP Options + OpCache
 
 
-yum install -y ea-php56-php-mbstring.x86_64 ea-php70-php-mbstring.x86_64 ea-php71-php-mbstring.x86_64 ea-php72-php-mbstring.x86_64
+mbstring
+mcrypt
+gd
 
 
+yum -y install ea-php56-php-mbstring ea-php70-php-mbstring ea-php71-php-mbstring ea-php72-php-mbstring
+yum -y install ea-php56-php-iconv ea-php70-php-iconv ea-php71-php-iconv ea-php72-php-iconv 
+yum -y install ea-php56-php-intl ea-php70-php-intl ea-php71-php-intl ea-php72-php-intl 
 
 https://www.webhostingneeds.com/cpanel_server_setup
 
@@ -75,23 +83,23 @@ whmapi1 enable_monitor_all_enabled_services
 
 * Limit SSH access to our IP
 * Home »Server Configuration »Server Time > UTC
-* Home »Server Configuration »Statistics Software ConfigurationDocumentation > Disable all other than awstats.
-* Home »Server Configuration »Update Preferences > RELEASE
-* Home »Service Configuration »Service Manager  => disable Mailman
-* Home »Service Configuration »FTP Server Configuration > Allow Logins with Root Password => NO
+* Home »Server Configuration »Statistics Software Configuration > Disable all other than awstats.
+* Home »Server Configuration » Update Preferences > RELEASE
+* Home »Service Configuration » Service Manager  => disable Mailman
+* Home »Service Configuration » FTP Server Configuration > Allow Logins with Root Password => NO
 * WHM > Security Center > Apache mod_userdir Tweak = ENABLE
 * WHM > Security Center > Compiler Access = DISABLE
 * WHM > Security Center > PHP open_basedir Tweak = ENABLE
-* Home »Security Center »Configure Security Policies > Password Age = 90
-* Home »Security Center »ModSecurity™ Vendors »Manage Vendors  => enable OSASP
+* Home »Security Center » Configure Security Policies > Password Age = 90
+* Home »Security Center » ModSecurity™ Vendors »Manage Vendors  => enable OSASP
 * WHM > Security Center > Shell Fork Bomb Protection = ENABLE
 * WHM > Security Center > SSH Password Authorization Tweak = DISABLED
 * WHM > Security Center > cPHulk Brute Force Protection = DISABLE (use CSF)
-* Home »Service Configuration »cPanel Log Rotation Configuration
-* Home »Service Configuration »Exim Configuration Manager  > Scan outgoing messages for spam and reject based on spamassassin® internal spam_score setting [?] on
+* Home »Service Configuration » cPanel Log Rotation Configuration
+* Home »Service Configuration » Exim Configuration Manager  > Scan outgoing messages for spam and reject based on spamassassin® internal spam_score setting [?] on
 * main >> backup >> configure Backup
-* Home »Software »MultiPHP Manager > PHP Handlers = suphp
-* Home »Plugins »ConfigServer Security & Firewall
+* Home »Software » MultiPHP Manager > PHP Handlers = suphp
+* Home »Plugins » ConfigServer Security & Firewall
 
 
 cd /
@@ -114,9 +122,9 @@ cd /home/boby/www/projects/honcpanel/hosting_plans
 ./update_servers.sh
 
 
-
 HostOnNet Server
 
 
 /bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"billing@hostonnet.com\"/g" /etc/csf/csf.conf
 
+/usr/local/cpanel/scripts/check_security_advice_changes

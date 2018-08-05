@@ -34,23 +34,9 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 
 apt-get install -y phpmyadmin postfix
 
-if [ -f /etc/php/7.2/apache2/php.ini ]; then
-    cd /etc/php/7.2/apache2
-elif [ -f /etc/php/7.0/apache2/php.ini ]; then
-    cd /etc/php/7.0/apache2
-fi
-
-sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini
-sed -i "s/max_input_time\s*=.*/max_input_time = 6000/g" php.ini
-sed -i "s/memory_limit\s*=.*/memory_limit = 256M/g" php.ini
-sed -i "s/display_errors\s*=.*/display_errors = On/g" php.ini
-sed -i "s/file_uploads\s*=.*/file_uploads = On/g" php.ini
-sed -i "s/post_max_size\s*=.*/post_max_size = 800M/g" php.ini
-sed -i "s/upload_max_filesize\s*=.*/upload_max_filesize = 800M/g" php.ini
-sed -i "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" php.ini
-sed -i "s/error_reporting\s*=.*/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" php.ini
-sed -i "s/max_file_uploads = On/max_file_uploads = 1000/g" php.ini
-sed -i 's/; max_input_vars = 1000/max_input_vars = 3000/g' php.ini
-
 service apache2 stop
 service apache2 start
+
+apt install -y monit
+ln -s /etc/monit/conf-available/apache2 /etc/monit/conf-enabled/
+ln -s /etc/monit/conf-available/mysql /etc/monit/conf-enabled/

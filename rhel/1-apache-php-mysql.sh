@@ -1,11 +1,18 @@
 #!/bin/bash
 
+yum -y install epel-release
+yum -y install yum-utils
+rpm -ivh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
 yum -y install httpd httpd-devel httpd-tools
 
-yum -y install php php-cli php-devel php-gd php-intl php-mbstring php-mysqlnd php-odbc php-pdo php-process php-pspell php-soap php-xml php-xmlrpc
+yum-config-manager --enable remi-php72
+
+yum install -y php php-bcmath php-cli php-common php-devel php-gd \
+    php-imap php-intl php-json php-ldap php-lz4 php-mbstring php-mysqlnd \
+    php-soap php-intl php-opcache php-xml php-pdo
 
 yum -y install mariadb mariadb-server
-
 
 systemctl enable mariadb
 systemctl enable httpd
