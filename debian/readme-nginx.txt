@@ -9,11 +9,13 @@ useradd -m -d /home/DOMAIN/ -s /bin/bash USERNAME
 
 passwd USERNAME
 
-yu@wEFBrPjqjj1
+yQ1Pna@EypGsGm
 
-#sed -i 's/www-data/USERNAME/g' /etc/nginx/nginx.conf
-cp /etc/php/7.2/fpm/pool.d/www.conf /etc/php/7.2/fpm/pool.d/UNSERNAME.conf
-sed -i 's/www-data/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+cat /etc/php/7.2/fpm/pool.d/www.conf | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
+sed -i 's/^user = .*/user = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+sed -i 's/^group = .*/group = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+sed -i 's/^\[www\]$/[USERNAME]/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+sed -i 's/php7.2-fpm.sock/php7.2-fpm-USERNAME.sock/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 
 vi /etc/nginx/sites-available/DOMAIN.conf
 
@@ -49,7 +51,7 @@ server {
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
-        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.2-fpm-USERNAME.sock;
     }
 
     location ~* \.(txt|xml|js)$ {
