@@ -17,6 +17,5 @@ mkdir ~/.ssh/
 curl -s http://k.serverok.in/yb.pub >> ~/.ssh/authorized_keys
 chmod -R 700 ~/.ssh/
 
-
 wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench.sh
 sh ./geekbench.sh
