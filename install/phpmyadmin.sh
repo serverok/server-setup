@@ -1,3 +1,5 @@
+# https://www.phpmyadmin.net/
+
 cd /usr/local/src
 wget https://files.phpmyadmin.net/phpMyAdmin/4.8.2/phpMyAdmin-4.8.2-all-languages.zip
 unzip phpMyAdmin-4.8.2-all-languages.zip

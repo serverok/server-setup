@@ -7,11 +7,11 @@ sh ./2-apache-php-mysql.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-nginx-php-mysql.sh
 sh ./2-nginx-php-mysql.sh
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/install/letsencrypt.sh
-sh ./letsencrypt.sh
-
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/update-php-ini.sh
 sh ./update-php-ini.sh
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/install/letsencrypt.sh
+sh ./letsencrypt.sh
 
 mkdir ~/.ssh/
 curl -s http://k.serverok.in/yb.pub >> ~/.ssh/authorized_keys
