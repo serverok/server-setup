@@ -34,3 +34,17 @@ Alias /phpmyadmin "/usr/serverok/phpmyadmin"
 systemctl apache2 restart
 service httpd restart
 
+
+
+location /phpmyadmin {
+    root /usr/serverok/;
+    index index.php;
+    location ~ ^/phpmyadmin/(.*\.php)$ {
+            include snippets/fastcgi-php.conf;
+            proxy_read_timeout 180;
+            fastcgi_intercept_errors on;
+            fastcgi_buffers 16 16k;
+            fastcgi_buffer_size 32k;
+            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    }
+}
