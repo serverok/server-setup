@@ -1,5 +1,6 @@
 DOMAIN
 USERNAME
+PASSWORD_HERE
 
 -------------------------------------------------------------------
 
@@ -9,7 +10,10 @@ useradd -m -d /home/DOMAIN/ -s /bin/bash USERNAME
 
 passwd USERNAME
 
-yQ1Pna@EypGsGm
+PASSWORD_HERE
+
+mkdir /home/DOMAIN/html/
+chown -R USERNAME:USERNAME /home/DOMAIN/
 
 cat /etc/php/7.2/fpm/pool.d/www.conf | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^user = .*/user = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
@@ -18,10 +22,6 @@ sed -i 's/^\[www\]$/[USERNAME]/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/php7.2-fpm.sock/php7.2-fpm-USERNAME.sock/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 
 vi /etc/nginx/sites-available/DOMAIN.conf
-
-mkdir /home/DOMAIN/html/
-chown -R USERNAME:USERNAME /home/DOMAIN/
-
 
 server {
     listen 80;
