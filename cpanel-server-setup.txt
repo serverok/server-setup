@@ -41,6 +41,11 @@ gd
 yum -y install ea-php56-php-mbstring ea-php70-php-mbstring ea-php71-php-mbstring ea-php72-php-mbstring
 yum -y install ea-php56-php-iconv ea-php70-php-iconv ea-php71-php-iconv ea-php72-php-iconv 
 yum -y install ea-php56-php-intl ea-php70-php-intl ea-php71-php-intl ea-php72-php-intl 
+yum -y install ea-php56-php-fileinfo.x86_64 ea-php70-php-fileinfo.x86_64 ea-php71-php-fileinfo.x86_64 ea-php72-php-fileinfo.x86_64
+
+
+
+
 
 https://www.webhostingneeds.com/cpanel_server_setup
 

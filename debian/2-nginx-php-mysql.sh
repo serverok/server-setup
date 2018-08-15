@@ -15,7 +15,7 @@ echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selecti
 echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
 echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
 echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect " | debconf-set-selections
 
 apt-get install -y phpmyadmin
 
