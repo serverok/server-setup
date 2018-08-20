@@ -31,7 +31,7 @@ if [ -f /etc/php/7.0/apache2/php.ini ]; then
 fi
 
 if [ -f /etc/php/7.0/fpm/php.ini ]; then
-    echo "Found PHP 7.2 php-fpm"
+    echo "Found PHP 7.0 php-fpm"
     cd /etc/php/7.0/fpm
     update_php_ini
     systemctl restart php7.0-fpm

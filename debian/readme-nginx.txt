@@ -104,7 +104,6 @@ server {
 
 
 ln -s /etc/nginx/sites-available/DOMAIN.conf /etc/nginx/sites-enabled/DOMAIN.conf
-rm -f /etc/nginx/sites-enabled/default
 
 
 systemctl restart ssh
