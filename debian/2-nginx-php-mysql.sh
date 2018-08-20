@@ -23,3 +23,8 @@ systemctl enable nginx
 systemctl restart php7.0-fpm
 systemctl restart mariadb
 systemctl restart nginx
+
+apt install -y monit
+ln -s /etc/monit/conf-available/nginx /etc/monit/conf-enabled/nginx
+ln -s /etc/monit/conf-available/mysql /etc/monit/conf-enabled/mysql
+systemctl restart monit
