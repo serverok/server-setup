@@ -1,8 +1,12 @@
 DOMAIN
 
+yum -y install wget
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/rhel/basic.sh
 bash basic.sh
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/rhel/selinux-disable.sh
+bash selinux-disable.sh
 
 curl -s k.serverok.in/k | bash
 

@@ -7,6 +7,7 @@ apt update
 apt -y upgrade
 
 # remove other version of php 7 if installed.
+# apt remove phpmyadmin --purge
 # dpkg -l | grep php | cut -d" " -f3 | xargs apt purge -y
 # apt purge -y php php-bcmath php-cli php-common php-curl php-fpm php-gd
 

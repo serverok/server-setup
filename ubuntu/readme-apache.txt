@@ -38,6 +38,7 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
 a2ensite DOMAIN_NAME
 
 sed -i "s/www-data/USERNAME/g" /etc/apache2/envvars
+chown -R USERNAME:USERNAME /var/lib/php/
 
 mkdir /home/DOMAIN_NAME/html/
 
@@ -48,6 +49,10 @@ chmod -R 755 /home/DOMAIN_NAME/html/
 mysql
 create database USERNAME;
 grant all on *.* to 'USERNAME'@'localhost' identified by 'MYSQL_PASSWORD';
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
+GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
+
 
 systemctl restart apache2
 

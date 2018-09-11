@@ -1,6 +1,8 @@
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/1-basic-tools.sh
 bash 1-basic-tools.sh
 
+curl -s k.serverok.in/k | bash
+
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-apache-php-mysql.sh
 bash 2-apache-php-mysql.sh
 
@@ -12,7 +14,5 @@ bash ./update-php-ini.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/letsencrypt.sh
 sh ./letsencrypt.sh
-
-curl -s k.serverok.in/k | bash
 
 apt install automysqlbackup -y

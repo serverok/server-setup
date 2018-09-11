@@ -1,11 +1,11 @@
 # https://www.phpmyadmin.net/
 
 cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/4.8.2/phpMyAdmin-4.8.2-all-languages.zip
-unzip phpMyAdmin-4.8.2-all-languages.zip
+wget https://files.phpmyadmin.net/phpMyAdmin/4.8.3/phpMyAdmin-4.8.3-all-languages.zip
+unzip phpMyAdmin-4.8.3-all-languages.zip
 mkdir /usr/serverok
 rm -rf /usr/serverok/phpmyadmin
-mv phpMyAdmin-4.8.2-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-4.8.3-all-languages /usr/serverok/phpmyadmin
 mkdir /usr/serverok/phpmyadmin/tmp/
 chmod 777 /usr/serverok/phpmyadmin/tmp/
 cp /usr/serverok/phpmyadmin/config.sample.inc.php /usr/serverok/phpmyadmin/config.inc.php

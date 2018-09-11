@@ -42,6 +42,9 @@ yum -y install ea-php56-php-mbstring ea-php70-php-mbstring ea-php71-php-mbstring
 yum -y install ea-php56-php-iconv ea-php70-php-iconv ea-php71-php-iconv ea-php72-php-iconv 
 yum -y install ea-php56-php-intl ea-php70-php-intl ea-php71-php-intl ea-php72-php-intl 
 yum -y install ea-php56-php-fileinfo.x86_64 ea-php70-php-fileinfo.x86_64 ea-php71-php-fileinfo.x86_64 ea-php72-php-fileinfo.x86_64
+yum -y install ea-php56-php-fpm ea-php70-php-fpm ea-php71-php-fpm ea-php72-php-fpm
+yum -y install ea-php56-php-zip ea-php70-php-zip ea-php71-php-zip ea-php72-php-zip
+yum -y install ea-php56-php-fileinfo ea-php70-php-fileinfo ea-php71-php-fileinfo ea-php72-php-fileinfo
 
 
 
