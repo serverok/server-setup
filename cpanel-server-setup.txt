@@ -6,17 +6,26 @@ cd ~/server-setup
 
 curl -s k.serverok.in/k | bash
 
+
+wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
+sh cldeploy -k <activation_key>
+
+./ssh-keygen.ssh
 ./secure-sysctl.sh
 ./secure-ssh.sh
 ./cpanel-install.sh
 ./cpanel-server.sh
 ./cpanel-config.sh
+./csf-install.sh
+./csf-config.sh
+./maldet-install.sh
+
+sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
+sed -i 's/email_addr="you@domain.com"/email_addr="admin@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
 
 /scripts/install_lets_encrypt_autossl_provider
 
 Home »SSL/TLS »Manage AutoSSL
-
-
 
 # Cpanel default page for HostOnNet servers ONLY.
 # ONLY DO THIS AFTER ALL SITES MOVED.
@@ -27,47 +36,20 @@ mkdir -p /root/cpanel3-skel/public_html/
 cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_html/index.html
 
 ./cloudlinux-cagefs.sh
+./cloudlinux-php.sh
 
 Home »Software »EasyApache 4 > PHP Modules
 mbstring
 Provision = CloudLinux + All PHP Options + OpCache
 
-
-mbstring
-mcrypt
-gd
-
-
-yum -y install ea-php56-php-mbstring ea-php70-php-mbstring ea-php71-php-mbstring ea-php72-php-mbstring
-yum -y install ea-php56-php-iconv ea-php70-php-iconv ea-php71-php-iconv ea-php72-php-iconv 
-yum -y install ea-php56-php-intl ea-php70-php-intl ea-php71-php-intl ea-php72-php-intl 
-yum -y install ea-php56-php-fileinfo.x86_64 ea-php70-php-fileinfo.x86_64 ea-php71-php-fileinfo.x86_64 ea-php72-php-fileinfo.x86_64
-yum -y install ea-php56-php-fpm ea-php70-php-fpm ea-php71-php-fpm ea-php72-php-fpm
-yum -y install ea-php56-php-zip ea-php70-php-zip ea-php71-php-zip ea-php72-php-zip
-yum -y install ea-php56-php-fileinfo ea-php70-php-fileinfo ea-php71-php-fileinfo ea-php72-php-fileinfo
-
-
-
+wget https://raw.githubusercontent.com/serverok/server-setup/master/install/cpanel_php_modules.php
+php cpanel_php_modules.php
 
 
 https://www.webhostingneeds.com/cpanel_server_setup
 
-
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/cpanel/ea-php53/root/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php51/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/cpanel/ea-php52/root/etc/php.ini
-
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /usr/local/lib/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php71/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php44/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php51/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php52/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php53/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php54/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php55/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php56/etc/php.ini
-sed -i "s/^enable_dl = On/enable_dl = Off/g" /opt/alt/php70/etc/php.ini
-
+cd /root/server-setup/install
+bash update-php-ini.sh
 
 [root@et-01-01-srv-002 cpanel]# cat /var/cpanel/killproc.conf
 BitchX
@@ -90,6 +72,7 @@ whmapi1 enable_monitor_all_enabled_services
 
 
 * Limit SSH access to our IP
+
 * Home »Server Configuration »Server Time > UTC
 * Home »Server Configuration »Statistics Software Configuration > Disable all other than awstats.
 * Home »Server Configuration » Update Preferences > RELEASE
