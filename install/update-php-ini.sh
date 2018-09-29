@@ -81,5 +81,5 @@ if [ -f /opt/cpanel/ea-php72/root/etc/php.ini ]; then
 fi
 
 if [ -f /usr/sbin/cagefsctl ]; then
-    /usr/sbin/cagefsctl --update  --force
+    /usr/sbin/cagefsctl --force-update
 fi

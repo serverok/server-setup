@@ -11,13 +11,16 @@ $phpVersions = [
 ];
 
 $phpExtensions = [
+    'curl',
+    'exif',
     'ioncube10',
-    'mbstring',
     'iconv',
     'intl',
     'fileinfo',
     'fpm',
-    'zip'
+    'mbstring',
+    'soap',
+    'zip',
 ];
 
 foreach ($phpExtensions as $phpExtension) {
