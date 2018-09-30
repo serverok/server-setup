@@ -64,9 +64,11 @@ PHP_INI_PATHS=(
 )
 
 for php_ini_path in ${PHP_INI_PATHS[@]}; do
-    echo "Updating $php_ini_path"
-    cd $(dirname "${php_ini_path}")
-    update_php_ini
+    if [ -f $php_ini_path ]; then
+        echo "Updating $php_ini_path"
+        cd $(dirname "${php_ini_path}")
+        update_php_ini
+    fi
 done
 
 if [ -f /etc/init.d/httpd ]; then

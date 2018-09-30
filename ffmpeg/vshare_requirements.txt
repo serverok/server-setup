@@ -1,5 +1,5 @@
 yum install -y screen git
-cd && git clone https://github.com/HostOnNet/server-setup.git
+cd && git clone https://github.com/serverok/server-setup.git
 screen
 
 uname -a
