@@ -48,4 +48,14 @@ ln -s /usr/share/zoneinfo/UTC /etc/localtime
 echo "DEFAULTGENS=AWSTATS" > /etc/stats.conf
 echo "allow_awstats_include=0" >> /etc/stats.conf
 
+/bin/sed -i "s/^skipanalog=0/skipanalog=1/g" /var/cpanel/cpanel.config
+/bin/sed -i "s/^skipwebalizer=0/skipwebalizer=1/g" /var/cpanel/cpanel.config
+
+/scripts/initquotas
+
+/scripts/install_lets_encrypt_autossl_provider
+
+wget https://gist.githubusercontent.com/serverok/dd123d2a79a7490a8d4cca0e6ba47bff/raw -O /var/cpanel/autossl.json
+
+
 service cpanel restart

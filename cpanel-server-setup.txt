@@ -23,8 +23,6 @@ sh cldeploy -k <activation_key>
 sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
 sed -i 's/email_addr="you@domain.com"/email_addr="admin@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
 
-/scripts/install_lets_encrypt_autossl_provider
-
 Home »SSL/TLS »Manage AutoSSL
 
 # Cpanel default page for HostOnNet servers ONLY.
@@ -77,7 +75,6 @@ whmapi1 enable_monitor_all_enabled_services
 * Home »Server Configuration »Statistics Software Configuration > Disable all other than awstats.
 * Home »Server Configuration » Update Preferences > RELEASE
 * Home »Service Configuration » Service Manager  => disable Mailman
-* Home »Service Configuration » FTP Server Configuration > Allow Logins with Root Password => NO
 * WHM > Security Center > Apache mod_userdir Tweak = ENABLE
 * WHM > Security Center > Compiler Access = DISABLE
 * WHM > Security Center > PHP open_basedir Tweak = ENABLE
@@ -87,7 +84,8 @@ whmapi1 enable_monitor_all_enabled_services
 * WHM > Security Center > SSH Password Authorization Tweak = DISABLED
 * WHM > Security Center > cPHulk Brute Force Protection = DISABLE (use CSF)
 * Home »Service Configuration » cPanel Log Rotation Configuration
-* Home »Service Configuration » Exim Configuration Manager  > Scan outgoing messages for spam and reject based on spamassassin® internal spam_score setting [?] on
+* Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Scan outgoing messages for spam and reject based on defined Apache SpamAssassin = 5
+* Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Do not forward mail to external recipients based on the defined Apache SpamAssassin™ score = 5
 * main >> backup >> configure Backup
 * Home »Software » MultiPHP Manager > PHP Handlers = suphp
 * Home »Plugins » ConfigServer Security & Firewall

@@ -1,5 +1,9 @@
-#railwire
+# boby isp
 sshd : 112.133. : allow
+sshd : 103.35.199.82 : allow
+
+# ok.serverok.in
+sshd : 51.38.246.115 : allow
 
 #asianet
 sshd : 111.92. : allow
@@ -14,9 +18,6 @@ sshd : 158.69.53.72 : allow
 sshd : 149.56.240.40 : allow
 sshd : 192.99.18.195 : allow
 sshd : 158.69.124.221 : allow
-
-# admin.serverok.in
-sshd : 51.38.246.115 : allow
 
 #vpn
 sshd : 198.50.234. : allow

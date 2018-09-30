@@ -45,39 +45,32 @@ if [ -f /etc/php/7.2/fpm/php.ini ]; then
     systemctl restart php7.2-fpm
 fi
 
-if [ -f /etc/php.ini ]; then
-    echo "Updating /etc/php.ini"
-    cd /etc/
-    update_php_ini
-    service httpd restart
-fi
+PHP_INI_PATHS=(
+/etc/php.ini
+/opt/cpanel/ea-php56/root/etc/php.ini
+/opt/cpanel/ea-php70/root/etc/php.ini
+/opt/cpanel/ea-php71/root/etc/php.ini
+/opt/cpanel/ea-php72/root/etc/php.ini
+/opt/alt/php44/etc/php.ini
+/opt/alt/php51/etc/php.ini
+/opt/alt/php52/etc/php.ini
+/opt/alt/php53/etc/php.ini
+/opt/alt/php54/etc/php.ini
+/opt/alt/php55/etc/php.ini
+/opt/alt/php56/etc/php.ini
+/opt/alt/php70/etc/php.ini
+/opt/alt/php71/etc/php.ini
+/opt/alt/php72/etc/php.ini
+)
 
-if [ -f /opt/cpanel/ea-php56/root/etc/php.ini ]; then
-    echo "Updating /opt/cpanel/ea-php56/root/etc/php.ini"
-    cd /opt/cpanel/ea-php56/root/etc/
+for php_ini_path in ${PHP_INI_PATHS[@]}; do
+    echo "Updating $php_ini_path"
+    cd $(dirname "${php_ini_path}")
     update_php_ini
-    service httpd restart
-fi
+done
 
-if [ -f /opt/cpanel/ea-php70/root/etc/php.ini ]; then
-    echo "Updating /opt/cpanel/ea-php70/root/etc/php.ini"
-    cd /opt/cpanel/ea-php70/root/etc/
-    update_php_ini
-    service httpd restart
-fi
-
-if [ -f /opt/cpanel/ea-php71/root/etc/php.ini ]; then
-    echo "Updating /opt/cpanel/ea-php71/root/etc/php.ini"
-    cd /opt/cpanel/ea-php71/root/etc/
-    update_php_ini
-    service httpd restart
-fi
-
-if [ -f /opt/cpanel/ea-php72/root/etc/php.ini ]; then
-    echo "Updating /opt/cpanel/ea-php72/root/etc/php.ini"
-    cd /opt/cpanel/ea-php72/root/etc/
-    update_php_ini
-    service httpd restart
+if [ -f /etc/init.d/httpd ]; then
+   service httpd restart
 fi
 
 if [ -f /usr/sbin/cagefsctl ]; then
