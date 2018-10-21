@@ -5,6 +5,8 @@ update-rc.d apache2 enable
 a2enmod rewrite
 a2enmod ssl
 
+sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
+
 apt-get -y install php php-cli php-curl php-gd \
            php-mysql php-imagick php-imap php-mcrypt \
            php-json php-xml php-mbstring php-zip \

@@ -31,6 +31,7 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
 a2ensite DOMAIN_NAME
 
 sed -i "s/www-data/USERNAME/g" /etc/apache2/envvars
+chown -R USERNAME:USERNAME /var/lib/php/
 
 mkdir /home/DOMAIN_NAME/html/
 
@@ -42,5 +43,5 @@ mysql
 create database USERNAME;
 grant all on *.* to 'USERNAME'@'localhost' identified by 'PASSWOD_HERE';
 
-certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html --installer apache -d DOMAIN_NAME -d www.DOMAIN_NAME
+certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html --installer apache --agree-tos --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME
 

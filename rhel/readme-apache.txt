@@ -36,6 +36,7 @@ vi /etc/httpd/conf.d/DOMAIN_NAME.conf
 sed -i "s/User apache/User USERNAME/g" /etc/httpd/conf/httpd.conf
 sed -i "s/Group apache/Group USERNAME/g" /etc/httpd/conf/httpd.conf
 
+chown -R USERNAME:USERNAME /var/lib/php/
 
 mkdir /home/DOMAIN_NAME/html/
 
