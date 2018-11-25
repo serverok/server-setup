@@ -6,8 +6,8 @@ curl -s k.serverok.in/k | bash
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-apache-php-mysql.sh
 bash 2-apache-php-mysql.sh
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-mysql.sh
-bash 2-nginx-php-mysql.sh
+wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-72-mysql.sh
+bash 2-nginx-php-72-mysql.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/update-php-ini.sh
 bash ./update-php-ini.sh
@@ -16,3 +16,7 @@ wget https://raw.githubusercontent.com/serverok/server-setup/master/install/lets
 sh ./letsencrypt.sh
 
 apt install automysqlbackup -y
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
+GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;

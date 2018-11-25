@@ -1,3 +1,10 @@
+USERNAME
+DOMAIN_NAME
+MYSQL_PASSWORD
+admin@serverok.in
+
+------------------
+
 sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 service ssh restart
 
@@ -43,5 +50,11 @@ mysql
 create database USERNAME;
 grant all on *.* to 'USERNAME'@'localhost' identified by 'PASSWOD_HERE';
 
-certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html --installer apache --agree-tos --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME
 
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
+GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
+
+
+systemctl restart apache2
+
+certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html/ --installer apache --agree-tos --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME

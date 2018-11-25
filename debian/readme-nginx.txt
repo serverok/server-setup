@@ -15,7 +15,8 @@ PASSWORD_HERE
 mkdir /home/DOMAIN/html/
 chown -R USERNAME:USERNAME /home/DOMAIN/
 
-cat /etc/php/7.2/fpm/pool.d/www.conf | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
+mv /etc/php/7.2/fpm/pool.d/www.conf /etc/php/7.2/fpm/pool.d/www.conf.serverok
+cat /etc/php/7.2/fpm/pool.d/www.conf.serverok | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^user = .*/user = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^group = .*/group = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^\[www\]$/[USERNAME]/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
@@ -29,10 +30,13 @@ server {
     root /home/DOMAIN/html/;
     index index.php;
     client_max_body_size 100M;
+    proxy_read_timeout 600s;
+    fastcgi_read_timeout 600s;
+    fastcgi_send_timeout 600s;
 
     location = /favicon.ico {
-            log_not_found off;
-            access_log off;
+        log_not_found off;
+        access_log off;
     }
 
     location = /robots.txt {
@@ -47,7 +51,6 @@ server {
 
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        proxy_read_timeout 180;
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
@@ -115,3 +118,10 @@ http://www.DOMAIN/
 
 certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer nginx -d DOMAIN -d www.DOMAIN
 
+
+/etc/php/7.1/fpm/pool.d/felini.conf
+
+catch_workers_output = yes
+php_flag[display_errors] = on
+php_admin_value[error_log] = /var/log/fpm-php.log
+php_admin_flag[log_errors] = on

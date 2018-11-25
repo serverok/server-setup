@@ -1,4 +1,4 @@
 #!/bin/bash
 
-ansible cpanel -i ansible.hosts  -a "/usr/local/cpanel/cpkeyclt"
+ansible cpanel -i inventory -a "/usr/local/cpanel/cpkeyclt"
 

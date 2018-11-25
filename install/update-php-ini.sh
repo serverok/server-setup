@@ -32,7 +32,7 @@ if [ -f /etc/php/7.0/fpm/php.ini ]; then
 fi
 
 if [ -f /etc/php/7.1/fpm/php.ini ]; then
-    echo "Found PHP 7.0 php-fpm"
+    echo "Found PHP 7.1 php-fpm"
     cd /etc/php/7.1/fpm
     update_php_ini
     systemctl restart php7.1-fpm

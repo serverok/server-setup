@@ -1,5 +1,7 @@
 # https://www.serverok.in/ubuntu-php-72
 
+apt-get install software-properties-common python-software-properties
+
 add-apt-repository ppa:ondrej/php
 apt update
 apt -y upgrade
@@ -18,4 +20,5 @@ apt install libapache2-mod-php7.2
 
 a2enmod php7.2
 a2dismod php5.6
+a2dismod php7.0
 service apache2 restart

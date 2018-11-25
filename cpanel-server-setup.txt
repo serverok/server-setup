@@ -23,6 +23,8 @@ sh cldeploy -k <activation_key>
 sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
 sed -i 's/email_addr="you@domain.com"/email_addr="admin@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
 
+/scripts/install_lets_encrypt_autossl_provider
+
 Home »SSL/TLS »Manage AutoSSL
 
 # Cpanel default page for HostOnNet servers ONLY.
@@ -40,11 +42,10 @@ Home »Software »EasyApache 4 > PHP Modules
 mbstring
 Provision = CloudLinux + All PHP Options + OpCache
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/install/cpanel_php_modules.php
-php cpanel_php_modules.php
-
-
 https://www.webhostingneeds.com/cpanel_server_setup
+
+cd /root/server-setup/install
+php cpanel_php_modules.php
 
 cd /root/server-setup/install
 bash update-php-ini.sh
