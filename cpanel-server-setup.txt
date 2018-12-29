@@ -1,3 +1,7 @@
+VERIFY PARTITION (/ should be atleast 100 GB if /usr and /var is not on its own)
+
+df -h
+
 yum -y install git 
 cd /root
 git clone https://github.com/serverok/server-setup/
@@ -6,9 +10,10 @@ cd ~/server-setup
 
 curl -s k.serverok.in/k | bash
 
-
 wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
 sh cldeploy -k <activation_key>
+
+/usr/sbin/rhnreg_ks --activationkey=88804-CLN-c63946aca45d09add03c0a4395e368de --force
 
 ./ssh-keygen.ssh
 ./secure-sysctl.sh
@@ -21,7 +26,7 @@ sh cldeploy -k <activation_key>
 ./maldet-install.sh
 
 sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
-sed -i 's/email_addr="you@domain.com"/email_addr="admin@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
+sed -i 's/email_addr="you@domain.com"/email_addr="boby@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
 
 /scripts/install_lets_encrypt_autossl_provider
 
@@ -35,35 +40,15 @@ Home »SSL/TLS »Manage AutoSSL
 mkdir -p /root/cpanel3-skel/public_html/
 cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_html/index.html
 
-./cloudlinux-cagefs.sh
-./cloudlinux-php.sh
+bash cloudlinux-cagefs.sh
+bash cloudlinux-php.sh
+bash cpanel/php-modules.sh
+bash install/update-php-ini.sh
 
-Home »Software »EasyApache 4 > PHP Modules
-mbstring
-Provision = CloudLinux + All PHP Options + OpCache
-
-https://www.webhostingneeds.com/cpanel_server_setup
-
-cd /root/server-setup/install
-php cpanel_php_modules.php
-
-cd /root/server-setup/install
-bash update-php-ini.sh
-
-[root@et-01-01-srv-002 cpanel]# cat /var/cpanel/killproc.conf
-BitchX
-bnc
-eggdrop
-generic-sniffers
-guardservices
-ircd
-psyBNC
-ptlink
-services
-[root@et-01-01-srv-002 cpanel]#
+curl -sL https://gist.github.com/serverok/8fbcbda5f8fb578cf4a9a5ac5667d1da/raw > /var/cpanel/killproc.conf
+cat /var/cpanel/killproc.conf
 
 /bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@hostonnet.com\"/g" /etc/csf/csf.conf
-
 
 cat /var/cpanel/backups/config
 
@@ -78,7 +63,6 @@ whmapi1 enable_monitor_all_enabled_services
 * Home »Service Configuration » Service Manager  => disable Mailman
 * WHM > Security Center > Apache mod_userdir Tweak = ENABLE
 * WHM > Security Center > Compiler Access = DISABLE
-* WHM > Security Center > PHP open_basedir Tweak = ENABLE
 * Home »Security Center » Configure Security Policies > Password Age = 90
 * Home »Security Center » ModSecurity™ Vendors »Manage Vendors  => enable OSASP
 * WHM > Security Center > Shell Fork Bomb Protection = ENABLE
@@ -90,6 +74,11 @@ whmapi1 enable_monitor_all_enabled_services
 * main >> backup >> configure Backup
 * Home »Software » MultiPHP Manager > PHP Handlers = suphp
 * Home »Plugins » ConfigServer Security & Firewall
+
+
+Home »Software »EasyApache 4 > PHP Modules
+Provision = CloudLinux + All PHP Options + OpCache
+Enable lsapi => https://www.serverok.in/cloudlinux-php-lsapi
 
 
 cd /

@@ -36,6 +36,8 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 
 apt-get install -y phpmyadmin postfix
 
+echo '$cfg["blowfish_secret"] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";' >> /etc/phpmyadmin/config.inc.php
+
 service apache2 stop
 service apache2 start
 

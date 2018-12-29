@@ -2,7 +2,7 @@
 
 apt update
 apt -y upgrade
-apt -y install wget curl nmap whois vim screen git unzip atop htop telnet net-tools dnsutils tmux
+apt -y install wget curl nmap whois vim screen git unzip atop htop telnet net-tools dnsutils tmux iftop
 
 echo "set mouse-=a" >> ~/.vimrc
 echo "alias ll='ls -la --color'" >> ~/.bashrc

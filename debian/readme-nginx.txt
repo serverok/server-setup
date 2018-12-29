@@ -15,8 +15,7 @@ PASSWORD_HERE
 mkdir /home/DOMAIN/html/
 chown -R USERNAME:USERNAME /home/DOMAIN/
 
-mv /etc/php/7.2/fpm/pool.d/www.conf /etc/php/7.2/fpm/pool.d/www.conf.serverok
-cat /etc/php/7.2/fpm/pool.d/www.conf.serverok | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
+cat /etc/php/7.2/fpm/pool.d/www.conf | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^user = .*/user = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^group = .*/group = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^\[www\]$/[USERNAME]/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
@@ -28,7 +27,7 @@ server {
     listen 80;
     server_name DOMAIN www.DOMAIN;
     root /home/DOMAIN/html/;
-    index index.php;
+    index index.php index.html index.htm;
     client_max_body_size 100M;
     proxy_read_timeout 600s;
     fastcgi_read_timeout 600s;
@@ -40,11 +39,17 @@ server {
     }
 
     location = /robots.txt {
-            allow all;
-            log_not_found off;
-            access_log off;
+        allow all;
+        log_not_found off;
+        access_log off;
     }
 
+    location = /xmlrpc.php {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+    
     location / {
             try_files $uri $uri/ /index.php?$args;
     }
@@ -119,9 +124,24 @@ http://www.DOMAIN/
 certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer nginx -d DOMAIN -d www.DOMAIN
 
 
-/etc/php/7.1/fpm/pool.d/felini.conf
+
+root@ip-172-31-1-94:/var/log# cat /etc/php/7.0/fpm/pool.d/www.conf 
+[www]
+user = www-data
+group = www-data
+listen = /run/php/php7.0-fpm.sock
+listen.owner = www-data
+listen.group = www-data
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+
 
 catch_workers_output = yes
 php_flag[display_errors] = on
 php_admin_value[error_log] = /var/log/fpm-php.log
 php_admin_flag[log_errors] = on
+
+root@ip-172-31-1-94:/var/log# 
