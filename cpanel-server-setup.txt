@@ -40,8 +40,7 @@ Home »SSL/TLS »Manage AutoSSL
 mkdir -p /root/cpanel3-skel/public_html/
 cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_html/index.html
 
-bash cloudlinux-cagefs.sh
-bash cloudlinux-php.sh
+bash cloudlinux.sh
 bash cpanel/php-modules.sh
 bash install/update-php-ini.sh
 

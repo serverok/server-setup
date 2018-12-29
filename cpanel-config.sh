@@ -1,4 +1,7 @@
 #!/bin/bash
+# Author: ServerOK.in
+# Email: admin@serverok.in
+# Web; https://www.serverok.in
 
 # WHM Tweaks for better CSF score
 

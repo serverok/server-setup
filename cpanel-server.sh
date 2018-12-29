@@ -1,4 +1,7 @@
 #!/bin/bash
+# Author: ServerOK.in
+# Email: admin@serverok.in
+# Web; https://www.serverok.in
 
 mkdir /root/cpanel3-skel/
 echo "archive-logs=1" > /root/cpanel3-skel/.cpanel-logs

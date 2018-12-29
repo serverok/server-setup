@@ -1,0 +1,15 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+password: Z0BDaFtW@RSkvq
+chpasswd: { expire: False }
+ssh_pwauth: True
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4gjNM1Rf9qXOqKk1wHs9ymAWA65cW01Gz89S7ctPYeO6Mg9G1E6G5AtcFzeqh9GfXpXvkUGsGJ7DEVDEloepBoVEWyh0TBbcQi7l/7iXjUNALTHYPkALkwp8K8HN9KB/JLSzaHvSgMJ6jRMaXDr7cIn7RcgGltV9sNyC2/4VwxT/JlIQcmeYWvTwRE7baCKca38VRLdfVvKHZ83nyhN91AmQydCW/vDLPMdLzja/JOBw5iJ41Fa3Sdw8e/VSS3Xpw9gUVMd63X2le12oG+BdhCcvP3jm0TX95h3VAQ+tmbMkDyijdRmyHEASQ64jHEWP19YI7AWNWRwItOclJPNif admin@hostonnet.com
+runcmd:
+ - [ ls, -l, / ]
+ - [ sh, -xc, "echo $(date) ': hello world!'" ]
+ - [ sh, -c, echo "=========hello world'=========" ]
+ - ls -l /root
+ - [ wget, "http://slashdot.org", -O, /tmp/index.html ]
+ - [ touch, "YujinBoby"]

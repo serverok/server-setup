@@ -1,4 +1,7 @@
 #!/bin/bash
+# Author: ServerOK.in
+# Email: admin@serverok.in
+# Web; https://www.serverok.in
 
 echo "Installing CageFS"
 
@@ -13,3 +16,8 @@ yum -y install cagefs lvemanager
 
 cagefsctl --force-update
 
+yum groupinstall -y alt-php
+
+yum update -y cagefs lvemanager
+
+cagefsctl --force-update
