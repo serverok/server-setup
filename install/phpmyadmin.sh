@@ -116,3 +116,8 @@ Listen 90
         allow from all
     </Directory>
 </VirtualHost>
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
+GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
+
