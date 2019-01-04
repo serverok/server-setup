@@ -12,9 +12,6 @@ passwd USERNAME
 
 PASSWORD_HERE
 
-mkdir /home/DOMAIN/html/
-chown -R USERNAME:USERNAME /home/DOMAIN/
-
 cat /etc/php/7.2/fpm/pool.d/www.conf | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^user = .*/user = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/^group = .*/group = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
@@ -114,16 +111,20 @@ server {
 ln -s /etc/nginx/sites-available/DOMAIN.conf /etc/nginx/sites-enabled/DOMAIN.conf
 
 
+mkdir /home/DOMAIN/html/
+chown -R USERNAME:USERNAME /home/DOMAIN/
+chmod -R 755 /home/DOMAIN/
+
 systemctl restart ssh
 systemctl restart php7.2-fpm
 systemctl restart nginx
 
-
 http://www.DOMAIN/
 
-certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer nginx -d DOMAIN -d www.DOMAIN
+certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer nginx -m admin@serverok.in --agree-tos yes -d DOMAIN -d www.DOMAIN
 
-
+sed -i 's/#systemctl restart nginx/systemctl restart nginx/g' /usr/serverok/ssl-renew
+cat /usr/serverok/ssl-renew
 
 root@ip-172-31-1-94:/var/log# cat /etc/php/7.0/fpm/pool.d/www.conf 
 [www]
