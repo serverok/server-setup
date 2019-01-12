@@ -60,5 +60,19 @@ echo "allow_awstats_include=0" >> /etc/stats.conf
 
 wget https://gist.githubusercontent.com/serverok/dd123d2a79a7490a8d4cca0e6ba47bff/raw -O /var/cpanel/autossl.json
 
+# Keep cpanel logs
+
+mkdir /root/cpanel3-skel/
+echo "archive-logs=1" > /root/cpanel3-skel/.cpanel-logs
+echo "remove-old-archived-logs=1" >> /root/cpanel3-skel/.cpanel-logs
+
+# disable mail from mailer-daemon
+
+/bin/sed -i "s/mailer-daemon:\tpostmaster/mailer-daemon: \/dev\/null/g" /etc/aliases
+
+# install clamav
+
+/scripts/update_local_rpm_versions --edit target_settings.clamav installed
+/scripts/check_cpanel_rpms --fix --targets=clamav
 
 service cpanel restart
