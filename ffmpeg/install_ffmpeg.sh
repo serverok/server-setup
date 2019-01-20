@@ -36,7 +36,7 @@ export TMPDIR=/usr/local/src/tmp
 
 if [ -f /usr/local/cpanel/version ];
 then
-    /scripts/installruby
+    # /scripts/installruby
 else
     yum -y install ruby
 fi
@@ -49,12 +49,12 @@ cd /usr/local/src/jpeg-*
 make
 make install
 
-# https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
+# https://github.com/mstorsjo/fdk-aac/releases
 
 cd /usr/local/src/
-wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/tarball/master
+wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/archive/v0.1.6.tar.gz
 tar xzvf fdk-aac.tar.gz
-cd /usr/local/src/mstorsjo-fdk-aac*
+cd /usr/local/src/fdk-aac-0.1.6
 make distclean
 autoreconf -fiv
 ./configure --prefix=/usr
@@ -105,7 +105,7 @@ cd /usr/local/src/
 wget -c http://downloads.xiph.org/releases/ogg/libogg-1.3.3.tar.gz
 tar zxvf libogg-1.3.3.tar.gz
 cd /usr/local/src/libogg-1.3.3
-./configure && make && make install
+./configure --prefix=/usr && make && make install
 
 if [ $? -ne 0 ]; then
     echo "libogg failed to install"
@@ -118,10 +118,10 @@ ldconfig
 # http://www.xiph.org/downloads/
 
 cd /usr/local/src/
-wget -c http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz
-tar zxvf libvorbis-1.3.5.tar.gz
-cd /usr/local/src/libvorbis-1.3.5
-./configure && make && make install
+wget -c http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.6.tar.gz
+tar zxvf libvorbis-1.3.6.tar.gz
+cd /usr/local/src/libvorbis-1.3.6
+./configure --prefix=/usr && make && make install
 
 if [ $? -ne 0 ]; then
     echo "libvorbis failed to install"
@@ -172,14 +172,19 @@ fi
 
 # http://rubyforge.org/projects/flvtool2/
 # http://www.inlet-media.de/2009/11/flvtool2.html
+# https://www.serverok.in/install-ruby-from-source
 
-cd /usr/local/src/
-wget https://github.com/unnu/flvtool2/archive/master.zip -O flvtool2.zip
-unzip flvtool2.zip
-cd /usr/local/src/flvtool2-master/
-ruby setup.rb config --prefix=/usr
-ruby setup.rb setup
-ruby setup.rb install
+gem install flvtool2
+ln -s /usr/local/bin/flvtool2 /usr/bin/flvtool2
+
+
+#cd /usr/local/src/
+#wget https://github.com/unnu/flvtool2/archive/master.zip -O flvtool2.zip
+#unzip flvtool2.zip
+#cd /usr/local/src/flvtool2-master/
+#ruby setup.rb config --prefix=/usr
+#ruby setup.rb setup
+#ruby setup.rb install
 
 if [ $? -ne 0 ]; then
     echo "faac-src failed to install"
@@ -232,7 +237,7 @@ cd /usr/local/src/amrwb-11.0.0.0
 make && make install
 
 if [ $? -ne 0 ]; then
-    echo "faac-src failed to install"
+    echo "amrwb failed to install"
     exit 1
 fi
 
@@ -248,7 +253,7 @@ cd /usr/local/src/yasm
 make && make install
 
 if [ $? -ne 0 ]; then
-    echo "faac-src failed to install"
+    echo "yasm failed to install"
     exit 1
 fi
 
@@ -261,7 +266,7 @@ cd /usr/local/src/nasm-2.14rc0/
 make && make install
 
 if [ $? -ne 0 ]; then
-    echo "faac-src failed to install"
+    echo "nasm failed to install"
     exit 1
 fi
 
@@ -277,18 +282,9 @@ make clean && make distclean
 make && make install
 
 if [ $? -ne 0 ]; then
-    echo "faac-src failed to install"
+    echo "x264 failed to install"
     exit 1
 fi
-
-# 32bit versions needed for neroAacEnc
-yum -y install glibc.i686 libstdc++.i686
-
-cd /usr/local/src/
-wget -c http://ftp6.nero.com/tools/NeroDigitalAudio.zip
-unzip NeroDigitalAudio.zip -d nero
-cd /usr/local/src/nero/linux
-install -D -m755 neroAacEnc /usr/bin
 
 # https://gpac.wp.mines-telecom.fr/
 # 2017-11-18
