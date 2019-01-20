@@ -76,3 +76,7 @@ echo "remove-old-archived-logs=1" >> /root/cpanel3-skel/.cpanel-logs
 /scripts/check_cpanel_rpms --fix --targets=clamav
 
 service cpanel restart
+
+# Enable shell bomb protection
+
+/usr/local/cpanel/bin/install-login-profile --install limits
