@@ -57,4 +57,4 @@ GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
 
 systemctl restart apache2
 
-certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html/ --installer apache --agree-tos --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME
+certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html/ --installer apache --agree-tos --no-eff-email --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME

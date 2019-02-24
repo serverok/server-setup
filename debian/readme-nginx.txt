@@ -25,7 +25,7 @@ server {
     server_name DOMAIN www.DOMAIN;
     root /home/DOMAIN/html/;
     index index.php index.html index.htm;
-    client_max_body_size 100M;
+    client_max_body_size 1000M;
     proxy_read_timeout 600s;
     fastcgi_read_timeout 600s;
     fastcgi_send_timeout 600s;
@@ -121,7 +121,7 @@ systemctl restart nginx
 
 http://www.DOMAIN/
 
-certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer nginx -m admin@serverok.in --agree-tos yes -d DOMAIN -d www.DOMAIN
+certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer nginx -m admin@serverok.in --agree-tos --no-eff-email -d DOMAIN -d www.DOMAIN
 
 sed -i 's/#systemctl restart nginx/systemctl restart nginx/g' /usr/serverok/ssl-renew
 cat /usr/serverok/ssl-renew

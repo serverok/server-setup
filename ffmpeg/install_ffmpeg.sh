@@ -330,6 +330,12 @@ cd /usr/local/src/MPlayer-1.3.0
 echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
 make && make install
 
+cd /usr/local/src
+wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2
+tar xvf mplayer-checkout-snapshot.tar.bz2
+cd mplayer-checkout-2018-10-23
+echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
+make && make install
 
 cd /usr/local/src/
 wget -c http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2
@@ -363,6 +369,9 @@ make install
 # https://github.com/FFmpeg/FFmpeg/releases
 # Updated on 2016-10-13
 
+pkg-config --exists --print-errors vorbis
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig"
+
 cd /usr/local/src/
 wget https://github.com/FFmpeg/FFmpeg/archive/n3.3.5.tar.gz
 tar zxf n3.3.5.tar.gz
@@ -376,3 +385,15 @@ make tools/qt-faststart
 cp -a tools/qt-faststart /usr/bin/
 
 ldconfig
+
+wget https://github.com/FFmpeg/FFmpeg/archive/n4.0.2.tar.gz
+tar xvf n4.0.2.tar.gz
+cd /usr/local/src/FFmpeg-n4.0.2
+
+./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
+
+make && make install && ldconfig
+
+
+git clone  https://github.com/FFmpeg/FFmpeg
+cd FFmpeg

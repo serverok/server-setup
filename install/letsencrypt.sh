@@ -8,8 +8,7 @@ wget https://dl.eff.org/certbot-auto
 chmod a+x /usr/bin/certbot-auto
 rm -f /usr/bin/certbot
 mv /usr/bin/certbot-auto /usr/bin/certbot
-
-certbot register --agree-tos -m admin@serverok.in
+/usr/bin/certbot --install-only
 
 crontab -l > /root/crontab-backup
 echo "30 2 * * 1 /usr/serverok/ssl-renew >> /var/log/le-renew.log" >> /root/crontab-backup
