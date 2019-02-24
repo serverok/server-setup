@@ -1,11 +1,11 @@
 # https://www.phpmyadmin.net/
 
 cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/4.8.4/phpMyAdmin-4.8.4-all-languages.zip
-unzip phpMyAdmin-4.8.4-all-languages.zip
+wget https://files.phpmyadmin.net/phpMyAdmin/4.8.5/phpMyAdmin-4.8.5-all-languages.zip
+unzip phpMyAdmin-4.8.5-all-languages.zip
 mkdir /usr/serverok
 rm -rf /usr/serverok/phpmyadmin
-mv phpMyAdmin-4.8.4-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-4.8.5-all-languages /usr/serverok/phpmyadmin
 mkdir /usr/serverok/phpmyadmin/tmp/
 chmod 777 /usr/serverok/phpmyadmin/tmp/
 cp /usr/serverok/phpmyadmin/config.sample.inc.php /usr/serverok/phpmyadmin/config.inc.php
@@ -35,9 +35,13 @@ systemctl restart apache2
 service httpd restart
 
 
+vi /etc/nginx/sites-enabled/default
 
 location /phpmyadmin {
-    client_max_body_size 100M;
+    client_max_body_size 200M;
+    proxy_read_timeout 600s;
+    fastcgi_read_timeout 600s;
+    fastcgi_send_timeout 600s;
     root /usr/serverok/;
     index index.php;
     location ~ ^/phpmyadmin/(.*\.php)$ {
@@ -51,6 +55,10 @@ location /phpmyadmin {
 }
 
 location /phpmyadmin {
+    client_max_body_size 200M;
+    proxy_read_timeout 600s;
+    fastcgi_read_timeout 600s;
+    fastcgi_send_timeout 600s;
     root /usr/serverok/;
     index index.php index.html index.htm;
     location ~ ^/phpmyadmin/(.+\.php)$ {
@@ -122,3 +130,6 @@ Listen 90
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
 
+
+CREATE USER 'admin'@'%' IDENTIFIED BY 'AEs308SuEtT0Hs';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
