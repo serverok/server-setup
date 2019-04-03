@@ -26,6 +26,8 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
     ServerAlias www.DOMAIN_NAME
     ServerAdmin info@DOMAIN_NAME
     DocumentRoot /home/DOMAIN_NAME/html
+    CustomLog ${APACHE_LOG_DIR}/DOMAIN_NAME.log combined
+    ErrorLog ${APACHE_LOG_DIR}/DOMAIN_NAME-error.log
     <Directory "/home/DOMAIN_NAME/html">
         Options All
         AllowOverride All

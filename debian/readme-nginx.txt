@@ -146,3 +146,12 @@ php_admin_value[error_log] = /var/log/fpm-php.log
 php_admin_flag[log_errors] = on
 
 root@ip-172-31-1-94:/var/log# 
+
+
+mysql
+create database USERNAME_wp;
+grant all on USERNAME_wp.* to 'USERNAME_wp'@'localhost' identified by 'PASSWORD_HERE';
+
+
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'PASSWORD_HERE' WITH GRANT OPTION;
+GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;

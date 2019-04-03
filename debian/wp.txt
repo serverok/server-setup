@@ -1,5 +1,17 @@
 cd /var/www/
+
 wget https://wordpress.org/latest.tar.gz
 tar xvf latest.tar.gz
+
+wget https://br.wordpress.org/latest-pt_BR.tar.gz
+tar xf latest-pt_BR.tar.gz
+
+rm -f *.tar.gz
+
+
 mv html html-old
 mv wordpress html
+
+vi html/wp-config.php
+
+define( 'WP_MEMORY_LIMIT', '256M' );

@@ -8,8 +8,8 @@ function update_php_ini() {
     sed -i "s/memory_limit\s*=.*/memory_limit = 256M/g" php.ini
     sed -i "s/display_errors\s*=.*/display_errors = On/g" php.ini
     sed -i "s/file_uploads\s*=.*/file_uploads = On/g" php.ini
-    sed -i "s/post_max_size\s*=.*/post_max_size = 800M/g" php.ini
-    sed -i "s/upload_max_filesize\s*=.*/upload_max_filesize = 800M/g" php.ini
+    sed -i "s/post_max_size\s*=.*/post_max_size = 4000M/g" php.ini
+    sed -i "s/upload_max_filesize\s*=.*/upload_max_filesize = 4000M/g" php.ini
     sed -i "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" php.ini
     sed -i "s/error_reporting\s*=.*/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" php.ini
     sed -i "s/max_file_uploads = On/max_file_uploads = 1000/g" php.ini

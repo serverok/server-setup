@@ -17,7 +17,9 @@ sh cldeploy -k <activation_key>
 
 ./ssh-keygen.ssh
 ./secure-ssh.sh
+
 bash cpanel/install.sh
+
 bash cpanel/config.sh
 bash cpanel/php-modules.sh
 
@@ -28,6 +30,9 @@ bash cloudlinux.sh
 
 bash install/update-php-ini.sh
 
+curl -sL https://gist.github.com/serverok/8fbcbda5f8fb578cf4a9a5ac5667d1da/raw > /var/cpanel/killproc.conf
+cat /var/cpanel/killproc.conf
+
 ./csf-install.sh
 ./csf-config.sh
 ./maldet-install.sh
@@ -35,7 +40,7 @@ bash install/update-php-ini.sh
 sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
 sed -i 's/email_addr="you@domain.com"/email_addr="boby@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
 
-Home »SSL/TLS »Manage AutoSSL
+Home > SSL/TLS > Manage AutoSSL
 
 # Cpanel default page for HostOnNet servers ONLY.
 # ONLY DO THIS AFTER ALL SITES MOVED.
@@ -46,8 +51,6 @@ mkdir -p /root/cpanel3-skel/public_html/
 cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_html/index.html
 
 
-curl -sL https://gist.github.com/serverok/8fbcbda5f8fb578cf4a9a5ac5667d1da/raw > /var/cpanel/killproc.conf
-cat /var/cpanel/killproc.conf
 
 /bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@hostonnet.com\"/g" /etc/csf/csf.conf
 
@@ -69,12 +72,20 @@ whmapi1 enable_monitor_all_enabled_services
 * Home »Service Configuration » cPanel Log Rotation Configuration
 * Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Scan outgoing messages for spam and reject based on defined Apache SpamAssassin = 5
 * Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Do not forward mail to external recipients based on the defined Apache SpamAssassin™ score = 5
+* Home > Service Configuration >  Exim Configuration Manager > RBL
+    RBL: bl.spamcop.net = ON
+    RBL: zen.spamhaus.org = ON
 * main >> backup >> configure Backup
-* Home »Software » MultiPHP Manager > PHP Handlers = suphp
-* Home »Plugins » ConfigServer Security & Firewall
+* Home > Software >  MultiPHP Manager > PHP Handlers = suphp
+* Home > Plugins >  ConfigServer Security & Firewall
 
+On CentOS server
 
-Home »Software »EasyApache 4 > PHP Modules
+* Home > Software > EasyApache 4 > All PHP Options + OpCache 
+
+On CloudLinux
+
+Home > Software > EasyApache 4 > PHP Modules
 Provision = CloudLinux + All PHP Options + OpCache
 Enable lsapi => https://www.serverok.in/cloudlinux-php-lsapi
 
