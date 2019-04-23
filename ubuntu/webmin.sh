@@ -8,5 +8,6 @@ cd /root
 wget http://www.webmin.com/jcameron-key.asc
 apt-key add jcameron-key.asc
 
-apt-get update
-apt-get -y install apt-transport-https webmin
+apt update
+apt -y install apt-transport-https 
+apt -y install webmin

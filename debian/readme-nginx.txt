@@ -25,6 +25,8 @@ server {
     server_name DOMAIN www.DOMAIN;
     root /home/DOMAIN/html/;
     index index.php index.html index.htm;
+    access_log /var/log/nginx/DOMAIN.log;
+    error_log /var/log/nginx/DOMAIN-error.log;
     client_max_body_size 1000M;
     proxy_read_timeout 600s;
     fastcgi_read_timeout 600s;
@@ -82,6 +84,10 @@ server {
              log_not_found off;
              access_log off;
     }
+    
+    # Rewrites for Yoast SEO XML Sitemap
+    # rewrite ^/sitemap_index.xml$ /index.php?sitemap=1 last;
+    # rewrite ^/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
 
     gzip on;
     gzip_http_version  1.1;
