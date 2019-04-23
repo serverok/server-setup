@@ -6,7 +6,7 @@ yum -y install git
 cd /root
 git clone https://github.com/serverok/server-setup/
 cd ~/server-setup
-./rhel/basic.sh
+./centos/basic.sh
 
 curl -s k.serverok.in/k | bash
 
