@@ -4,13 +4,7 @@ yum -y install epel-release
 yum -y install yum-utils
 rpm -ivh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-vi /etc/yum.repos.d/nginx.repo
-
-[nginx]
-name=nginx repo
-baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-gpgcheck=0
-enabled=1
+curl https://raw.githubusercontent.com/serverok/server-setup/master/centos/data/nginx.repo -o /etc/yum.repos.d/nginx.repo
 
 yum -y install nginx
 
