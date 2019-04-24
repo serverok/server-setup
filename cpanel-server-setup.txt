@@ -13,10 +13,16 @@ curl -s k.serverok.in/k | bash
 wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
 sh cldeploy -k <activation_key>
 
+If IP based license
+
+sh cldeploy -i
+
 /usr/sbin/rhnreg_ks --activationkey=88804-CLN-c63946aca45d09add03c0a4395e368de --force
 
 ./ssh-keygen.ssh
 ./secure-ssh.sh
+
+yum remove -y NetworkManager
 
 bash cpanel/install.sh
 
@@ -24,6 +30,7 @@ bash cpanel/config.sh
 bash cpanel/php-modules.sh
 
 if CloudLinux
+
 bash secure-sysctl.sh
 bash cloudlinux.sh
 
