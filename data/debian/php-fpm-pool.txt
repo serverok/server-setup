@@ -1,7 +1,7 @@
 [POOL_NAME]
 user = FPM_USER
 group = FPM_USER
-listen = /run/php/php7.0-fpm-POOL_NAME.sock
+listen = /run/php/php7.2-fpm-POOL_NAME.sock
 listen.owner = www-data
 listen.group = www-data
 pm = dynamic
@@ -13,3 +13,4 @@ catch_workers_output = yes
 php_flag[display_errors] = on
 php_admin_value[error_log] = /var/log/fpm-php.log
 php_admin_flag[log_errors] = on
+

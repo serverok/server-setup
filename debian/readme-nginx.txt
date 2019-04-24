@@ -17,11 +17,8 @@ sed -i 's/POOL_NAME/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 sed -i 's/FPM_USER/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
 
 curl -s https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/nginx-vhost.txt -o /etc/nginx/sites-available/DOMAIN.conf
-
 sed -i 's/POOL_NAME/USERNAME/g' /etc/nginx/sites-available/DOMAIN.conf
 sed -i 's/FQDN/DOMAIN/g' /etc/nginx/sites-available/DOMAIN.conf
-
-
 ln -s /etc/nginx/sites-available/DOMAIN.conf /etc/nginx/sites-enabled/DOMAIN.conf
 
 
