@@ -1,7 +1,7 @@
-[www]
-user = www-data
-group = www-data
-listen = /run/php/php7.0-fpm.sock
+[POOL_NAME]
+user = FPM_USER
+group = FPM_USER
+listen = /run/php/php7.0-fpm-POOL_NAME.sock
 listen.owner = www-data
 listen.group = www-data
 pm = dynamic

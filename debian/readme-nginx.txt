@@ -12,11 +12,10 @@ passwd USERNAME
 
 PASSWORD_HERE
 
-cat /etc/php/7.2/fpm/pool.d/www.conf | grep -v "^;" | grep -v "^$" > /etc/php/7.2/fpm/pool.d/USERNAME.conf
-sed -i 's/^user = .*/user = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
-sed -i 's/^group = .*/group = USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
-sed -i 's/^\[www\]$/[USERNAME]/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
-sed -i 's/php7.2-fpm.sock/php7.2-fpm-USERNAME.sock/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+curl -s https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/php-fpm-pool.txt -o /etc/php/7.2/fpm/pool.d/USERNAME.conf
+sed -i 's/POOL_NAME/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+sed -i 's/FPM_USER/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+
 
 vi /etc/nginx/sites-available/DOMAIN.conf
 
@@ -131,27 +130,6 @@ certbot --authenticator webroot --webroot-path /home/DOMAIN/html/ --installer ng
 
 sed -i 's/#systemctl restart nginx/systemctl restart nginx/g' /usr/serverok/ssl-renew
 cat /usr/serverok/ssl-renew
-
-root@ip-172-31-1-94:/var/log# cat /etc/php/7.0/fpm/pool.d/www.conf 
-[www]
-user = www-data
-group = www-data
-listen = /run/php/php7.0-fpm.sock
-listen.owner = www-data
-listen.group = www-data
-pm = dynamic
-pm.max_children = 5
-pm.start_servers = 2
-pm.min_spare_servers = 1
-pm.max_spare_servers = 3
-
-
-catch_workers_output = yes
-php_flag[display_errors] = on
-php_admin_value[error_log] = /var/log/fpm-php.log
-php_admin_flag[log_errors] = on
-
-root@ip-172-31-1-94:/var/log# 
 
 
 mysql
