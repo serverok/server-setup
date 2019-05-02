@@ -2,10 +2,10 @@ DOMAIN
 
 yum -y install wget
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/rhel/basic.sh
+wget https://raw.githubusercontent.com/serverok/server-setup/master/centos/basic.sh
 bash basic.sh
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/rhel/selinux-disable.sh
+wget https://raw.githubusercontent.com/serverok/server-setup/master/centos/selinux-disable.sh
 bash selinux-disable.sh
 
 curl -s k.serverok.in/k | bash

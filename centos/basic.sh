@@ -14,4 +14,6 @@ yum install -y libcpp libgcc libstdc++ gcc4 gcc4-c++ gcc4-gfortran
 yum install -y dos2unix libtool gcc-c++ gcc-c++ compat-gcc-32 compat-gcc-32-c++
 yum groupinstall -y "Development tools"
 
+/bin/sed -i "s/#UseDNS yes/UseDNS no/g" /etc/ssh/sshd_config
+
 echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bashrc

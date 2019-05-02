@@ -1,0 +1,46 @@
+    easy.h should be in <curl-dir>/include/curl/
+
+
+cd /usr/local/src
+wget https://curl.haxx.se/download/curl-7.63.0.tar.gz
+tar xvf curl-7.63.0.tar.gz
+cd curl-7.63.0
+./configure --prefix=/usr/serverok/php
+make
+make install
+
+cd /usr/local/src
+wget https://download.savannah.gnu.org/releases/freetype/freetype-2.9.1.tar.gz
+tar xf freetype-2.9.1.tar.gz
+cd /usr/local/src/freetype-2.9.1/
+make clean && make distclean
+./configure --prefix=/usr/serverok/php/
+make
+make install
+
+cd /usr/local/src/php-5.6.30
+./configure --prefix=/usr/serverok/\
+--with-config-file-path=/usr/serverok/etc \
+--with-mysql \
+--with-pdo-mysql \
+--enable-cgi \
+--with-zlib \
+--with-gettext \
+--enable-ftp \
+--enable-calendar \
+--enable-bcmath \
+--enable-sockets \
+--with-curl=/usr/serverok/php/ \
+--with-gd \
+--with-jpeg-dir=/usr/local \
+--enable-mbstring \
+--with-freetype-dir==/usr/serverok/php/include/ \
+--with-mhash=/usr/local --enable-exif \
+--with-mcrypt=/usr \
+--with-tidy \
+--with-openssl \
+--enable-zip \
+--enable-fpm
+
+
+

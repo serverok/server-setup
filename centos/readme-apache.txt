@@ -1,5 +1,5 @@
-USERNAME
 DOMAIN_NAME
+USERNAME
 MYSQL_PASSWORD
 admin@serverok.in
 
