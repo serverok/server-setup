@@ -27,7 +27,7 @@ server {
         log_not_found off;
     }
 
-    location ~ /\. { deny all; }
+    location ~ /\.user.ini  { deny all; return 404; }
     
     location / {
             try_files $uri $uri/ /index.php?$args;
