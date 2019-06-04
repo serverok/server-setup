@@ -26,6 +26,8 @@ server {
         access_log off;
         log_not_found off;
     }
+
+    location ~ /\. { deny all; }
     
     location / {
             try_files $uri $uri/ /index.php?$args;

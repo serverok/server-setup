@@ -8,4 +8,7 @@ apt -y install wget curl nmap whois vim screen git unzip atop htop telnet tmux
 apt -y purge mlocate
 apt autoremove -y
 
+systemctl stop apparmor
+systemctl disable apparmor
+
 echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bashrc

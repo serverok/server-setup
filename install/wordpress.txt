@@ -1,3 +1,5 @@
-su - alixplus
+su - USER
+rmdir html
 wget https://wordpress.org/latest.tar.gz
 tar xvf latest.tar.gz
+mv wordpress html

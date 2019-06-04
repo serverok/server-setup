@@ -1,5 +1,4 @@
 # boby isp
-sshd : 112.133. : allow
 sshd : 103.35.199.82 : allow
 
 # ok.serverok.in

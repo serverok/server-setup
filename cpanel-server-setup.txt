@@ -2,6 +2,10 @@ VERIFY PARTITION (/ should be atleast 100 GB if /usr and /var is not on its own)
 
 df -h
 
+/ = 120 GB
+/home = grow
+swap = 8 GB
+
 yum -y install git 
 cd /root
 git clone https://github.com/serverok/server-setup/
@@ -27,11 +31,14 @@ yum remove -y NetworkManager
 bash cpanel/install.sh
 
 bash cpanel/config.sh
-bash cpanel/php-modules.sh
+#bash cpanel/php-modules.sh
 
-if CloudLinux
+# if CloudLinux
 
 bash secure-sysctl.sh
+
+# reboot to cloud linux kernal
+
 bash cloudlinux.sh
 
 
@@ -77,8 +84,8 @@ whmapi1 enable_monitor_all_enabled_services
 * WHM > Security Center > SSH Password Authorization Tweak = DISABLED
 * WHM > Security Center > cPHulk Brute Force Protection = DISABLE (use CSF)
 * Home »Service Configuration » cPanel Log Rotation Configuration
-* Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Scan outgoing messages for spam and reject based on defined Apache SpamAssassin = 5
-* Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Do not forward mail to external recipients based on the defined Apache SpamAssassin™ score = 5
+* Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Scan outgoing messages for spam and reject based on defined Apache SpamAssassin = 4.5
+* Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Do not forward mail to external recipients based on the defined Apache SpamAssassin™ score = 4.5
 * Home > Service Configuration >  Exim Configuration Manager > RBL
     RBL: bl.spamcop.net = ON
     RBL: zen.spamhaus.org = ON
