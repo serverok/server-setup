@@ -3,3 +3,8 @@ rmdir html
 wget https://wordpress.org/latest.tar.gz
 tar xvf latest.tar.gz
 mv wordpress html
+
+
+vi html/wp-config.php
+
+define( 'WP_MEMORY_LIMIT', '256M' );

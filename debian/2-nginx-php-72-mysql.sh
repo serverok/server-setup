@@ -17,7 +17,9 @@ apt -y install php7.2-fpm
 
 phpenmod -v 7.2 simplexml
 
-apt-get -y install mariadb-client mariadb-server
+apt -y install mariadb-client mariadb-server
+apt -y install automysqlbackup
+
 
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
