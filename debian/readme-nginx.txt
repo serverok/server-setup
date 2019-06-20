@@ -13,9 +13,10 @@ passwd USERNAME
 
 PASSWORD_HERE
 
-curl -s https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/php-fpm-pool.txt -o /etc/php/7.2/fpm/pool.d/USERNAME.conf
-sed -i 's/POOL_NAME/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
-sed -i 's/FPM_USER/USERNAME/g' /etc/php/7.2/fpm/pool.d/USERNAME.conf
+cd /etc/php/7.3/fpm/pool.d/
+curl -s https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/php-fpm-pool.txt -o USERNAME.conf
+sed -i 's/POOL_NAME/USERNAME/g' USERNAME.conf
+sed -i 's/FPM_USER/USERNAME/g' USERNAME.conf
 
 curl -s https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/nginx-vhost.txt -o /etc/nginx/sites-available/DOMAIN.conf
 sed -i 's/POOL_NAME/USERNAME/g' /etc/nginx/sites-available/DOMAIN.conf
@@ -27,7 +28,7 @@ mkdir /home/DOMAIN/html/
 chown -R USERNAME:USERNAME /home/DOMAIN/
 chmod -R 755 /home/DOMAIN/
 
-systemctl restart php7.2-fpm
+systemctl restart php7.3-fpm
 systemctl restart nginx
 
 http://www.DOMAIN/
