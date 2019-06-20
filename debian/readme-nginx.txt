@@ -5,6 +5,7 @@ PASSWORD_HERE
 -------------------------------------------------------------------
 
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+systemctl restart ssh
 
 useradd -m -d /home/DOMAIN/ -s /bin/bash USERNAME
 
@@ -26,7 +27,6 @@ mkdir /home/DOMAIN/html/
 chown -R USERNAME:USERNAME /home/DOMAIN/
 chmod -R 755 /home/DOMAIN/
 
-systemctl restart ssh
 systemctl restart php7.2-fpm
 systemctl restart nginx
 

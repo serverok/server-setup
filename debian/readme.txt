@@ -6,6 +6,9 @@ curl -s k.serverok.in/k | bash
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-apache-php-mysql.sh
 bash 2-apache-php-mysql.sh
 
+wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-73-mysql.sh
+bash 2-nginx-php-73-mysql.sh
+
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-72-mysql.sh
 bash 2-nginx-php-72-mysql.sh
 
