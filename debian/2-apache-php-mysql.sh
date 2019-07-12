@@ -8,10 +8,12 @@ a2enmod ssl
 sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
 
 apt-get -y install php php-cli php-curl php-gd \
-           php-mysql php-imagick php-imap php-mcrypt \
+           php-mysql php-imagick php-imap  \
            php-json php-xml php-mbstring php-zip \
            php-xmlrpc php-soap php-intl php-bcmath
 
+# not in Debian 10
+apt-get install -y php-mcrypt
 phpenmod mcrypt
 
 # Debian 8
