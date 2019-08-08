@@ -35,15 +35,14 @@ systemctl restart apache2
 service httpd restart
 
 
-vi /etc/nginx/sites-enabled/default
-
 https://gist.github.com/serverok/9627c6fcb39d4ba11c4a109222ec36b1
 
 curl -s https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/nginx-phpmyadmin.conf -o /etc/nginx/pma.conf
 cat /etc/nginx/pma.conf
 
+vi /etc/nginx/sites-enabled/default
 
-include /etc/nginx/pma2.conf;
+include /etc/nginx/pma.conf;
 
 location /phpmyadmin {
     client_max_body_size 200M;

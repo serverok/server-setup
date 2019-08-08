@@ -6,8 +6,8 @@ curl -s k.serverok.in/k | bash
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-apache-php-mysql.sh
 bash ./2-apache-php-mysql.sh
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-nginx-php-mysql.sh
-bash ./2-nginx-php-mysql.sh
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-nginx-php73-mysql.sh
+bash ./2-nginx-php73-mysql.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/update-php-ini.sh
 bash ./update-php-ini.sh

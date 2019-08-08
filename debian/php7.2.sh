@@ -20,6 +20,9 @@ a2enmod rewrite
 
 
 cd /etc/php/7.2/fpm/
+cd /etc/php/7.2/apache2/
+
+
 /bin/sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini
 /bin/sed -i "s/max_input_time\s*=.*/max_input_time = 6000/g" php.ini
 /bin/sed -i "s/memory_limit\s*=.*/memory_limit = 512M/g" php.ini
@@ -33,4 +36,5 @@ cd /etc/php/7.2/fpm/
 
 systemctl enable php7.2-fpm
 systemctl enable nginx
+systemctl restart apache2
 
