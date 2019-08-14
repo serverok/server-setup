@@ -88,13 +88,14 @@ location /phpmyadmin {
     }
 }
 
+vi /etc/nginx/sites-enabled/phpmyadmin.conf
 
 server {
-    listen *:90;
+    listen *:8080;
     server_name _;
     root /usr/serverok/phpmyadmin/;
     index index.php;
-    client_max_body_size 100M;
+    client_max_body_size 500M;
     location = /favicon.ico {
             log_not_found off;
             access_log off;
@@ -113,7 +114,7 @@ server {
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
-        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
     }
 }
 

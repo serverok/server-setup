@@ -18,6 +18,12 @@ bash ./update-php-ini.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/letsencrypt.sh
 sh ./letsencrypt.sh
 
+wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/upgrade-debian-8.sh
+bash upgrade-debian-8.sh
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/upgrade-debian-9.sh
+bash upgrade-debian-9.sh
+
 apt install automysqlbackup -y
 
 
