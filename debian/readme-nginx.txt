@@ -1,6 +1,7 @@
 DOMAIN
 USERNAME
 PASSWORD_HERE
+IP_ADDRESS_HERE
 
 -------------------------------------------------------------------
 
@@ -46,3 +47,24 @@ grant all on USERNAME_wp.* to 'USERNAME_wp'@'localhost' identified by 'PASSWORD_
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'PASSWORD_HERE' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
+
+
+SFTP DOMAIN
+
+IP = IP_ADDRESS_HERE
+Port = 22
+User = USERNAME
+PW = GJd0f56QRrc48z
+
+MySQL
+
+DB = USERNAME_wp
+User = USERNAME_wp
+PW = PASSWORD_HERE
+
+phpMyAdmin
+
+http://IP_ADDRESS_HERE:8080
+
+User = admin
+PW = PASSWORD_HERE
