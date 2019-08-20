@@ -13,3 +13,5 @@ systemctl disable apparmor
 
 curl -Ls https://github.com/serverok/server-setup/raw/master/data/.vimrc > ~/.vimrc
 echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bashrc
+
+rm -f /etc/update-motd.d/*

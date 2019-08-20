@@ -2,6 +2,8 @@
 # Author: admin@serverOk.in
 # Web: https://www.serverok.in
 
+apt install -y software-properties-common
+
 add-apt-repository ppa:ondrej/php
 apt update
 apt -y upgrade
