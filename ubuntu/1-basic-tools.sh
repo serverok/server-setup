@@ -5,6 +5,7 @@
 apt update
 apt -y upgrade
 apt -y install wget curl nmap whois vim screen git unzip atop htop telnet tmux
+apt install -y software-properties-common
 apt -y purge mlocate
 apt autoremove -y
 
