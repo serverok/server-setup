@@ -13,3 +13,6 @@ systemctl stop apparmor
 systemctl disable apparmor
 
 source ~/.bashrc
+
+rm -f /etc/update-motd.d/*
+echo > /etc/motd
