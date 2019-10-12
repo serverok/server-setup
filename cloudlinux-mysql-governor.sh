@@ -6,3 +6,5 @@
 yum install -y governor-mysql
 /usr/share/lve/dbgovernor/mysqlgovernor.py --install
 
+/usr/share/lve/dbgovernor/mysqlgovernor.py --mysql-version=mariadb103
+/usr/share/lve/dbgovernor/mysqlgovernor.py --install
