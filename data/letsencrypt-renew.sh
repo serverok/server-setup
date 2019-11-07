@@ -1,7 +1,7 @@
 #!/bin/bash
 # Author: ServerOK.in
 # Email: admin@serverok.in
-# Web; https://www.serverok.in
+# Web: https://www.serverok.in
 
 /usr/bin/certbot renew
 

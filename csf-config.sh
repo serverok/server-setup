@@ -17,6 +17,7 @@
 
 /bin/sed -i "s/TESTING = \"1\"/TESTING = \"0\"/g" /etc/csf/csf.conf
 
+# LF_EMAIL_ALERT = ip block alert
 
 /bin/systemctl restart csf.service
 csf -r

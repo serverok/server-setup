@@ -1,0 +1,5 @@
+#!/bin/bash
+
+sudo a2dismod php5.6
+sudo a2enmod php7.2
+sudo systemctl restart apache2

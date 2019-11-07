@@ -6,7 +6,7 @@
 cd /usr/local/src
 wget http://www.rfxn.com/downloads/maldetect-current.tar.gz
 tar zxvf maldetect-current.tar.gz
-cd maldetect-*
+cd maldetect-1.*
 ./install.sh
 
 # sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet

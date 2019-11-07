@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get -y install apache2
-update-rc.d apache2 enable
+systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
 
@@ -22,6 +22,7 @@ phpenmod mcrypt
 #apt -y install php7.0-pgsql
 
 apt-get -y install libapache2-mod-php
+#apt install -y libapache2-mod-php7.3
 
 apt-get -y install mariadb-client mariadb-server
 update-rc.d mysql enable

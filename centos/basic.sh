@@ -5,8 +5,8 @@
 yum update -y
 yum upgrade -y
 yum -y remove mlocate
-yum install -y nmap lynx wget curl telnet whois bind-utils net-tools parted
-yum install -y atop iotop
+yum install -y nmap wget curl telnet whois bind-utils net-tools parted
+yum install -y iotop
 yum install -y git vim tmux
 yum install -y strace sysstat lsof lbzip2
 yum install -y ncurses-devel automake autoconf gcc gmake patch make
