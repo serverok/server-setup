@@ -28,15 +28,6 @@ server {
         log_not_found off;
     }
 
-    location ~ /\. {
-        deny all;
-    }
-
-    # deny access to .php files in uploads/files folder.
-    location ~* /(?:uploads|files)/.*\.php$ {
-        deny all;
-    }
-    
     location / {
             try_files $uri $uri/ /index.php?$args;
     }
