@@ -11,12 +11,9 @@ apt -y upgrade
 apt update
 apt -y install nginx
 
-apt -y install php7.3-cli php7.3-curl php7.3-gd php7.3-mysql php7.3-imagick php7.3-imap php7.3-json
-apt -y install php7.3-xml php7.3-mbstring php7.3-zip php7.3-xmlrpc php7.3-soap php7.3-intl php7.3-bcmath
-apt install -y php7.3-fpm
-
-apt install -y php7.3-mcrypt
-phpenmod mcrypt
+apt -y install php7.4-cli php7.4-curl php7.4-gd php7.4-mysql php7.4-imagick php7.4-imap php7.4-json
+apt -y install php7.4-xml php7.4-mbstring php7.4-zip php7.4-xmlrpc php7.4-soap php7.4-intl php7.4-bcmath
+apt install -y php7.4-fpm
 
 apt -y install mariadb-client mariadb-server
 apt install automysqlbackup -y
@@ -32,5 +29,5 @@ systemctl enable nginx
 systemctl restart mysql
 systemctl restart nginx
 
-systemctl enable php7.3-fpm
-systemctl restart php7.3-fpm
+systemctl enable php7.4-fpm
+systemctl restart php7.4-fpm
