@@ -7,6 +7,7 @@ apt -y upgrade
 apt -y install wget curl nmap whois vim git unzip telnet tmux
 apt install -y software-properties-common
 apt -y purge mlocate
+apt remove -y vim-tiny nano ed --purge
 apt autoremove -y
 
 systemctl stop apparmor

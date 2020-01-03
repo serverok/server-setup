@@ -1,11 +1,19 @@
 # https://www.phpmyadmin.net/
 
-cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-all-languages.zip
-unzip phpMyAdmin-4.9.1-all-languages.zip
+
 mkdir /usr/serverok
 rm -rf /usr/serverok/phpmyadmin
-mv phpMyAdmin-4.9.1-all-languages /usr/serverok/phpmyadmin
+
+cd /usr/local/src
+wget https://files.phpmyadmin.net/phpMyAdmin/5.0.0/phpMyAdmin-5.0.0-all-languages.tar.gz
+tar xvf phpMyAdmin-5.0.0-all-languages.tar.gz
+mv phpMyAdmin-5.0.0-all-languages /usr/serverok/phpmyadmin
+
+cd /usr/local/src
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.3/phpMyAdmin-4.9.3-all-languages.tar.gz
+tar xvf phpMyAdmin-4.9.3-all-languages.tar.gz
+mv phpMyAdmin-4.9.3-all-languages /usr/serverok/phpmyadmin
+
 mkdir /usr/serverok/phpmyadmin/tmp/
 chmod 777 /usr/serverok/phpmyadmin/tmp/
 cp /usr/serverok/phpmyadmin/config.sample.inc.php /usr/serverok/phpmyadmin/config.inc.php
@@ -96,6 +104,9 @@ server {
     root /usr/serverok/phpmyadmin/;
     index index.php;
     client_max_body_size 500M;
+    proxy_read_timeout 600s;
+    fastcgi_read_timeout 600s;
+    fastcgi_send_timeout 600s;
     location = /favicon.ico {
             log_not_found off;
             access_log off;
@@ -110,7 +121,6 @@ server {
     }
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        proxy_read_timeout 180;
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
@@ -141,3 +151,7 @@ GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'AEs308SuEtT0Hs';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+
+/etc/phpmyadmin/config.inc.php
+
+$cfg["blowfish_secret"] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";

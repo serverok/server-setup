@@ -12,6 +12,7 @@ apt install -y php5.6-fpm
 
 
 #a2dismod php5.6
+a2dismod php7.2
 
 a2enmod php5.6
 service apache2 restart

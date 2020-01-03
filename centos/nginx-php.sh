@@ -8,7 +8,7 @@ curl https://raw.githubusercontent.com/serverok/server-setup/master/data/centos/
 
 yum -y install nginx
 
-yum-config-manager --enable remi-php72
+yum-config-manager --enable remi-php74
 # If you need PHP 5.6, run
 # yum-config-manager --disable remi-php72
 # yum-config-manager --enable remi-php56

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+yum -y upgrade
 yum -y install epel-release
 yum -y install yum-utils
 rpm -ivh https://rpms.remirepo.net/enterprise/remi-release-7.rpm

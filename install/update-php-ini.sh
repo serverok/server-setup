@@ -52,6 +52,13 @@ if [ -f /etc/php/7.3/fpm/php.ini ]; then
     systemctl restart php7.3-fpm
 fi
 
+if [ -f /etc/php/7.4/fpm/php.ini ]; then
+    echo "Found PHP 7.4 php-fpm"
+    cd /etc/php/7.4/fpm
+    update_php_ini
+    systemctl restart php7.4-fpm
+fi
+
 PHP_INI_APACHE_PATHS=(
 /etc/php/5.6/apache2/php.ini
 /etc/php/7.0/apache2/php.ini
