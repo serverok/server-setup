@@ -65,6 +65,7 @@ PHP_INI_APACHE_PATHS=(
 /etc/php/7.1/apache2/php.ini
 /etc/php/7.2/apache2/php.ini
 /etc/php/7.3/apache2/php.ini
+/etc/php/7.4/apache2/php.ini
 )
 
 for php_ini_path in ${PHP_INI_APACHE_PATHS[@]}; do
@@ -83,6 +84,7 @@ PHP_INI_PATHS=(
 /opt/cpanel/ea-php71/root/etc/php.ini
 /opt/cpanel/ea-php72/root/etc/php.ini
 /opt/cpanel/ea-php73/root/etc/php.ini
+/opt/cpanel/ea-php74/root/etc/php.ini
 /opt/alt/php44/etc/php.ini
 /opt/alt/php51/etc/php.ini
 /opt/alt/php52/etc/php.ini
@@ -94,6 +96,7 @@ PHP_INI_PATHS=(
 /opt/alt/php71/etc/php.ini
 /opt/alt/php72/etc/php.ini
 /opt/alt/php73/etc/php.ini
+/opt/alt/php74/etc/php.ini
 )
 
 for php_ini_path in ${PHP_INI_PATHS[@]}; do
