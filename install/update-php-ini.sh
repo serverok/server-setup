@@ -79,6 +79,8 @@ done
 
 PHP_INI_PATHS=(
 /etc/php.ini
+/opt/cpanel/ea-php53/root/etc/php.ini
+/opt/cpanel/ea-php52/root/etc/php.ini
 /opt/cpanel/ea-php56/root/etc/php.ini
 /opt/cpanel/ea-php70/root/etc/php.ini
 /opt/cpanel/ea-php71/root/etc/php.ini
