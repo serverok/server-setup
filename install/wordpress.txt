@@ -8,3 +8,23 @@ mv wordpress html
 vi html/wp-config.php
 
 define( 'WP_MEMORY_LIMIT', '256M' );
+
+
+cd ~/html
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+
+wp core download
+wp core config --dbname=wordpress_db --dbuser=wordpress_db --dbpass=DB_PASSWORD_HERE
+wp core install --url=http://YOURDOMAIN.COM --title='My Site' --admin_user=admin --admin_email=admin@YOURDOMAIN.COM --admin_password=password
+
+wp --info
+wp search-replace 'http://www.olddomain.com' 'http://www.newdomain.com'
+wp option update home 'http://example.com'
+wp option update siteurl 'http://example.com'
+wp option get home
+wp option get siteurl
+
+wp role list
+wp user list --role=administrator
+wp user create serverok serverok.in@gmail.com --role=administrator
+
