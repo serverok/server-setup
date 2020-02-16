@@ -3,6 +3,7 @@
 # Web: https://www.serverok.in
 
 apt-get -y install apache2
+apt -y install libapache2-mod-ruid2
 update-rc.d apache2 enable
 a2enmod rewrite
 a2enmod ssl
@@ -26,15 +27,10 @@ apt-get -y install mariadb-client mariadb-server
 update-rc.d mysql enable
 apt install automysqlbackup -y
 
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 
-apt-get install -y phpmyadmin postfix
+apt install -y postfix
 
 echo '$cfg["blowfish_secret"] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";' >> /etc/phpmyadmin/config.inc.php
 
