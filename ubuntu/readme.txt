@@ -21,6 +21,8 @@ bash ./letsencrypt.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench.sh
 bash ./geekbench.sh
 
+wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench-5.sh
+bash ./geekbench-5.sh
 
 wget -qO- https://get.docker.com/ | sh
 sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
