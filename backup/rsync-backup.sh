@@ -27,4 +27,4 @@ done
 
 echo "Last backup on ${DATE_TODAY}. Backup Type = ${BACKUP_TYPE}" >  /home/your-domain.com/backup.txt
 
-rsync -avzP "-e ssh -p 3333" --exclude /html/wp-content/cache/ /home/your-domain.com/ root@51.159.34.98:/backup/${BACKUP_TYPE}/
+rsync -avzP --delete "-e ssh -p 3333" --exclude /html/wp-content/cache/ /home/your-domain.com/ root@51.159.34.98:/backup/${BACKUP_TYPE}/
