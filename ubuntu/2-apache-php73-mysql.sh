@@ -3,9 +3,11 @@
 # Web: https://www.serverok.in
 
 apt-get -y install apache2
-update-rc.d apache2 enable
+apt -y install libapache2-mod-ruid2
+systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
+systemctl restart apache2
 
 sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
 
@@ -21,29 +23,18 @@ apt install php7.3-bcmath php7.3-bz2 php7.3-cgi php7.3-cli php7.3-common php7.3-
 
 apt install libapache2-mod-php7.3
 
-
 a2enmod php7.3
 
-service apache2 restart
+systemctl enable apache2
+systemctl start apache2
 
 apt-get -y install mariadb-client mariadb-server
-update-rc.d mysql enable
-apt install automysqlbackup -y
 
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+systemctl enable mysql
+
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
-
-apt-get install -y phpmyadmin postfix
-
-echo '$cfg["blowfish_secret"] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";' >> /etc/phpmyadmin/config.inc.php
-
-service apache2 stop
-service apache2 start
+apt-get install -y postfix
 
 apt install -y monit
 ln -s /etc/monit/conf-available/apache2 /etc/monit/conf-enabled/
@@ -51,3 +42,5 @@ ln -s /etc/monit/conf-available/mysql /etc/monit/conf-enabled/
 
 systemctl enable monit
 systemctl start monit
+
+apt install automysqlbackup -y

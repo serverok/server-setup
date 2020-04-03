@@ -31,3 +31,11 @@ systemctl restart nginx
 
 systemctl enable php7.4-fpm
 systemctl restart php7.4-fpm
+
+apt install -y monit
+ln -s /etc/monit/conf-available/nginx /etc/monit/conf-enabled/
+ln -s /etc/monit/conf-available/mysql /etc/monit/conf-enabled/
+
+systemctl enable monit
+systemctl start monit
+

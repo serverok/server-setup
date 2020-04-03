@@ -25,20 +25,16 @@ apt-get -y install libapache2-mod-php
 #apt install -y libapache2-mod-php7.3
 
 apt-get -y install mariadb-client mariadb-server
-update-rc.d mysql enable
+systemctl enable mariadb
 
-echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" | debconf-set-selections
-echo "phpmyadmin phpmyadmin/app-password-confirm password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/admin-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/mysql/app-pass password " | debconf-set-selections
-echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 
-apt-get install -y phpmyadmin postfix
+apt install -y postfix
 
-service apache2 stop
-service apache2 start
+systemctl stop apache2
+systemctl start apache2
+systemctl status apache2
 
 apt install -y monit
 ln -s /etc/monit/conf-available/apache2 /etc/monit/conf-enabled/

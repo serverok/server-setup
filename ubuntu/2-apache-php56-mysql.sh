@@ -3,6 +3,7 @@
 # Web: https://www.serverok.in
 
 apt-get -y install apache2
+apt -y install libapache2-mod-ruid2
 update-rc.d apache2 enable
 a2enmod rewrite
 a2enmod ssl

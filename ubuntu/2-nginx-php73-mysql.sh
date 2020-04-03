@@ -30,3 +30,10 @@ systemctl restart nginx
 
 systemctl enable php7.3-fpm
 systemctl restart php7.3-fpm
+
+apt install -y monit
+ln -s /etc/monit/conf-available/nginx /etc/monit/conf-enabled/
+ln -s /etc/monit/conf-available/mysql /etc/monit/conf-enabled/
+
+systemctl enable monit
+systemctl start monit

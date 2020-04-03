@@ -1,3 +1,5 @@
+apt install libapache2-mod-ruid2
+
 DOMAIN_NAME
 USERNAME
 MYSQL_PASSWORD
@@ -15,8 +17,6 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
 useradd -m --shell /bin/bash --home /home/DOMAIN_NAME USERNAME
-usermod -aG sudo USERNAME
-
 passwd USERNAME
 
 vi /etc/apache2/sites-available/DOMAIN_NAME.conf
@@ -29,6 +29,8 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
     CustomLog ${APACHE_LOG_DIR}/DOMAIN_NAME.log combined
     ErrorLog ${APACHE_LOG_DIR}/DOMAIN_NAME-error.log
     <Directory "/home/DOMAIN_NAME/html">
+        RMode config
+        RUidGid USERNAME USERNAME
         Options All
         AllowOverride All
         Require all granted
@@ -39,18 +41,14 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
 
 a2ensite DOMAIN_NAME
 
-sed -i "s/www-data/USERNAME/g" /etc/apache2/envvars
-chown -R USERNAME:USERNAME /var/lib/php/
-
 mkdir /home/DOMAIN_NAME/html/
-
 echo "<?php phpinfo();" > /home/DOMAIN_NAME/html/index.php
 chown -R USERNAME:USERNAME /home/DOMAIN_NAME/
 chmod -R 755 /home/DOMAIN_NAME/html/
 
 mysql
 create database USERNAME;
-grant all on *.* to 'USERNAME'@'localhost' identified by 'MYSQL_PASSWORD';
+grant all on USERNAME.* to 'USERNAME'@'localhost' identified by 'MYSQL_PASSWORD';
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;

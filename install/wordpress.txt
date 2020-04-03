@@ -12,6 +12,8 @@ define( 'WP_MEMORY_LIMIT', '256M' );
 
 cd ~/html
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+chmod 755 /usr/local/bin/wp
 
 wp core download
 wp core config --dbname=wordpress_db --dbuser=wordpress_db --dbpass=DB_PASSWORD_HERE
@@ -27,4 +29,6 @@ wp option get siteurl
 wp role list
 wp user list --role=administrator
 wp user create serverok serverok.in@gmail.com --role=administrator
+
+wp cache flush
 

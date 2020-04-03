@@ -43,10 +43,11 @@ sed -i "s/www-data/USERNAME/g" /etc/apache2/envvars
 chown -R USERNAME:USERNAME /var/lib/php/
 
 mkdir /home/DOMAIN_NAME/html/
-
-echo "<?php phpinfo();" > /home/DOMAIN_NAME/html/index.php
+# echo "<?php phpinfo();" > /home/DOMAIN_NAME/html/index.php
 chown -R USERNAME:USERNAME /home/DOMAIN_NAME/
 chmod -R 755 /home/DOMAIN_NAME/html/
+
+systemctl restart apache2
 
 mysql
 create database USERNAME;
@@ -55,8 +56,5 @@ grant all on *.* to 'USERNAME'@'localhost' identified by 'PASSWOD_HERE';
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
-
-
-systemctl restart apache2
 
 certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html/ --installer apache --agree-tos --no-eff-email --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME

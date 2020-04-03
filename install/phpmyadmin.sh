@@ -5,9 +5,10 @@ mkdir /usr/serverok
 rm -rf /usr/serverok/phpmyadmin
 
 cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/5.0.0/phpMyAdmin-5.0.0-all-languages.tar.gz
-tar xvf phpMyAdmin-5.0.0-all-languages.tar.gz
-mv phpMyAdmin-5.0.0-all-languages /usr/serverok/phpmyadmin
+rm -f phpMyAdmin-latest-all-languages.tar.gz
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+tar xvf phpMyAdmin-latest-all-languages.tar.gz
+mv phpMyAdmin-5.0.?-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.4/phpMyAdmin-4.9.4-all-languages.tar.gz
@@ -17,7 +18,6 @@ mv phpMyAdmin-4.9.4-all-languages /usr/serverok/phpmyadmin
 mkdir /usr/serverok/phpmyadmin/tmp/
 chmod 777 /usr/serverok/phpmyadmin/tmp/
 cp /usr/serverok/phpmyadmin/config.sample.inc.php /usr/serverok/phpmyadmin/config.inc.php
-
 sed -i  's/$cfg\[.blowfish_secret.\] = .*$/$cfg\["blowfish_secret"\] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";/g' /usr/serverok/phpmyadmin/config.inc.php
 
 vi /etc/httpd/conf.d/phpmyadmin.conf
@@ -132,7 +132,7 @@ vi /etc/apache2/conf-enabled/phpmyadmin.conf
 
 Listen 90
 
-<VirtualHost *:90>
+<VirtualHost *:8080>
     DocumentRoot /usr/serverok/phpmyadmin/
     CustomLog ${APACHE_LOG_DIR}/pma.log combined
     <Directory "/usr/serverok/phpmyadmin">
@@ -151,6 +151,13 @@ GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'AEs308SuEtT0Hs';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
+
+MySQL 8
+
+CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '123';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost';
+FLUSH PRIVILEGES;
+
 
 /etc/phpmyadmin/config.inc.php
 

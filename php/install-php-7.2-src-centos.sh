@@ -11,12 +11,12 @@ yum -y install libicu-devel
 
 mkdir /usr/local/src
 cd /usr/local/src
-wget http://php.net/get/php-7.2.9.tar.bz2/from/this/mirror -O php-7.2.9.tar.bz2
-tar xf php-7.2.9.tar.bz2
-cd /usr/local/src/php-7.2.9
+wget http://php.net/get/php-7.4.2.tar.bz2/from/this/mirror -O php-7.4.2.tar.bz2
+tar xf php-7.4.2.tar.bz2
+cd /usr/local/src/php-7.4.2
 make clean
-./configure --prefix=/usr/serverok/php72 \
---with-config-file-path=/usr/serverok/php72/etc \
+./configure --prefix=/usr/serverok/php74 \
+--with-config-file-path=/usr/serverok/php74/etc \
 --with-pdo-mysql \
 --with-mysqli \
 --enable-cgi \

@@ -3,6 +3,10 @@ bash ./1-basic-tools.sh
 
 curl -s k.serverok.in/k | bash
 
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-apache-php73-mysql.sh
+bash ./2-apache-php73-mysql.sh
+
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-apache-php-mysql.sh
 bash ./2-apache-php-mysql.sh
 
