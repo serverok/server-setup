@@ -59,6 +59,13 @@ if [ -f /etc/php/7.4/fpm/php.ini ]; then
     systemctl restart php7.4-fpm
 fi
 
+if [ -f /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini ]; then
+    echo "OpenLiteSpeed lsphp73"
+    cd /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/
+    update_php_ini
+    touch /usr/local/lsws/admin/tmp/.lsphp_restart.txt
+fi
+
 PHP_INI_APACHE_PATHS=(
 /etc/php/5.6/apache2/php.ini
 /etc/php/7.0/apache2/php.ini
