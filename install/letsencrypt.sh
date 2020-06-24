@@ -11,7 +11,7 @@ mv /usr/bin/certbot-auto /usr/bin/certbot
 /usr/bin/certbot --install-only
 
 crontab -l > /root/crontab-backup
-echo "30 2 * * 1 /usr/serverok/ssl-renew >> /var/log/le-renew.log" >> /root/crontab-backup
+echo "@weekly /usr/serverok/ssl-renew >> /var/log/le-renew.log" >> /root/crontab-backup
 crontab /root/crontab-backup
 
 mkdir /usr/serverok/
