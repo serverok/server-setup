@@ -28,8 +28,10 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
     DocumentRoot /home/DOMAIN_NAME/html
     CustomLog ${APACHE_LOG_DIR}/DOMAIN_NAME.log combined
     ErrorLog ${APACHE_LOG_DIR}/DOMAIN_NAME-error.log
+    # Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+    # Header always append X-Frame-Options SAMEORIGIN
     <Directory "/home/DOMAIN_NAME/html">
-        Options All
+        Options All -Indexes
         AllowOverride All
         Require all granted
         Order allow,deny
