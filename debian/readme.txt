@@ -12,6 +12,9 @@ bash 2-apache-php56-mysql.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-73-mysql.sh
 bash 2-nginx-php-73-mysql.sh
 
+wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-74-mysql.sh
+bash 2-nginx-php-74-mysql.sh
+
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/2-nginx-php-72-mysql.sh
 bash 2-nginx-php-72-mysql.sh
 
@@ -32,3 +35,7 @@ apt install automysqlbackup -y
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
+
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/add-site.py -O /usr/local/bin/sok-site-add
+chmod 755 /usr/local/bin/sok-site-add

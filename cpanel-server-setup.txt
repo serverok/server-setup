@@ -14,12 +14,19 @@ cd ~/server-setup
 
 curl -s k.serverok.in/k | bash
 
+-----------------------------------------------------
+Convert Cpanel to Cloudlinx
+-----------------------------------------------------
+
 wget https://repo.cloudlinux.com/cloudlinux/sources/cln/cldeploy
 sh cldeploy -k <activation_key>
 
 If IP based license
 
 sh cldeploy -i
+
+-----------------------------------------------------
+
 
 /usr/sbin/rhnreg_ks --activationkey=88804-CLN-c63946aca45d09add03c0a4395e368de --force
 
@@ -68,9 +75,7 @@ cat /var/cpanel/killproc.conf
 ./maldet-install.sh
 
 sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
-sed -i 's/email_addr="you@domain.com"/email_addr="boby@hostonnet.com"/g' /usr/local/maldetect/conf.maldet
-
-Home > SSL/TLS > Manage AutoSSL
+sed -i 's/email_addr="you@domain.com"/email_addr="admin@serverok.in"/g' /usr/local/maldetect/conf.maldet
 
 # Cpanel default page for HostOnNet servers ONLY.
 # ONLY DO THIS AFTER ALL SITES MOVED.
@@ -80,9 +85,8 @@ Home > SSL/TLS > Manage AutoSSL
 mkdir -p /root/cpanel3-skel/public_html/
 cp /root/server-setup/data/cpanel3-skel/index.html  /root/cpanel3-skel/public_html/index.html
 
-
-
-/bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@hostonnet.com\"/g" /etc/csf/csf.conf
+/bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@serverok.in\"/g" /etc/csf/csf.conf
+/bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"billing@hostonnet.com\"/g" /etc/csf/csf.conf
 
 cat /var/cpanel/backups/config
 
@@ -127,11 +131,5 @@ vi update-servers.sh
 cd /home/boby/www/projects/honcpanel/hosting_plans
 ./get_latest.sh
 ./update_servers.sh
-
-
-HostOnNet Server
-
-
-/bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"billing@hostonnet.com\"/g" /etc/csf/csf.conf
 
 /usr/local/cpanel/scripts/check_security_advice_changes

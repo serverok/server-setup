@@ -11,9 +11,9 @@ tar xvf phpMyAdmin-latest-all-languages.tar.gz
 mv phpMyAdmin-5.0.?-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.4/phpMyAdmin-4.9.4-all-languages.tar.gz
-tar xvf phpMyAdmin-4.9.4-all-languages.tar.gz
-mv phpMyAdmin-4.9.4-all-languages /usr/serverok/phpmyadmin
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.5/phpMyAdmin-4.9.5-all-languages.tar.gz
+tar xvf phpMyAdmin-4.9.5-all-languages.tar.gz
+mv phpMyAdmin-4.9.5-all-languages /usr/serverok/phpmyadmin
 
 mkdir /usr/serverok/phpmyadmin/tmp/
 chmod 777 /usr/serverok/phpmyadmin/tmp/
@@ -97,9 +97,10 @@ location /phpmyadmin {
 }
 
 vi /etc/nginx/sites-enabled/phpmyadmin.conf
+vi /etc/nginx/conf.d/phpmyadmin.conf
 
 server {
-    listen *:8080;
+    listen *:7777;
     server_name _;
     root /usr/serverok/phpmyadmin/;
     index index.php;
@@ -124,13 +125,13 @@ server {
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
-        fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
     }
 }
 
 vi /etc/apache2/conf-enabled/phpmyadmin.conf
 
-Listen 90
+Listen 8080
 
 <VirtualHost *:8080>
     DocumentRoot /usr/serverok/phpmyadmin/
@@ -162,3 +163,5 @@ FLUSH PRIVILEGES;
 /etc/phpmyadmin/config.inc.php
 
 $cfg["blowfish_secret"] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";
+
+https://stackoverflow.com/questions/48001569/phpmyadmin-count-parameter-must-be-an-array-or-an-object-that-implements-co/49483740#49483740

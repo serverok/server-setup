@@ -1,0 +1,96 @@
+---
+- hosts: web
+  remote_user: root
+  become_method: sudo
+  tasks:
+    - name: apt update
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    - name: install apache
+      apt:
+        pkg:
+        - apache2
+        - libapache2-mod-ruid2
+    - name: update mutex
+      replace:
+        path: /etc/apache2/apache2.conf
+        regexp: '^#Mutex file:..APACHE_LOCK_DIR. default$'
+        replace: 'Mutex posixsem'
+    - name: install software-properties-common
+      apt:  
+        pkg:
+        - software-properties-common
+    - name: add ppa
+      apt_repository:
+        repo: 'ppa:ondrej/php'
+    - name: inatall php
+      apt:
+        pkg:
+        - php7.3
+        - php7.3-bcmath
+        - php7.3-bz2
+        - php7.3-cgi
+        - php7.3-cli
+        - php7.3-common
+        - php7.3-curl
+        - php7.3-dba
+        - php7.3-dev
+        - php7.3-enchant
+        - php7.3-gd
+        - php7.3-gmp
+        - php7.3-imap
+        - php7.3-intl
+        - php7.3-json
+        - php7.3-mbstring
+        - php7.3-mysql
+        - php7.3-opcache
+        - php7.3-pgsql
+        - php7.3-pspell
+        - php7.3-readline
+        - php7.3-soap
+        - php7.3-sqlite3
+        - php7.3-sybase
+        - php7.3-tidy
+        - php7.3-xml
+        - php7.3-xmlrpc
+        - php7.3-zip
+        - php7.3-xsl
+        - php7.3-gmp
+        - libapache2-mod-php7.3
+    - name: enable apache modules
+      command: a2enmod rewrite ssl php7.3
+    - name: enable apache2 service
+      systemd:
+        name: apache2
+        state: started
+        enabled: yes
+    - name: install mysql server
+      apt:
+        pkg:
+        - mysql-server
+    - name: enable mysql server
+      systemd:
+        name: mysql
+        state: started
+        enabled: yes
+    - name: set postfix hostname
+      debconf:
+        name=postifx
+        question="postfix/mailname"
+        value="{{ inventory_hostname }}"
+        vtype="string"
+    - name: set postfix as internet site
+      debconf:
+        name=postfix
+        question="postfix/main_mailer_type"
+        value="'Internet Site'"
+        vtype="string"
+    - name: install postfix
+      apt:
+        name: postfix
+        state: present
+    - name: install automysqlbackup
+      apt:
+        name: automysqlbackup
+        state: present

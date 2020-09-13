@@ -16,17 +16,18 @@ apt -y install php7.4-xml php7.4-mbstring php7.4-zip php7.4-xmlrpc php7.4-soap p
 apt install -y php7.4-fpm
 
 apt -y install mariadb-client mariadb-server
-apt install automysqlbackup -y
 
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections
 
 apt-get install -y postfix
 
-systemctl enable mysql
-systemctl enable nginx
+apt install automysqlbackup -y
 
+systemctl enable mysql
 systemctl restart mysql
+
+systemctl enable nginx
 systemctl restart nginx
 
 systemctl enable php7.4-fpm

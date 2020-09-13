@@ -1,0 +1,67 @@
+---
+- hosts: web
+  remote_user: root
+  become_method: sudo
+  tasks:
+    - name: apt update
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+    - name: install monit
+      apt:
+        name: monit
+        state: latest
+
+    - name: check if apache installed
+      stat: 
+        path: /usr/sbin/apache2
+      register: apache_bin
+    - name: enable apache monitoring
+      file:
+        src: "/etc/monit/conf-available/apache2"
+        dest: "/etc/monit/conf-enabled/apache2"
+        state: link
+      when: apache_bin.stat.exists == True
+
+    - name: check if nginx installed
+      stat: 
+        path: /usr/sbin/nginx
+      register: nginx_bin
+    - name: enable nginx monitoring
+      file:
+        src: "/etc/monit/conf-available/nginx"
+        dest: "/etc/monit/conf-enabled/nginx"
+        state: link
+      when: nginx_bin.stat.exists == True
+
+    - name: check if mysql installed
+      stat:
+        path: /usr/sbin/mysqld
+      register: mysqld_bin
+    - name: enable mysql monitoring
+      file:
+        src: "/etc/monit/conf-available/mysql"
+        dest: "/etc/monit/conf-enabled/mysql"
+        state: link
+      when: mysqld_bin.stat.exists == True
+
+    - name: enable monit status 1
+      replace:
+        path: /etc/monit/monitrc
+        regexp: '^# set httpd port 2812 and$'
+        replace: 'set httpd port 2812 and'
+    - name: enable monit status 2
+      replace:
+        path: /etc/monit/monitrc
+        regexp: '^#     use address localhost.*$'
+        replace: '     use address localhost'
+    - name: enable monit status 3
+      replace:
+        path: /etc/monit/monitrc
+        regexp: '^#     allow localhost.*$'
+        replace: '     allow localhost'
+    - name: restart monit
+      systemd:
+        name: monit
+        state: restarted
+        enabled: yes

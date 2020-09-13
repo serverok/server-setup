@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: admin@serverOk.in
-# Web: https://www.serverok.in
+# Web: https://serverok.in
 
 function update_php_ini() {
     sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini

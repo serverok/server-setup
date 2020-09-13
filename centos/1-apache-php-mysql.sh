@@ -8,7 +8,7 @@ rpm -ivh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum -y install httpd httpd-devel httpd-tools mod_ssl
 
 
-yum-config-manager --enable remi-php73
+yum-config-manager --enable remi-php74
 # If you need PHP 5.6, run
 # yum-config-manager --disable remi-php72
 # yum-config-manager --enable remi-php56

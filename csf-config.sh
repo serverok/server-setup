@@ -2,7 +2,10 @@
 
 /bin/sed -i "s/RESTRICT_SYSLOG\s*=.*$/RESTRICT_SYSLOG = \"3\"/g" /etc/csf/csf.conf
 /bin/sed -i "s/SYSLOG_CHECK\s*=.*$/SYSLOG_CHECK = \"3600\"/g" /etc/csf/csf.conf
-/bin/sed -i "s/SMTP_BLOCK\s*=.*/SMTP_BLOCK = \"1\"/g" /etc/csf/csf.conf
+
+# By default, CSF will block allowed IP if they break rules.
+/bin/sed -i "s/IGNORE_ALLOW\s*=.*/IGNORE_ALLOW = \"1\"/g" /etc/csf/csf.conf
+
 
 /bin/sed -i "s/LF_GLOBAL\s*=.*$/LF_GLOBAL = \"1800\"/g" /etc/csf/csf.conf
 /bin/sed -i "s/GLOBAL_ALLOW\s*=.*$/GLOBAL_ALLOW = \"http:\/\/git\.buyscripts\.in\:10080\/boby\/firewall\/raw\/master\/allow\.txt\"/g" /etc/csf/csf.conf
@@ -17,7 +20,16 @@
 
 /bin/sed -i "s/TESTING = \"1\"/TESTING = \"0\"/g" /etc/csf/csf.conf
 
-# LF_EMAIL_ALERT = ip block alert
-
-/bin/systemctl restart csf.service
+systemctl restart csf.service
 csf -r
+
+
+# Disable IP blocking alert. You may get many, if you dont need to act on this, disable it
+
+/bin/sed -i "s/LF_PERMBLOCK_ALERT\s*=.*/LF_PERMBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
+/bin/sed -i "s/LF_EMAIL_ALERT\s*=.*/LF_EMAIL_ALERT = \"0\"/g" /etc/csf/csf.conf
+
+# ONLY CPANEL
+/bin/sed -i "s/SMTP_BLOCK\s*=.*/SMTP_BLOCK = \"1\"/g" /etc/csf/csf.conf
+
+# /bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@serverok.in\"/g" /etc/csf/csf.conf

@@ -7,6 +7,7 @@ apt -y install libapache2-mod-ruid2
 systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
+a2enmod headers
 systemctl restart apache2
 
 sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
@@ -28,7 +29,7 @@ a2enmod php7.2
 systemctl enable apache2
 systemctl start apache2
 
-apt-get -y install mysql-server-5.7
+apt-get -y install mariadb-server mariadb-client
 
 systemctl enable mysql
 

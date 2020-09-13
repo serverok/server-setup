@@ -2,8 +2,7 @@
 
 # wget https://raw.githubusercontent.com/serverok/server-setup/master/rhel/basic.sh && chmod 755 basic.sh && ./basic.sh
 
-yum update -y
-yum upgrade -y
+yum upgrade
 yum -y remove mlocate
 yum install -y nmap wget curl telnet whois bind-utils net-tools parted
 yum install -y iotop

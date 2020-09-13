@@ -9,8 +9,8 @@ sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_
 service ssh restart
 
 dd if=/dev/zero of=/swapfile bs=1M count=2048
-mkswap /swapfile
 chmod 0600 /swapfile
+mkswap /swapfile
 swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
