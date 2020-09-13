@@ -39,10 +39,12 @@
         path: /usr/sbin/mysqld
       register: mysqld_bin
     - name: enable mysql monitoring
-      file:
-        src: "/etc/monit/conf-available/mysql"
+      copy:
+        src: "data/monit_mysql"
         dest: "/etc/monit/conf-enabled/mysql"
-        state: link
+        owner: root
+        group: root
+        mode: '0755'
       when: mysqld_bin.stat.exists == True
 
     - name: enable monit status 1
