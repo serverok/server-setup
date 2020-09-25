@@ -4,3 +4,5 @@
     tasks:
         - name: update system
           yum: name=* state=latest
+        - name: update cpanel
+          command: /scripts/upcp

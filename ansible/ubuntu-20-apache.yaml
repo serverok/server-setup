@@ -60,6 +60,8 @@
         - libapache2-mod-php7.3
     - name: enable apache modules
       command: a2enmod rewrite ssl php7.3
+    - name: disable mod_autoindex
+      command: a2dismod autoindex -f
     - name: enable apache2 service
       systemd:
         name: apache2
@@ -68,7 +70,7 @@
     - name: install mysql server
       apt:
         pkg:
-        - mysql-server
+        - mariadb-server
     - name: enable mysql server
       systemd:
         name: mysql

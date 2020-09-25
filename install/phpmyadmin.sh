@@ -131,9 +131,9 @@ server {
 
 vi /etc/apache2/conf-enabled/phpmyadmin.conf
 
-Listen 8080
+Listen 7777
 
-<VirtualHost *:8080>
+<VirtualHost *:7777>
     DocumentRoot /usr/serverok/phpmyadmin/
     CustomLog ${APACHE_LOG_DIR}/pma.log combined
     <Directory "/usr/serverok/phpmyadmin">

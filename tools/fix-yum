@@ -1,5 +1,6 @@
 #!/usr/bin/python
-# https://blog.hostonnet.com/python-script-to-update-yum
+# Author: Yujin Boby
+# Web: https://serverok.in
 
 import subprocess
 import os

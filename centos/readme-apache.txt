@@ -25,7 +25,7 @@ vi /etc/httpd/conf.d/DOMAIN_NAME.conf
     ServerAdmin info@DOMAIN_NAME
     DocumentRoot /home/DOMAIN_NAME/html
     <Directory "/home/DOMAIN_NAME/html">
-        Options All
+        Options All -Indexes
         AllowOverride All
         Require all granted
         Order allow,deny

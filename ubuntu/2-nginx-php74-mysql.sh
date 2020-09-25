@@ -1,6 +1,6 @@
 #!/bin/bash
 # Author: admin@serverOk.in
-# Web: https://www.serverok.in
+# Web: https://serverok.in
 
 apt install -y software-properties-common
 

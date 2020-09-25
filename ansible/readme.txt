@@ -6,4 +6,4 @@ phpMyAdmin install on nginx debian/Ubuntu
 
 ansible-playbook -i servers.txt phpmyadmin.yaml 
 
-
+ansible-playbook -i inventory/cpanel-servers.txt update-cpanel-servers.yml
