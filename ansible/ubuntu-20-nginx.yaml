@@ -29,6 +29,7 @@
         - php7.4-xml
         - php7.4-xmlrpc
         - php7.4-zip
+        - composer
     - name: install php-fpm
       apt:
         name: php7.4-fpm
