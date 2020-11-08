@@ -11,6 +11,7 @@ import random
 import os
 import crypt
 import requests
+import argparse
 
 def update_password(password, char):
     replace_index = random.randrange(len(password)-1)
@@ -40,8 +41,16 @@ def generate_password():
     return my_password
 
 def verify_domain(domain_name):
-    if not re.match("^([A-Za-z0-9\.]+)$", domain_name): 
+    if not re.match("^([A-Za-z0-9-\.]+)$", domain_name):
         print("Invalid domain name:", domain_name)
+        sys.exit(1)
+
+def verify_username(username):
+    if len(username) > 32:
+        print('Error: username must be less than 32 chars')
+        sys.exit(1)
+    if not re.match("^([A-Za-z0-9]+)$", username):
+        print("Invalid user name %s" % username)
         sys.exit(1)
 
 def linux_user_exists(username):
@@ -94,14 +103,34 @@ def find_ip():
         return ip
     else:
         print("Failed to find IP address")
-        os.exit(1)
+        sys.exit(1)
 
 
-domain_name = input("Enter domain name: ")
-domain_name = domain_name.strip()
+text = 'This is a test program. It demonstrates how to use the argparse module with a program description.'
 
+parser = argparse.ArgumentParser(description=text)
+parser.add_argument("-d", "--domain", help="domain name for your web site")
+parser.add_argument("-u", "--user", help="user name for your web site")
+
+args = parser.parse_args()
+
+if args.domain:
+    print("domain = %s" % args.domain)
+    domain_name = args.domain.strip()
+else:
+    domain_name = input("Enter domain name: ")
+    domain_name = domain_name.strip()
+
+if args.user:
+    username = args.user
+else:
+    username = generate_username(domain_name)
+
+print("user = %s" % username)
+
+verify_username(username)
 verify_domain(domain_name)
-username = generate_username(domain_name)
+
 password = generate_password()
 password_mysql = generate_password()
 ip_address = find_ip()
@@ -138,7 +167,7 @@ print("PW = {}".format(password_mysql))
 print("\n")
 print("phpMyAdmin\n")
 
-print("http://{}:8080".format(ip_address))
+print("http://{}:7777".format(ip_address))
 print("User = {}_db".format(username))
 print("PW = {}".format(password_mysql))
 
