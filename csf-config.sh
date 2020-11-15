@@ -7,9 +7,9 @@
 /bin/sed -i "s/IGNORE_ALLOW\s*=.*/IGNORE_ALLOW = \"1\"/g" /etc/csf/csf.conf
 
 
-/bin/sed -i "s/LF_GLOBAL\s*=.*$/LF_GLOBAL = \"1800\"/g" /etc/csf/csf.conf
-/bin/sed -i "s/GLOBAL_ALLOW\s*=.*$/GLOBAL_ALLOW = \"http:\/\/git\.buyscripts\.in\:10080\/boby\/firewall\/raw\/master\/allow\.txt\"/g" /etc/csf/csf.conf
-/bin/sed -i "s/GLOBAL_DENY\s*=.*$/GLOBAL_DENY = \"http\:\/\/git\.buyscripts\.in\:10080\/boby\/firewall\/raw\/master\/deny.txt\"/g" /etc/csf/csf.conf
+#/bin/sed -i "s/LF_GLOBAL\s*=.*$/LF_GLOBAL = \"1800\"/g" /etc/csf/csf.conf
+#/bin/sed -i "s/GLOBAL_ALLOW\s*=.*$/GLOBAL_ALLOW = \"http:\/\/git\.buyscripts\.in\:10080\/boby\/firewall\/raw\/master\/allow\.txt\"/g" /etc/csf/csf.conf
+#/bin/sed -i "s/GLOBAL_DENY\s*=.*$/GLOBAL_DENY = \"http\:\/\/git\.buyscripts\.in\:10080\/boby\/firewall\/raw\/master\/deny.txt\"/g" /etc/csf/csf.conf
 
 # This option will notify you when a large amount of email is sent from a particular script on the server
 /bin/sed -i "s/LF_SCRIPT_ALERT\s*=.*$/LF_SCRIPT_ALERT = \"1\"/g" /etc/csf/csf.conf
@@ -20,10 +20,6 @@
 
 /bin/sed -i "s/TESTING = \"1\"/TESTING = \"0\"/g" /etc/csf/csf.conf
 
-systemctl restart csf.service
-csf -r
-
-
 # Disable IP blocking alert. You may get many, if you dont need to act on this, disable it
 
 /bin/sed -i "s/LF_PERMBLOCK_ALERT\s*=.*/LF_PERMBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
@@ -33,3 +29,7 @@ csf -r
 /bin/sed -i "s/SMTP_BLOCK\s*=.*/SMTP_BLOCK = \"1\"/g" /etc/csf/csf.conf
 
 # /bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@serverok.in\"/g" /etc/csf/csf.conf
+
+systemctl restart csf.service
+csf -r
+

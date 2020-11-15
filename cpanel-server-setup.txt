@@ -35,18 +35,16 @@ sh cldeploy -i
 
 yum remove -y NetworkManager
 
-bash cpanel/install.sh
-
-bash cpanel/config.sh
-#bash cpanel/php-modules.sh
+bash /root/server-setup/cpanel/install.sh
+bash /root/server-setup/cpanel/config.sh
 
 # if CloudLinux
 
-bash secure-sysctl.sh
+bash /root/server-setup/secure-sysctl.sh
 
 # reboot to cloud linux kernal
 
-bash cloudlinux.sh
+bash /root/server-setup/cloudlinux.sh
 
 On CentOS server
 
@@ -70,9 +68,9 @@ bash install/update-php-ini.sh
 curl -sL https://gist.github.com/serverok/8fbcbda5f8fb578cf4a9a5ac5667d1da/raw > /var/cpanel/killproc.conf
 cat /var/cpanel/killproc.conf
 
-./csf-install.sh
-./csf-config.sh
-./maldet-install.sh
+/root/server-setup/csf-install.sh
+/root/server-setup/csf-config.sh
+/root/server-setup/maldet-install.sh
 
 sed -i 's/email_alert="0"/email_alert="1"/g' /usr/local/maldetect/conf.maldet
 sed -i 's/email_addr="you@domain.com"/email_addr="admin@serverok.in"/g' /usr/local/maldetect/conf.maldet

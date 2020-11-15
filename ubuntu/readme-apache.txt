@@ -1,7 +1,9 @@
 apt install libapache2-mod-ruid2
 
+SERVER_IP_HERE
 DOMAIN_NAME
 USERNAME
+SFTP_PASSWORD
 MYSQL_PASSWORD
 admin@serverok.in
 
@@ -18,6 +20,8 @@ echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
 useradd -m --shell /bin/bash --home /home/DOMAIN_NAME USERNAME
 passwd USERNAME
+
+SFTP_PASSWORD
 
 vi /etc/apache2/sites-available/DOMAIN_NAME.conf
 
@@ -49,8 +53,8 @@ chown -R USERNAME:USERNAME /home/DOMAIN_NAME/
 chmod -R 755 /home/DOMAIN_NAME/html/
 
 mysql
-create database USERNAME;
-grant all on USERNAME.* to 'USERNAME'@'localhost' identified by 'MYSQL_PASSWORD';
+create database USERNAME_db;
+grant all on USERNAME_db.* to 'USERNAME_db'@'localhost' identified by 'MYSQL_PASSWORD';
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
@@ -59,3 +63,31 @@ GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
 systemctl restart apache2
 
 certbot --authenticator webroot --webroot-path /home/DOMAIN_NAME/html/ --installer apache --agree-tos --no-eff-email --email admin@serverok.in -d DOMAIN_NAME -d www.DOMAIN_NAME
+
+
+Server setup complete. Here is the login details.
+
+SFTP
+
+IP = SERVER_IP_HERE
+Port = 22
+User = USERNAME
+PW = SFTP_PASSWORD
+
+MySQL
+
+DB = USERNAME_db
+User = admin
+PW = MYSQL_PASSWORD
+
+phpMyAdmin
+
+http://SERVER_IP_HERE:7777
+
+User = admin
+PW = MYSQL_PASSWORD
+
+You can access web site using the IP now.
+
+http://SERVER_IP_HERE/
+

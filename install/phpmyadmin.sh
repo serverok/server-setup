@@ -11,9 +11,9 @@ tar xvf phpMyAdmin-latest-all-languages.tar.gz
 mv phpMyAdmin-5.0.?-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.5/phpMyAdmin-4.9.5-all-languages.tar.gz
-tar xvf phpMyAdmin-4.9.5-all-languages.tar.gz
-mv phpMyAdmin-4.9.5-all-languages /usr/serverok/phpmyadmin
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
+tar xvf phpMyAdmin-4.9.7-all-languages.tar.gz
+mv phpMyAdmin-4.9.7-all-languages /usr/serverok/phpmyadmin
 
 mkdir /usr/serverok/phpmyadmin/tmp/
 chmod 777 /usr/serverok/phpmyadmin/tmp/
