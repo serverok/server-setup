@@ -39,7 +39,7 @@
         name: apparmor
         state: stopped
         enabled: no
-    - name: download vlmrc
+    - name: download .vimrc
       get_url:
         url: "https://github.com/serverok/server-setup/raw/master/data/.vimrc"
         dest: "/root/.vimrc"
