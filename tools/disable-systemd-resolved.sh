@@ -11,6 +11,7 @@ rm -f /etc/resolv.conf
 tee /etc/resolv.conf << END
 nameserver 8.8.8.8
 nameserver 1.1.1.1
+nameserver 9.9.9.9
 END
 
 echo "systemd-resolved disabled."
