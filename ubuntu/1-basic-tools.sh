@@ -11,6 +11,9 @@ apt -y purge mlocate
 apt remove -y vim-tiny nano ed --purge
 apt autoremove -y
 
+apt-get install -y sysstat
+sed -i 's/ENABLED="false"/ENABLED="true"/g' /etc/default/sysstat
+
 systemctl stop apparmor
 systemctl disable apparmor
 

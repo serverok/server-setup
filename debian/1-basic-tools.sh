@@ -9,6 +9,9 @@ echo "alias rm='rm -i'" >> ~/.bashrc
 echo "alias grep='grep --color=auto'" >> ~/.bashrc
 echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bashrc
 
+apt-get install -y sysstat
+sed -i 's/ENABLED="false"/ENABLED="true"/g' /etc/default/sysstat
+
 systemctl stop apparmor
 systemctl disable apparmor
 
