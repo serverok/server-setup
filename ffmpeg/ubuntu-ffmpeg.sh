@@ -6,9 +6,9 @@ apt -y install libmp3lame-dev libxvidcore-dev
 apt -y install cmake mercurial
 
 cd /usr/local/src
-wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc0/nasm-2.14rc0.tar.xz
-tar xf nasm-2.14rc0.tar.xz
-cd nasm-2.14rc0/
+wget https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.gz
+tar xf nasm-2.14.02.tar.gz
+cd nasm-2.14.02
 ./configure --prefix=/usr
 make
 make install
@@ -21,7 +21,7 @@ cd /usr/local/src/yasm-1.3.0
 make && make install
 
 cd /usr/local/src
-git clone git://git.videolan.org/x264.git
+git clone https://code.videolan.org/videolan/x264.git
 cd /usr/local/src/x264/
 git pull
 make clean && make distclean
