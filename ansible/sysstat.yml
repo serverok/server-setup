@@ -1,0 +1,24 @@
+---
+  - hosts: web
+    user: root
+    tasks:
+      - name: update system
+        apt:
+          update_cache: yes
+          cache_valid_time: 3600
+      - name: install sysstat
+        apt:
+          name: sysstat
+          state: latest
+      - name: enable sysstat
+        systemd:
+          name: sysstat
+          state: started
+          enabled: yes
+      - name: enable sysstat
+        replace:
+          path: /etc/default/sysstat
+          regexp: 'ENABLED="false"'
+          replace: 'ENABLED="true"'
+
+

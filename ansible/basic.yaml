@@ -47,3 +47,17 @@
       lineinfile:
         path: '/root/.bashrc'
         line: 'export HISTTIMEFORMAT="%d/%m/%y %T "'
+    - name: install sysstat
+      apt:
+        name: sysstat
+        state: latest
+    - name: enable sysstat
+      systemd:
+        name: sysstat
+        state: started
+        enabled: yes
+    - name: enable sysstat
+      replace:
+        path: /etc/default/sysstat
+        regexp: 'ENABLED="false"'
+        replace: 'ENABLED="true"'
