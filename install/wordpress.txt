@@ -10,7 +10,7 @@ vi html/wp-config.php
 define( 'WP_MEMORY_LIMIT', '256M' );
 
 
-cd ~/html
+cd
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 chmod 755 /usr/local/bin/wp
@@ -32,3 +32,32 @@ wp user create serverok serverok.in@gmail.com --role=administrator
 
 wp cache flush
 
+wp rewrite structure '/%postname%/'
+
+wp user update USERNAME --user_pass=<password>
+wp user update USERNAME --user_pass="new_password"
+wp user update admin --user_email=brunadias.seo@gmail.com
+
+
+php -d memory_limit=5128M ~/wp-cli.phar option get home
+php -d memory_limit=5128M ~/wp-cli.phar search-replace 'http://support2.i-autom8.com' 'https://support.i-autom8.com'
+
+wp option get admin_email
+wp option update admin_email brunadias.seo@gmail.com
+
+
+sudo -u www-data -i -- wp db export
+
+wp config set DB_NAME new_name
+wp config create --dbname=user2_wp --dbuser=user2_wp --dbpass=new_password
+
+wp plugin install hello-dolly --activate
+wp plugin update --all
+
+wp theme list
+wp theme install twentytwenty --activate
+wp theme status
+
+wp db export --add-drop-table
+wp db optimize  
+wp db repair

@@ -45,6 +45,11 @@ def verify_domain(domain_name):
         print("Invalid domain name:", domain_name)
         sys.exit(1)
 
+def verify_password(password):
+    if not re.match("^([A-Za-z0-9-\.]+)$", password):
+        print("Invalid password:", password)
+        sys.exit(1)
+
 def verify_username(username):
     if len(username) > 32:
         print('Error: username must be less than 32 chars')
@@ -111,6 +116,7 @@ text = 'This is a test program. It demonstrates how to use the argparse module w
 parser = argparse.ArgumentParser(description=text)
 parser.add_argument("-d", "--domain", help="domain name for your web site")
 parser.add_argument("-u", "--user", help="user name for your web site")
+parser.add_argument("-p", "--password", help="sftp password for site")
 
 args = parser.parse_args()
 
@@ -128,10 +134,19 @@ else:
 
 print("user = %s" % username)
 
+if args.password:
+    password = args.password
+else:
+    password = generate_password()
+
 verify_username(username)
 verify_domain(domain_name)
+verify_password(password)
 
-password = generate_password()
+print(password)
+
+sys.exit(0)
+
 password_mysql = generate_password()
 ip_address = find_ip()
 

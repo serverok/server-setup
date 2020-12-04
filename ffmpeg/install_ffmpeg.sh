@@ -2,10 +2,10 @@
 
 CFLAGS="-fPIC";export CFLAGS
 
-echo "/usr/lib64/" > /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
-echo "/usr/local/lib" >> /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
-echo "/usr/lib" >> /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
-cat /etc/ld.so.conf.d/hostonnet_ffmpeg.conf
+echo "/usr/lib64/" > /etc/ld.so.conf.d/serverok_ffmpeg.conf
+echo "/usr/local/lib" >> /etc/ld.so.conf.d/serverok_ffmpeg.conf
+echo "/usr/lib" >> /etc/ld.so.conf.d/serverok_ffmpeg.conf
+cat /etc/ld.so.conf.d/serverok_ffmpeg.conf
 ldconfig
 
 
@@ -34,12 +34,8 @@ mkdir -p /usr/local/src/tmp
 chmod 777 /usr/local/src/tmp
 export TMPDIR=/usr/local/src/tmp
 
-if [ -f /usr/local/cpanel/version ];
-then
-    # /scripts/installruby
-else
-    yum -y install ruby
-fi
+yum -y install ruby
+
 
 cd /usr/local/src/
 wget -c http://www.ijg.org/files/jpegsrc.v9a.tar.gz
@@ -52,9 +48,9 @@ make install
 # https://github.com/mstorsjo/fdk-aac/releases
 
 cd /usr/local/src/
-wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/archive/v0.1.6.tar.gz
+wget -O fdk-aac.tar.gz https://github.com/mstorsjo/fdk-aac/archive/v2.0.1.tar.gz
 tar xzvf fdk-aac.tar.gz
-cd /usr/local/src/fdk-aac-0.1.6
+cd /usr/local/src/fdk-aac-2.0.1
 make distclean
 autoreconf -fiv
 ./configure --prefix=/usr
@@ -70,9 +66,9 @@ ldconfig
 # http://sourceforge.net/projects/faac/files/
 
 cd /usr/local/src/
-wget -c http://downloads.sourceforge.net/project/faac/faac-src/faac-1.28/faac-1.28.tar.gz
-tar -zxvf faac-1.28.tar.gz
-cd /usr/local/src/faac*
+wget -c https://excellmedia.dl.sourceforge.net/project/faac/faac-src/faac-1.30/faac-1_30.tar.gz
+tar -zxvf faac-1_30.tar.gz
+cd /usr/local/src/faac-1_30
 sed -i '/char \*strcasestr(const char \*haystack, const char \*needle);/d' ./common/mp4v2/mpeg4ip.h
 ./bootstrap
 ./configure --prefix=/usr
@@ -85,10 +81,12 @@ fi
 
 ldconfig
 
+# https://github.com/knik0/faad2
+
 cd /usr/local/src/
-wget -c http://downloads.sourceforge.net/project/faac/faad2-src/faad2-2.7/faad2-2.7.tar.gz
-tar -zxvf faad2-2.7.tar.gz
-cd /usr/local/src/faad2*
+wget https://github.com/knik0/faad2/archive/2_9_2.tar.gz -O faad2.tar.gz
+tar -zxvf faad2.tar.gz
+cd /usr/local/src/faad2-2_9_2
 autoreconf -vif
 ./configure --prefix=/usr
 make && make install
@@ -102,10 +100,12 @@ fi
 # https://xiph.org/downloads/
 
 cd /usr/local/src/
-wget -c http://downloads.xiph.org/releases/ogg/libogg-1.3.3.tar.gz
-tar zxvf libogg-1.3.3.tar.gz
-cd /usr/local/src/libogg-1.3.3
-./configure --prefix=/usr && make && make install
+wget -c http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.gz
+tar zxvf libogg-1.3.4.tar.gz
+cd /usr/local/src/libogg-1.3.4
+./configure --prefix=/usr
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "libogg failed to install"
@@ -121,7 +121,9 @@ cd /usr/local/src/
 wget -c http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.6.tar.gz
 tar zxvf libvorbis-1.3.6.tar.gz
 cd /usr/local/src/libvorbis-1.3.6
-./configure --prefix=/usr && make && make install
+./configure --prefix=/usr
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "libvorbis failed to install"
@@ -132,10 +134,11 @@ fi
 
 cd /usr/local/src/
 wget -c http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2
-tar xf libtheora-1.1.1.tar.bz2
+tar xvf libtheora-1.1.1.tar.bz2
 cd /usr/local/src/libtheora-1.1.1
 ./configure --prefix=/usr
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "libtheora failed to install"
@@ -150,7 +153,8 @@ wget -c http://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.
 tar xf lame-3.100.tar.gz
 cd /usr/local/src/lame-3.100
 ./configure --enable-shared --prefix=/usr
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "faac-src failed to install"
@@ -163,7 +167,9 @@ cd /usr/local/src/
 wget -c http://downloads.xvid.org/downloads/xvidcore-1.3.4.tar.gz
 tar xvf xvidcore-1.3.4.tar.gz
 cd /usr/local/src/xvidcore/build/generic/
-./configure --prefix=/usr && make && make install
+./configure --prefix=/usr
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "faac-src failed to install"
@@ -176,15 +182,6 @@ fi
 
 gem install flvtool2
 ln -s /usr/local/bin/flvtool2 /usr/bin/flvtool2
-
-
-#cd /usr/local/src/
-#wget https://github.com/unnu/flvtool2/archive/master.zip -O flvtool2.zip
-#unzip flvtool2.zip
-#cd /usr/local/src/flvtool2-master/
-#ruby setup.rb config --prefix=/usr
-#ruby setup.rb setup
-#ruby setup.rb install
 
 if [ $? -ne 0 ]; then
     echo "faac-src failed to install"
@@ -208,7 +205,8 @@ wget -c http://liba52.sourceforge.net/files/a52dec-0.7.4.tar.gz
 tar xvf a52dec-0.7.4.tar.gz
 cd /usr/local/src/a52dec*
 ./configure
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "faac-src failed to install"
@@ -222,7 +220,8 @@ wget -c ftp://ftp.penguin.cz/pub/users/utx/amr/amrnb-11.0.0.0.tar.bz2
 tar jxvf amrnb-11.0.0.0.tar.bz2
 cd /usr/local/src/amrnb-11.0.0.0
 ./configure
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "faac-src failed to install"
@@ -234,7 +233,8 @@ wget -c ftp://ftp.penguin.cz/pub/users/utx/amr/amrwb-11.0.0.0.tar.bz2
 tar jxvf amrwb-11.0.0.0.tar.bz2
 cd /usr/local/src/amrwb-11.0.0.0
 ./configure
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "amrwb failed to install"
@@ -246,11 +246,13 @@ fi
 # yasm --version
 
 cd /usr/local/src/
-git clone git://github.com/yasm/yasm.git
-cd /usr/local/src/yasm
+wget http://www.tortall.net/projects/yasm/releases/yasm-1.3.0.tar.gz
+tar xvf yasm-1.3.0.tar.gz
+cd /usr/local/src/yasm-1.3.0
 ./autogen.sh
 ./configure --prefix=/usr
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "yasm failed to install"
@@ -259,11 +261,12 @@ fi
 
 # nasm needed for x264
 cd /usr/local/src/
-wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc0/nasm-2.14rc0.tar.xz
-tar xf nasm-2.14rc0.tar.xz
-cd /usr/local/src/nasm-2.14rc0/
+wget https://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.xz
+tar xvf nasm-2.14.02.tar.xz
+cd /usr/local/src/nasm-2.14.02/
 ./configure --prefix=/usr
-make && make install
+make
+make install
 
 if [ $? -ne 0 ]; then
     echo "nasm failed to install"
@@ -272,14 +275,15 @@ fi
 
 # http://www.videolan.org/developers/x264.html
 # x264 --help
+# 7817004df0bf57e1eb83e8ef9c0c407477b59d71 Fri Nov 1 10:00:11 2019 +0100
 
 cd /usr/local/src/
-wget ftp://ftp.videolan.org/pub/x264/snapshots/last_stable_x264.tar.bz2
-tar xvf last_stable_x264.tar.bz2
-cd /usr/local/src/x264-snapshot-*
+git clone https://code.videolan.org/videolan/x264.git
+cd x264
 make clean && make distclean
 ./configure --prefix=/usr --enable-shared
-make && make install
+make 
+make install
 
 if [ $? -ne 0 ]; then
     echo "x264 failed to install"
@@ -287,55 +291,49 @@ if [ $? -ne 0 ]; then
 fi
 
 # https://gpac.wp.mines-telecom.fr/
-# 2017-11-18
+# 2019-12-11
+# https://github.com/gpac/gpac/releases
+# /usr/bin/MP4Box
 
 cd /usr/local/src/
-wget https://github.com/gpac/gpac/archive/v0.7.1.tar.gz
-tar xf v0.7.1.tar.gz
-cd /usr/local/src/gpac-0.7.1
+wget https://github.com/gpac/gpac/archive/v0.8.0.tar.gz
+tar xf v0.8.0.tar.gz
+cd /usr/local/src/gpac-0.8.0
 ./configure --prefix=/usr
 make
 make install
 
+cd /usr/local/src
+wget https://github.com/gpac/gpac/archive/v1.0.1.tar.gz -O gpac.tar.gz
+tar vxf gpac.tar.gz
+cd gpac-1.0.1
+./configure --prefix=/usr
+make
+make install
+
+
 # https://mediaarea.net/en/MediaInfo/Download/Source
-# 2017-11-18
+# 2019-12-11
 
 cd /usr/local/src/
-wget https://mediaarea.net/download/binary/mediainfo/17.10/MediaInfo_CLI_17.10_GNU_FromSource.tar.gz
-tar xf MediaInfo_CLI_17.10_GNU_FromSource.tar.gz
+wget https://mediaarea.net/download/binary/mediainfo/20.03/MediaInfo_CLI_20.03_GNU_FromSource.tar.gz
+tar xvf MediaInfo_CLI_20.03_GNU_FromSource.tar.gz
 cd /usr/local/src/MediaInfo_CLI_GNU_FromSource
 ./CLI_Compile.sh --prefix=/usr
 cd /usr/local/src/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI
 make install
 
 # http://sourceforge.net/projects/libdc1394/files/?source=navbar
-# updated on 12-May-2015 09:32 AM
+# 2019-12-11
 
 cd /usr/local/src/
-wget -c http://downloads.sourceforge.net/project/libdc1394/libdc1394-2/2.2.4/libdc1394-2.2.4.tar.gz
-tar zxfv libdc1394-2.2.4.tar.gz
-cd /usr/local/src/libdc1394-2.2.4
+wget -c http://downloads.sourceforge.net/project/libdc1394/libdc1394-2/2.2.6/libdc1394-2.2.6.tar.gz
+tar zxfv libdc1394-2.2.6.tar.gz
+cd /usr/local/src/libdc1394-2.2.6
 make clean && make distclean
 ./configure
 make
 make install
-
-# http://www.mplayerhq.hu/design7/dload.html
-# Updated on 2017-08-09
-
-cd /usr/local/src/
-wget http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.3.0.tar.xz
-tar xvf MPlayer-1.3.0.tar.xz
-cd /usr/local/src/MPlayer-1.3.0
-echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
-make && make install
-
-cd /usr/local/src
-wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2
-tar xvf mplayer-checkout-snapshot.tar.bz2
-cd mplayer-checkout-2018-10-23
-echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
-make && make install
 
 cd /usr/local/src/
 wget -c http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2
@@ -351,6 +349,23 @@ ln -sf /usr/local/lib/codecs /usr/local/lib/win32
 ln -sf /usr/local/lib/codecs /usr/lib/win32
 ldconfig
 
+# http://www.mplayerhq.hu/design7/dload.html
+# Updated on 2017-08-09
+
+cd /usr/local/src/
+wget http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
+tar xvf MPlayer-1.4.tar.xz
+cd /usr/local/src/MPlayer-1.4
+echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
+make
+make install
+
+cd /usr/local/src
+wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2
+tar xvf mplayer-checkout-snapshot.tar.bz2
+cd mplayer-checkout-2018-10-23
+echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
+make && make install
 
 # https://www.webmproject.org/code/
 # https://github.com/webmproject/libvpx/releases
@@ -368,6 +383,8 @@ make install
 
 # https://github.com/FFmpeg/FFmpeg/releases
 # Updated on 2016-10-13
+# libavcodec/libfdk-aacenc.c:292:34: error: ‘AACENC_InfoStruct’ has no member named ‘encoderDelay’
+
 
 pkg-config --exists --print-errors vorbis
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig"
@@ -392,8 +409,9 @@ cd /usr/local/src/FFmpeg-n4.0.2
 
 ./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
 
-make && make install && ldconfig
-
+make
+make install
+ldconfig
 
 git clone  https://github.com/FFmpeg/FFmpeg
 cd FFmpeg
