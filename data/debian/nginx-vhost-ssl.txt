@@ -13,6 +13,11 @@ server {
     fastcgi_read_timeout 600s;
     fastcgi_send_timeout 600s;
 
+    # Forbidden files or directories
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project) {
+        return 404;
+    }
+
     location = /favicon.ico {
         log_not_found off;
         access_log off;
