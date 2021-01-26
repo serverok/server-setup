@@ -22,7 +22,7 @@ wget https://raw.githubusercontent.com/serverok/server-setup/master/install/upda
 bash ./update-php-ini.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/letsencrypt.sh
-sh ./letsencrypt.sh
+bash ./letsencrypt.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/debian/upgrade-debian-8.sh
 bash upgrade-debian-8.sh

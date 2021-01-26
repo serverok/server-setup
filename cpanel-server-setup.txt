@@ -111,6 +111,10 @@ whmapi1 enable_monitor_all_enabled_services
 * Home > Software >  MultiPHP Manager > PHP Handlers = suphp
 * Home > Plugins >  ConfigServer Security & Firewall
 
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/cpanel/php-ini-secure.sh
+bash php-ini-secure.sh
+
 cd /
 rm -f engintron.sh
 wget --no-check-certificate https://raw.githubusercontent.com/engintron/engintron/master/engintron.sh
