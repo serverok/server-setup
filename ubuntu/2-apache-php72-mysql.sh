@@ -8,9 +8,9 @@ systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
 a2enmod headers
+sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
 systemctl restart apache2
 
-sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
 
 apt-get install software-properties-common
 

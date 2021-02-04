@@ -143,10 +143,6 @@ verify_username(username)
 verify_domain(domain_name)
 verify_password(password)
 
-print(password)
-
-sys.exit(0)
-
 password_mysql = generate_password()
 ip_address = find_ip()
 

@@ -145,10 +145,21 @@ Listen 7777
     </Directory>
 </VirtualHost>
 
+=============================================================================
+Normal User
+=============================================================================
+
+CREATE USER 'USERNAME-HERE'@'localhost' IDENTIFIED BY 'PASSWORD_HERE';
+GRANT ALL PRIVILEGES ON DB_NAME_HERE.* TO 'USERNAME-HERE'@'localhost';
+FLUSH PRIVILEGES;
+
+
+=============================================================================
+ROOT USER
+=============================================================================
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
-
 
 CREATE USER 'admin'@'%' IDENTIFIED BY 'AEs308SuEtT0Hs';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
