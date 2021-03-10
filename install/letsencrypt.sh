@@ -26,10 +26,13 @@ else
     exit 1
 fi
 
-if [ $OS == "Ubuntu" ] && [ $VER == "18.04" ]; then
+if [ "$OS" == "Debian GNU/Linux" ]; then
 
-    echo "Installing LetsEncrypt for Ubuntu 18.04"
-    
+    rm -f /usr/bin/certbot
+
+    echo "Installing LetsEncrypt for Debian"
+
+    apt update
     apt install -y certbot
 
     if [ -f /usr/sbin/apache2 ]; then
@@ -42,10 +45,11 @@ if [ $OS == "Ubuntu" ] && [ $VER == "18.04" ]; then
         apt-get install -y python3-certbot-nginx 
     fi
 
-elif [ $OS == "Ubuntu" ] && [ $VER == "20.04" ]; then
+elif [ "$OS" == "Ubuntu" ]; then
 
-    echo "Installing LetsEncrypt for Ubuntu 20.04"
-    
+    echo "Installing LetsEncrypt for Ubuntu"
+
+    apt update
     apt install -y certbot
 
     if [ -f /usr/sbin/apache2 ]; then
