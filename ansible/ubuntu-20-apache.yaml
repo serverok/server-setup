@@ -57,8 +57,10 @@
         - php7.4-zip
         - php7.4-xsl
         - php7.4-gmp
+        - php7.4-imagick
         - composer
         - libapache2-mod-php7.4
+        - imagemagick
     - name: enable apache modules
       command: a2enmod rewrite ssl php7.4 headers
     - name: disable mod_autoindex

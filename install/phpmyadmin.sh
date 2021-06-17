@@ -8,7 +8,7 @@ cd /usr/local/src
 rm -f phpMyAdmin-latest-all-languages.tar.gz
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 tar xvf phpMyAdmin-latest-all-languages.tar.gz
-mv phpMyAdmin-5.0.?-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-5.1.0-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
@@ -144,6 +144,26 @@ Listen 7777
         allow from all
     </Directory>
 </VirtualHost>
+
+
+vi /etc/httpd/conf.d/phpmyadmin.conf
+
+Listen 7777
+
+<VirtualHost *:7777>
+    DocumentRoot /usr/serverok/phpmyadmin/
+    CustomLog /var/log/httpd/pma.log combined
+    <Directory "/usr/serverok/phpmyadmin">
+        Options All
+        AllowOverride All
+        Require all granted
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>
+
+
+
 
 =============================================================================
 Normal User

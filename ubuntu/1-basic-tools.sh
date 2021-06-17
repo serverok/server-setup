@@ -3,11 +3,11 @@
 # Web: https://www.serverok.in
 
 apt update
-apt -y upgrade
-apt -y install procps wget curl nmap whois vim git unzip telnet tmux
+apt upgrade -y 
+apt install -y procps wget curl nmap whois vim git unzip telnet tmux
 apt install -y net-tools
 apt install -y software-properties-common
-apt -y purge mlocate
+apt purge -y mlocate
 apt remove -y vim-tiny nano ed --purge
 apt autoremove -y
 

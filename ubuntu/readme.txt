@@ -42,3 +42,7 @@ chmod 755 /usr/local/bin/docker-compose
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/add-site.py -O /usr/local/bin/sok-site-add
 chmod 755 /usr/local/bin/sok-site-add
+
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+chmode: /usr/local/bin/wp

@@ -15,7 +15,7 @@
 /bin/sed -i "s/^skipboxtrapper=0$/skipboxtrapper=1/g" /var/cpanel/cpanel.config
 
 # Max hourly emails per domain. WHM > Tweak Settings > Max hourly emails per domain
-/bin/sed -i "s/^maxemailsperhour$/maxemailsperhour=150/g" /var/cpanel/cpanel.config
+/bin/sed -i "s/^maxemailsperhour.*$/maxemailsperhour=500/g" /var/cpanel/cpanel.config
 
 # Turn off Reset Password for cPanel accounts. WHM > Tweak Settings > Reset Password for cPanel accounts
 /bin/sed -i "s/^resetpass=1$/resetpass=0/g" /var/cpanel/cpanel.config
@@ -56,10 +56,6 @@ echo "allow_awstats_include=0" >> /etc/stats.conf
 
 /scripts/initquotas
 
-/scripts/install_lets_encrypt_autossl_provider
-
-wget https://gist.githubusercontent.com/serverok/dd123d2a79a7490a8d4cca0e6ba47bff/raw -O /var/cpanel/autossl.json
-
 # Keep cpanel logs
 
 mkdir /root/cpanel3-skel/
@@ -82,3 +78,6 @@ service cpanel restart
 /usr/local/cpanel/bin/install-login-profile --install limits
 
 ln -s /scripts/whoowns /usr/local/bin/whoowns
+
+/bin/systemctl stop rpcbind
+/bin/systemctl disable rpcbind

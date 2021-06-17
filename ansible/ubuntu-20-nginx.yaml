@@ -29,7 +29,9 @@
         - php7.4-xml
         - php7.4-xmlrpc
         - php7.4-zip
+        - php7.4-imagick
         - composer
+        - imagemagick
     - name: install php-fpm
       apt:
         name: php7.4-fpm

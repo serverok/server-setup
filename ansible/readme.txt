@@ -7,3 +7,8 @@ phpMyAdmin install on nginx debian/Ubuntu
 ansible-playbook -i servers.txt phpmyadmin.yaml 
 
 ansible-playbook -i inventory/cpanel-servers.txt update-cpanel-servers.yml
+
+ansible-playbook -i servers.txt --ask-pass phpmyadmin-apache.yaml 
+
+ansible all -u root -i servers.txt -a "systemctl restart php7.4-fpm"
+

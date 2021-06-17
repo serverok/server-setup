@@ -50,7 +50,7 @@ a2ensite DOMAIN_NAME
 mkdir /home/DOMAIN_NAME/html/
 echo "<?php phpinfo();" > /home/DOMAIN_NAME/html/index.php
 chown -R USERNAME:USERNAME /home/DOMAIN_NAME/
-chmod -R 755 /home/DOMAIN_NAME/html/
+chmod -R 755 /home/DOMAIN_NAME/
 
 mysql
 create database USERNAME_db;

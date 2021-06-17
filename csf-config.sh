@@ -22,11 +22,18 @@
 
 # Disable IP blocking alert. You may get many, if you dont need to act on this, disable it
 
+/bin/sed -i "s/PT_USERMEM\s*=.*/PT_USERMEM = \"1024\"/g" /etc/csf/csf.conf
+/bin/sed -i "s/LF_NETBLOCK_ALERT\s*=.*/LF_NETBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
 /bin/sed -i "s/LF_PERMBLOCK_ALERT\s*=.*/LF_PERMBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
-/bin/sed -i "s/LF_EMAIL_ALERT\s*=.*/LF_EMAIL_ALERT = \"0\"/g" /etc/csf/csf.conf
+
+# Disable all alerts
+# /bin/sed -i "s/LF_EMAIL_ALERT\s*=.*/LF_EMAIL_ALERT = \"0\"/g" /etc/csf/csf.conf
 
 # ONLY CPANEL
-/bin/sed -i "s/SMTP_BLOCK\s*=.*/SMTP_BLOCK = \"1\"/g" /etc/csf/csf.conf
+
+if [ -d "/var/cpanel/" ]; then
+    /bin/sed -i "s/SMTP_BLOCK\s*=.*/SMTP_BLOCK = \"1\"/g" /etc/csf/csf.conf
+fi
 
 # /bin/sed -i "s/LF_ALERT_TO\s*=.*$/LF_ALERT_TO = \"admin@serverok.in\"/g" /etc/csf/csf.conf
 

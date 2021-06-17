@@ -3,7 +3,7 @@
 # Web: https://www.serverok.in
 
 apt-get -y install apache2
-apt -y install libapache2-mod-ruid2
+apt-get -y install libapache2-mod-ruid2
 systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
@@ -15,7 +15,7 @@ apt-get install software-properties-common
 
 add-apt-repository ppa:ondrej/php
 apt update
-apt -y upgrade
+apt upgrade -y 
 
 apt install -y php7.3
 
@@ -23,7 +23,10 @@ apt install -y php7.3-bcmath php7.3-bz2 php7.3-cgi php7.3-cli php7.3-common php7
 
 apt install -y libapache2-mod-php7.3
 
+a2dismod php7.4
 a2enmod php7.3
+
+update-alternatives --config php
 
 systemctl enable apache2
 systemctl start apache2
