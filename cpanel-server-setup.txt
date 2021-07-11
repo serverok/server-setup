@@ -34,7 +34,7 @@ sh cldeploy -i
 
 /usr/sbin/rhnreg_ks --activationkey=88804-CLN-c63946aca45d09add03c0a4395e368de --force
 
-/root/server-setup/ssh-keygen.ssh
+/root/server-setup/ssh-keygen.sh
 /root/server-setup/secure-ssh.sh
 
 yum remove -y NetworkManager

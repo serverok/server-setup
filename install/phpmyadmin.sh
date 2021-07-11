@@ -8,7 +8,7 @@ cd /usr/local/src
 rm -f phpMyAdmin-latest-all-languages.tar.gz
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 tar xvf phpMyAdmin-latest-all-languages.tar.gz
-mv phpMyAdmin-5.1.0-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-5.1.1-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
@@ -129,6 +129,17 @@ server {
     }
 }
 
+If CentOS
+
+location ~ \.php$ {
+    try_files $uri =404;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass 127.0.0.1:9000;
+    fastcgi_index index.php;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include fastcgi_params;
+}
+
 vi /etc/apache2/conf-enabled/phpmyadmin.conf
 
 Listen 7777
@@ -169,9 +180,18 @@ Listen 7777
 Normal User
 =============================================================================
 
+MariaDB/MySQL 5.7
+
+CREATE DATABASE DB_NAME;
+GRANT ALL PRIVILEGES ON DB_NAME.* to 'USERNAME'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD';
+
+
+MySQL 8
+
 CREATE USER 'USERNAME-HERE'@'localhost' IDENTIFIED BY 'PASSWORD_HERE';
 GRANT ALL PRIVILEGES ON DB_NAME_HERE.* TO 'USERNAME-HERE'@'localhost';
 FLUSH PRIVILEGES;
+
 
 
 =============================================================================
