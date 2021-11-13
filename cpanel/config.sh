@@ -38,6 +38,9 @@
 # Check Password ENV variable. WHM > Tweak Settings > Hide login password from cgi scripts
 /bin/sed -i "s/^cgihidepass=0$/cgihidepass=1/g" /var/cpanel/cpanel.config
 
+# Allow subdomain outside public_html
+/bin/sed -i "s/^publichtmlsubsonly=0$/publichtmlsubsonly=1/g" /var/cpanel/cpanel.config
+
 # Initial default/catch-all forwarder destination
 /bin/sed -i "s/^defaultmailaction=.*$/defaultmailaction=blackhole/g" /var/cpanel/cpanel.config
 
