@@ -45,6 +45,7 @@ server {
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
+        #include /etc/nginx/snippets/fastcgi-cache.conf;
         fastcgi_pass unix:/run/php/php-fpm-POOL_NAME.sock;
     }
 
