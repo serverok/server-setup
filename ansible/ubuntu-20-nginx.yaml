@@ -50,6 +50,16 @@
         name: nginx
         state: started
         enabled: yes
+    - name: nginx config
+      get_url:
+        url: https://raw.githubusercontent.com/serverok/server-setup/master/data/nginx/fastcgi-cache.conf
+        dest: /etc/nginx/snippets/fastcgi-cache.conf
+        mode: '0750'
+    - name: nginx config
+      get_url:
+        url: https://raw.githubusercontent.com/serverok/server-setup/master/data/nginx/sok_cache.conf
+        dest: /etc/nginx/conf.d/sok_cache.conf
+        mode: '0750'
     - name: enable mysql
       systemd:
         name: mysql
