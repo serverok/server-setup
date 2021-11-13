@@ -14,6 +14,8 @@ phpenmod -v 7.3 simplexml
 apt install -y php7.3-fpm
 
 a2dismod php7.0
+a2dismod php7.4
+
 
 apt install libapache2-mod-php7.3
 a2enmod rewrite

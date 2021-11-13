@@ -45,4 +45,4 @@ chmod 755 /usr/local/bin/sok-site-add
 
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
-chmode: /usr/local/bin/wp
+chmod 755 /usr/local/bin/wp

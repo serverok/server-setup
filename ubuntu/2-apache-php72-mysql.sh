@@ -24,10 +24,11 @@ apt install php7.2-bcmath php7.2-bz2 php7.2-cgi php7.2-cli php7.2-common php7.2-
 
 apt install libapache2-mod-php7.2
 
+a2dismod php7.4
 a2enmod php7.2
 
 systemctl enable apache2
-systemctl start apache2
+systemctl restart apache2
 
 apt-get -y install mariadb-server mariadb-client
 

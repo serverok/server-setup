@@ -1,4 +1,6 @@
 apt install libapache2-mod-ruid2
+apt install libapache2-mpm-itk
+a2enmod mpm_itk
 
 SERVER_IP_HERE
 DOMAIN_NAME
@@ -34,9 +36,15 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
     ErrorLog ${APACHE_LOG_DIR}/DOMAIN_NAME-error.log
     #Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
     Header always append X-Frame-Options SAMEORIGIN
-    <Directory "/home/DOMAIN_NAME/html">
+    <IfModule itk.c>
+        AssignUserID USERNAME USERNAME
+    </IfModule>
+    <IfModule mod_ruid2.c>
         RMode config
         RUidGid USERNAME USERNAME
+        RGroups www-data
+    </IfModule>
+    <Directory "/home/DOMAIN_NAME/html">
         Options All -Indexes
         AllowOverride All
         Require all granted
