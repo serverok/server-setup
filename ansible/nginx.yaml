@@ -1,0 +1,12 @@
+---
+- hosts: web
+  remote_user: root
+  become_method: sudo
+  roles:
+    - basic
+    - nginx
+    - phpmyadmin-nginx
+    - wp-cli
+    - monit
+    - letsencrypt
+    - swap

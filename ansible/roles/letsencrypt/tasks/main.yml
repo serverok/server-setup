@@ -1,0 +1,63 @@
+---
+- name: apt update
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+- name: install certbot
+  apt:
+    name: certbot
+    state: latest
+- name: Check if Apache server
+  stat:
+    path: /usr/sbin/apache2
+  register: stat_apache_result
+
+- name: install certbot for apache
+  apt:
+    name: python3-certbot-apache
+    state: latest
+  when: stat_apache_result.stat.exists
+
+- name: check if nginx server
+  stat:
+    path: /usr/sbin/nginx
+  register: stat_nginx_result
+
+- name: install certbot for nginx
+  apt:
+    name: python3-certbot-nginx 
+    state: latest
+  when: stat_nginx_result.stat.exists
+
+- name: Creates cronjob
+  ansible.builtin.cron:
+    name: "renew SSL"
+    special_time: weekly
+    job: "/usr/serverok/ssl-renew >> /var/log/le-renew.log"
+
+- name: mkdir /usr/serverok/
+  file:
+    path: /usr/serverok/
+    state: directory
+
+- name: download cronjob
+  get_url:
+    url: https://raw.githubusercontent.com/serverok/server-setup/master/data/letsencrypt-renew.sh
+    dest: /usr/serverok/ssl-renew
+    mode: '755'
+
+- name: enable apache restart
+  ansible.builtin.replace:
+    path: /usr/serverok/ssl-renew
+    regexp: '#systemctl restart apache2'
+    replace: 'systemctl restart apache2'
+  when: stat_apache_result.stat.exists
+
+- name: enable nginx restart
+  ansible.builtin.replace:
+    path: /usr/serverok/ssl-renew
+    regexp: '#systemctl restart nginx'
+    replace: 'systemctl restart nginx'
+  when: stat_nginx_result.stat.exists
+
+  

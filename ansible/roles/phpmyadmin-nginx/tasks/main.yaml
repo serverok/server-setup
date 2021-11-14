@@ -1,0 +1,46 @@
+- name: create /usr/serverok
+  file:
+    path: /usr/serverok
+    state: directory
+- name: delete /usr/serverok/phpmyadmin
+  file:
+    path: /usr/serverok/phpmyadmin
+    state: absent
+- name: dlete phpmyadmin old source
+  file:
+    path: /usr/local/src/phpMyAdmin-latest-all-languages.tar.gz
+    state: absent
+- name: download phpmyadmin
+  get_url:
+    url: https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+    dest: /usr/local/src/phpMyAdmin-latest-all-languages.tar.gz
+- name: extract phpmyadmin
+  unarchive:
+    src: /usr/local/src/phpMyAdmin-latest-all-languages.tar.gz
+    dest: /usr/serverok/
+    remote_src: yes
+- name: rename phpmyadmin folder
+  command: mv /usr/serverok/phpMyAdmin-5.1.1-all-languages/ /usr/serverok/phpmyadmin/
+- name: /usr/serverok/phpmyadmin/tmp/
+  file:
+    path: /usr/serverok/phpmyadmin/tmp/
+    state: directory
+    mode: '0777'
+- name: copy config.inc.php
+  copy:
+    src: /usr/serverok/phpmyadmin/config.sample.inc.php
+    dest: /usr/serverok/phpmyadmin/config.inc.php
+    remote_src: yes
+- name: set blowfish_secret
+  replace:
+    path: /usr/serverok/phpmyadmin/config.inc.php
+    regexp: "^\\$cfg\\['blowfish_secret'\\].*$"
+    replace: "$cfg['blowfish_secret'] = 'ohhae8Fa6oJohrohng0ieV0to3aiThae';"
+- name: upload phpmyadmin.conf
+  copy:
+    src: phpmyadmin.conf
+    dest: /etc/nginx/sites-enabled/phpmyadmin.conf
+- name: restart nginx
+  systemd:
+    name: nginx
+    state: restarted
