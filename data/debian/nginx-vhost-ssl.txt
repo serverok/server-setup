@@ -14,7 +14,7 @@ server {
     fastcgi_send_timeout 600s;
 
     # Forbidden files or directories
-    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project) {
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|\.env) {
         return 404;
     }
 
@@ -43,9 +43,14 @@ server {
     location ~ \.php$ {
         include snippets/fastcgi-php.conf;
         fastcgi_intercept_errors on;
-        fastcgi_buffers 16 16k;
-        fastcgi_buffer_size 32k;
-        #include /etc/nginx/snippets/fastcgi-cache.conf;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 256 16k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_temp_file_write_size 256k;
+        fastcgi_send_timeout 600;
+        fastcgi_read_timeout 600;
+        fastcgi_param HTTP_PROXY "";
+        #include /etc/nginx/serverok/fastcgi-cache.conf;
         fastcgi_pass unix:/run/php/php-fpm-POOL_NAME.sock;
     }
 

@@ -50,10 +50,14 @@
         name: nginx
         state: started
         enabled: yes
+    - name: create directory /etc/nginx/serverok
+      file:
+        path: /etc/nginx/serverok
+        state: directory
     - name: nginx config
       get_url:
         url: https://raw.githubusercontent.com/serverok/server-setup/master/data/nginx/fastcgi-cache.conf
-        dest: /etc/nginx/snippets/fastcgi-cache.conf
+        dest: /etc/nginx/serverok/fastcgi-cache.conf
         mode: '0750'
     - name: nginx config
       get_url:
