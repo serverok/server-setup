@@ -1,0 +1,58 @@
+- name: apt update
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+- name: install basic tools
+  apt:
+    pkg:
+      - procps
+      - wget
+      - curl
+      - nmap
+      - whois
+      - vim
+      - git
+      - unzip
+      - telnet
+      - tmux
+      - net-tools
+      - software-properties-common
+- name: remove unwanted packages
+  apt:
+    pkg:
+      - mlocate
+      - nano
+      - ed
+      - vim-tiny
+    state: absent
+- name: disable apparmor
+  systemd:
+    name: apparmor
+    state: stopped
+    enabled: no
+- name: download .vimrc
+  get_url:
+    url: "https://github.com/serverok/server-setup/raw/master/data/.vimrc"
+    dest: "/root/.vimrc"
+- name: update history format
+  lineinfile:
+    path: '/root/.bashrc'
+    line: 'export HISTTIMEFORMAT="%d/%m/%y %T "'
+- name: install sysstat
+  apt:
+    name: sysstat
+    state: latest
+- name: enable sysstat
+  systemd:
+    name: sysstat
+    state: started
+    enabled: yes
+- name: enable sysstat
+  replace:
+    path: /etc/default/sysstat
+    regexp: 'ENABLED="false"'
+    replace: 'ENABLED="true"'
