@@ -50,7 +50,7 @@ server {
         fastcgi_send_timeout 600;
         fastcgi_read_timeout 600;
         fastcgi_param HTTP_PROXY "";
-        #include /etc/nginx/serverok/fastcgi-cache.conf;
+        #include /etc/nginx/serverok/wp-fastcgi-cache.conf;
         fastcgi_pass unix:/run/php/php-fpm-POOL_NAME.sock;
     }
 
