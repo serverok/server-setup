@@ -69,25 +69,6 @@
     name: php7.4-fpm
     state: started
     enabled: yes
-- name: install monit
-  apt:
-    name: monit
-    state: latest
-- name: enable nginx monitoring
-  file:
-    src: "/etc/monit/conf-available/nginx"
-    dest: "/etc/monit/conf-enabled/nginx"
-    state: link
-- name: enable mysql monitoring
-  file:
-    src: "/etc/monit/conf-available/mysql"
-    dest: "/etc/monit/conf-enabled/mysql"
-    state: link
-- name: enable monit
-  systemd:
-    name: monit
-    state: started
-    enabled: yes
 - name: download update-php-ini
   get_url:
     url: https://raw.githubusercontent.com/serverok/server-setup/master/install/update-php-ini.sh
@@ -103,9 +84,7 @@
 - name: restart ssh
   command: systemctl restart ssh
 - name: add add-site script
-  copy:
-    src: /home/boby/www/projects/server-setup/ubuntu/add-site.py
+  get_url:
+    url: https://raw.githubusercontent.com/serverok/server-setup/master/tools/sok-nginx-add-site.py
     dest: /usr/local/bin/sok-site-add
-    owner: root
-    group: root
     mode: '0755'
