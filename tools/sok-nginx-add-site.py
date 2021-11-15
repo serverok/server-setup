@@ -83,7 +83,7 @@ def get_url_content(url):
     return f.text
 
 def create_phpfpm_config(username):
-    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/php-fpm-pool.txt")
+    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/nginx/php-fpm-pool.txt")
     content = content.replace("POOL_NAME", username)
     content = content.replace("FPM_USER", username)
     file_location = "/etc/php/7.4/fpm/pool.d/" + username + ".conf"
@@ -92,7 +92,7 @@ def create_phpfpm_config(username):
     fpm_file.close()
 
 def create_nginx_config(domain_name, username):
-    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/data/debian/nginx-vhost-ssl.txt")
+    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/nginx/vhosts/nginx-vhost-ssl.txt")
     content = content.replace("POOL_NAME", username)
     content = content.replace("FQDN", domain_name)
     file_location = "/etc/nginx/sites-enabled/" + domain_name + ".conf"
