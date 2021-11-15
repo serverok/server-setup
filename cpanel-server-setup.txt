@@ -16,7 +16,7 @@ cd ~/server-setup
 /root/server-setup/benchmark/geekbench.sh
 
 
-curl -s k.serverok.in/k | bash
+curl -s ip.serverok.in/k | bash
 
 -----------------------------------------------------
 Convert Cpanel to Cloudlinx
@@ -67,7 +67,7 @@ Home > Software > MultiPHP Manager
 System PHP Version = PHP 7.3 (ea-php73) 
 System PHP-FPM Status = OFF
 
-bash install/update-php-ini.sh
+bash /root/server-setup/install/update-php-ini.sh
 
 curl -sL https://gist.github.com/serverok/8fbcbda5f8fb578cf4a9a5ac5667d1da/raw > /var/cpanel/killproc.conf
 cat /var/cpanel/killproc.conf

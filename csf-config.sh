@@ -26,6 +26,9 @@
 /bin/sed -i "s/LF_NETBLOCK_ALERT\s*=.*/LF_NETBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
 /bin/sed -i "s/LF_PERMBLOCK_ALERT\s*=.*/LF_PERMBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
 
+#LF_EMAIL_ALERT
+#LF_TEMP_EMAIL_ALERT
+
 # Disable all alerts
 # /bin/sed -i "s/LF_EMAIL_ALERT\s*=.*/LF_EMAIL_ALERT = \"0\"/g" /etc/csf/csf.conf
 
@@ -40,3 +43,5 @@ fi
 systemctl restart csf.service
 csf -r
 
+/bin/systemctl stop rpcbind
+/bin/systemctl disable rpcbind

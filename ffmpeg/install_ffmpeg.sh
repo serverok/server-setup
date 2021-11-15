@@ -295,14 +295,6 @@ fi
 # https://github.com/gpac/gpac/releases
 # /usr/bin/MP4Box
 
-cd /usr/local/src/
-wget https://github.com/gpac/gpac/archive/v0.8.0.tar.gz
-tar xf v0.8.0.tar.gz
-cd /usr/local/src/gpac-0.8.0
-./configure --prefix=/usr
-make
-make install
-
 cd /usr/local/src
 wget https://github.com/gpac/gpac/archive/v1.0.1.tar.gz -O gpac.tar.gz
 tar vxf gpac.tar.gz
@@ -310,6 +302,11 @@ cd gpac-1.0.1
 ./configure --prefix=/usr
 make
 make install
+
+if [ $? -ne 0 ]; then
+    echo "gpac failed to install"
+    exit 1
+fi
 
 
 # https://mediaarea.net/en/MediaInfo/Download/Source
@@ -323,6 +320,12 @@ cd /usr/local/src/MediaInfo_CLI_GNU_FromSource
 cd /usr/local/src/MediaInfo_CLI_GNU_FromSource/MediaInfo/Project/GNU/CLI
 make install
 
+if [ $? -ne 0 ]; then
+    echo "mediainfo failed to install"
+    exit 1
+fi
+
+
 # http://sourceforge.net/projects/libdc1394/files/?source=navbar
 # 2019-12-11
 
@@ -334,6 +337,12 @@ make clean && make distclean
 ./configure
 make
 make install
+
+if [ $? -ne 0 ]; then
+    echo "libdc1394 failed to install"
+    exit 1
+fi
+
 
 cd /usr/local/src/
 wget -c http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2
@@ -352,20 +361,18 @@ ldconfig
 # http://www.mplayerhq.hu/design7/dload.html
 # Updated on 2017-08-09
 
-cd /usr/local/src/
-wget http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
-tar xvf MPlayer-1.4.tar.xz
-cd /usr/local/src/MPlayer-1.4
-echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
-make
-make install
-
 cd /usr/local/src
 wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2
 tar xvf mplayer-checkout-snapshot.tar.bz2
 cd mplayer-checkout-2018-10-23
 echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
 make && make install
+
+if [ $? -ne 0 ]; then
+    echo "mplayer failed to install"
+    exit 1
+fi
+
 
 # https://www.webmproject.org/code/
 # https://github.com/webmproject/libvpx/releases
@@ -380,6 +387,11 @@ make clean && make distclean
 make
 make install
 
+if [ $? -ne 0 ]; then
+    echo "libvpx failed to install"
+    exit 1
+fi
+
 
 # https://github.com/FFmpeg/FFmpeg/releases
 # Updated on 2016-10-13
@@ -390,28 +402,21 @@ pkg-config --exists --print-errors vorbis
 export PKG_CONFIG_PATH="/usr/lib/pkgconfig"
 
 cd /usr/local/src/
-wget https://github.com/FFmpeg/FFmpeg/archive/n3.3.5.tar.gz
-tar zxf n3.3.5.tar.gz
-cd /usr/local/src/FFmpeg-n3.3.5/
+wget https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.xz
+tar xvf ffmpeg-4.3.2.tar.xz 
+cd ffmpeg-4.3.2
 make clean && make distclean
 ./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
 make && make install && ldconfig
 
-cd /usr/local/src/FFmpeg-n3.3.5/
+if [ $? -ne 0 ]; then
+    echo "gpac failed to install"
+    exit 1
+fi
+
+cd /usr/local/src/ffmpeg-4.3.2/
 make tools/qt-faststart
 cp -a tools/qt-faststart /usr/bin/
 
 ldconfig
 
-wget https://github.com/FFmpeg/FFmpeg/archive/n4.0.2.tar.gz
-tar xvf n4.0.2.tar.gz
-cd /usr/local/src/FFmpeg-n4.0.2
-
-./configure --prefix=/usr --enable-shared --enable-libxvid --enable-libvorbis --enable-libtheora --enable-libmp3lame --enable-gpl --enable-libfdk-aac --enable-nonfree --enable-libx264 --enable-libfreetype
-
-make
-make install
-ldconfig
-
-git clone  https://github.com/FFmpeg/FFmpeg
-cd FFmpeg
