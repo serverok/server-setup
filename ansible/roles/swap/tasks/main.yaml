@@ -12,9 +12,12 @@
     regexp="swapfile" 
     line="/swapfile swap swap defaults 0 0" 
     state=present
+  when: ansible_swaptotal_mb < 1
 
 - name: Turn swap on
   command: swapon -a
+  when: ansible_swaptotal_mb < 1
 
 - name: Set swapiness
   shell: echo 0 | sudo tee /proc/sys/vm/swappiness
+  when: ansible_swaptotal_mb < 1

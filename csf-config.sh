@@ -25,6 +25,11 @@
 /bin/sed -i "s/PT_USERMEM\s*=.*/PT_USERMEM = \"1024\"/g" /etc/csf/csf.conf
 /bin/sed -i "s/LF_NETBLOCK_ALERT\s*=.*/LF_NETBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
 /bin/sed -i "s/LF_PERMBLOCK_ALERT\s*=.*/LF_PERMBLOCK_ALERT = \"0\"/g" /etc/csf/csf.conf
+/bin/sed -i "s/PS_EMAIL_ALERT\s*=.*/PS_EMAIL_ALERT = \"0\"/g" /etc/csf/csf.conf
+
+
+
+# custoemer keep getting IP blocked mails, so i set LF_TEMP_EMAIL_ALERT = 0
 
 #LF_EMAIL_ALERT
 #LF_TEMP_EMAIL_ALERT

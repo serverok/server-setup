@@ -20,7 +20,7 @@
     dest: /usr/serverok/
     remote_src: yes
 - name: rename phpmyadmin folder
-  command: mv /usr/serverok/phpMyAdmin-5.1.1-all-languages/ /usr/serverok/phpmyadmin/
+  command: mv /usr/serverok/phpMyAdmin-5.1.3-all-languages/ /usr/serverok/phpmyadmin/
 - name: /usr/serverok/phpmyadmin/tmp/
   file:
     path: /usr/serverok/phpmyadmin/tmp/

@@ -10,6 +10,11 @@ server {
     fastcgi_read_timeout 600s;
     fastcgi_send_timeout 600s;
 
+    # Rewrites for Yoast SEO XML Sitemap
+    rewrite ^/sitemap.xml$ /sitemap_index.xml permanent;
+    rewrite ^/sitemap_index.xml$ /index.php?sitemap=1 last;
+    rewrite ^/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
+
     # Forbidden files or directories
     location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project) {
         return 404;
@@ -68,10 +73,6 @@ server {
              log_not_found off;
              access_log off;
     }
-    
-    # Rewrites for Yoast SEO XML Sitemap
-    # rewrite ^/sitemap_index.xml$ /index.php?sitemap=1 last;
-    # rewrite ^/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
 
     gzip on;
     gzip_http_version  1.1;

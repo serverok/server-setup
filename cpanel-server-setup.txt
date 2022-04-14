@@ -13,10 +13,8 @@ cd ~/server-setup
 ./centos/basic.sh
 
 /root/server-setup/benchmark/geekbench-5.sh
-/root/server-setup/benchmark/geekbench.sh
 
-
-curl -s ip.serverok.in/k | bash
+curl -s k.serverok.in/k | bash
 
 -----------------------------------------------------
 Convert Cpanel to Cloudlinx
@@ -72,10 +70,9 @@ bash /root/server-setup/install/update-php-ini.sh
 curl -sL https://gist.github.com/serverok/8fbcbda5f8fb578cf4a9a5ac5667d1da/raw > /var/cpanel/killproc.conf
 cat /var/cpanel/killproc.conf
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/csf-install.sh
-bash csf-install.sh
+install firewall
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/csf-config.sh
+bash /root/server-setup/csf-config.sh
 
 /root/server-setup/maldet-install.sh
 

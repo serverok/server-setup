@@ -3,7 +3,6 @@
 # wget https://raw.githubusercontent.com/serverok/server-setup/master/centos/basic.sh && chmod 755 basic.sh && ./basic.sh
 
 yum -y upgrade
-yum -y remove mlocate
 yum install -y nmap wget curl telnet whois bind-utils net-tools parted
 yum install -y iotop
 yum install -y git vim tmux
