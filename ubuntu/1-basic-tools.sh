@@ -2,6 +2,8 @@
 # Author: admin@serverOk.in
 # Web: https://www.serverok.in
 
+export DEBIAN_FRONTEND=noninteractive
+
 apt update
 apt upgrade -y 
 apt install -y procps wget curl nmap whois vim git unzip telnet tmux
@@ -14,6 +16,7 @@ apt autoremove -y
 apt-get install -y sysstat
 sed -i 's/ENABLED="false"/ENABLED="true"/g' /etc/default/sysstat
 
+systemctl status apparmor
 systemctl stop apparmor
 systemctl disable apparmor
 

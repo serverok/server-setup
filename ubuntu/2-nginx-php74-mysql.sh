@@ -2,6 +2,8 @@
 # Author: admin@serverOk.in
 # Web: https://serverok.in
 
+export DEBIAN_FRONTEND=noninteractive
+
 apt install -y software-properties-common
 
 add-apt-repository ppa:ondrej/php
