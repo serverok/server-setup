@@ -85,17 +85,13 @@ PW = SFTP_PASSWORD
 MySQL
 
 DB = USERNAME_db
-User = admin
+User = USERNAME_db
 PW = MYSQL_PASSWORD
 
 phpMyAdmin
 
 http://SERVER_IP_HERE:7777
 
-User = admin
+User = USERNAME_db
 PW = MYSQL_PASSWORD
-
-You can access web site using the IP now.
-
-http://SERVER_IP_HERE/
 

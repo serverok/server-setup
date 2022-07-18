@@ -30,9 +30,6 @@ bash ./letsencrypt.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/swap.sh
 bash swap.sh
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench.sh
-bash ./geekbench.sh
-
 wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench-5.sh
 bash ./geekbench-5.sh
 
