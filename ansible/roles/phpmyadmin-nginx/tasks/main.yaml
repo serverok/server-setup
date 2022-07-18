@@ -8,19 +8,19 @@
     state: absent
 - name: dlete phpmyadmin old source
   file:
-    path: /usr/local/src/phpMyAdmin-latest-all-languages.tar.gz
+    path: /usr/local/src/phpMyAdmin-sok.tar.gz
     state: absent
 - name: download phpmyadmin
   get_url:
-    url: https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
-    dest: /usr/local/src/phpMyAdmin-latest-all-languages.tar.gz
+    url: https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.tar.gz
+    dest: /usr/local/src/phpMyAdmin-sok.tar.gz
 - name: extract phpmyadmin
   unarchive:
-    src: /usr/local/src/phpMyAdmin-latest-all-languages.tar.gz
+    src: /usr/local/src/phpMyAdmin-sok.tar.gz
     dest: /usr/serverok/
     remote_src: yes
 - name: rename phpmyadmin folder
-  command: mv /usr/serverok/phpMyAdmin-5.1.3-all-languages/ /usr/serverok/phpmyadmin/
+  command: mv /usr/serverok/phpMyAdmin-5.2.0-all-languages/ /usr/serverok/phpmyadmin/
 - name: /usr/serverok/phpmyadmin/tmp/
   file:
     path: /usr/serverok/phpmyadmin/tmp/
