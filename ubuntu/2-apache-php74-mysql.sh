@@ -1,6 +1,8 @@
 #!/bin/bash
-# Author: admin@serverOk.in
-# Web: https://www.serverok.in
+# Author: admin@serverok.in
+# Web: https://serverok.in
+
+export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install apache2
 apt -y install libapache2-mod-ruid2

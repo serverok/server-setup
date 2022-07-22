@@ -37,5 +37,3 @@ GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;
 
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/add-site.py -O /usr/local/bin/sok-site-add
-chmod 755 /usr/local/bin/sok-site-add
