@@ -9,6 +9,9 @@ tar xvf lego_v4.4.0_linux_amd64.tar.gz
 mv lego /usr/bin
 rm -f lego_v4.4.0_linux_amd64.tar.gz CHANGELOG.md LICENSE
 
+mkdir -p /etc/lego/certificates/
+chmod -R 755 /etc/lego/
+
 crontab -l > /root/crontab-backup
 echo "@weekly /usr/serverok/lego-renew >> /var/log/lego-renew.log" >> /root/crontab-backup
 crontab /root/crontab-backup

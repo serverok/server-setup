@@ -9,6 +9,10 @@ bash ./2-apache-php56-mysql.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-apache-php73-mysql.sh
 bash ./2-apache-php73-mysql.sh
 
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-apache-php74-mysql.sh
+bash ./2-apache-php74-mysql.sh
+
+
 sed -i 's/php7.3/php7.1/g' 2-apache-php73-mysql.sh
 
 
@@ -26,6 +30,9 @@ bash ./update-php-ini.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/letsencrypt.sh
 bash ./letsencrypt.sh
+
+wget https:/raw.githubusercontent.com/serverok/server-setup/master/install/lego.sh
+bash ./lego.sh
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/swap.sh
 bash swap.sh
