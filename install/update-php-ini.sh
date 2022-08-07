@@ -66,6 +66,13 @@ if [ -f /etc/php/8.0/fpm/php.ini ]; then
     systemctl restart php8.0-fpm
 fi
 
+if [ -f /etc/php/8.1/fpm/php.ini ]; then
+    echo "Found PHP 8.0 php-fpm"
+    cd /etc/php/8.1/fpm
+    update_php_ini
+    systemctl restart php8.1-fpm
+fi
+
 if [ -f /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini ]; then
     echo "OpenLiteSpeed lsphp73"
     cd /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/
@@ -81,6 +88,7 @@ PHP_INI_APACHE_PATHS=(
 /etc/php/7.3/apache2/php.ini
 /etc/php/7.4/apache2/php.ini
 /etc/php/8.0/apache2/php.ini
+/etc/php/8.1/apache2/php.ini
 )
 
 for php_ini_path in ${PHP_INI_APACHE_PATHS[@]}; do
@@ -102,6 +110,8 @@ PHP_INI_PATHS=(
 /opt/cpanel/ea-php72/root/etc/php.ini
 /opt/cpanel/ea-php73/root/etc/php.ini
 /opt/cpanel/ea-php74/root/etc/php.ini
+/opt/cpanel/ea-php80/root/etc/php.ini
+/opt/cpanel/ea-php81/root/etc/php.ini
 /opt/alt/php44/etc/php.ini
 /opt/alt/php51/etc/php.ini
 /opt/alt/php52/etc/php.ini
@@ -115,6 +125,7 @@ PHP_INI_PATHS=(
 /opt/alt/php73/etc/php.ini
 /opt/alt/php74/etc/php.ini
 /opt/alt/php80/etc/php.ini
+/opt/alt/php81/etc/php.ini
 )
 
 for php_ini_path in ${PHP_INI_PATHS[@]}; do
