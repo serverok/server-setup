@@ -11,7 +11,7 @@ apt install -y net-tools
 apt install -y software-properties-common
 apt purge -y mlocate
 apt remove -y vim-tiny nano ed --purge
-apt autoremove -y
+apt autoremove  --purge -y
 
 apt-get install -y sysstat
 sed -i 's/ENABLED="false"/ENABLED="true"/g' /etc/default/sysstat

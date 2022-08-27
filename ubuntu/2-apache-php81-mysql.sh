@@ -1,12 +1,10 @@
 #!/bin/bash
-# Author: admin@serverok.in
+# Author: admin@serverOk.in
 # Web: https://serverok.in
-
-export DEBIAN_FRONTEND=noninteractive
 
 apt-get -y install apache2
 apt -y install libapache2-mod-ruid2
-systemctl enable apache2
+update-rc.d apache2 enable
 a2enmod rewrite
 a2enmod ssl
 a2enmod headers
@@ -19,20 +17,19 @@ add-apt-repository ppa:ondrej/php
 apt update
 apt -y upgrade
 
-apt install -y php7.4
+apt install php8.1
 
-apt install -y php7.4-bcmath php7.4-bz2 php7.4-cgi php7.4-cli php7.4-common php7.4-curl php7.4-dba php7.4-dev php7.4-enchant php7.4-gd php7.4-gmp php7.4-imap php7.4-intl php7.4-json php7.4-mbstring php7.4-mysql php7.4-opcache php7.4-pgsql php7.4-pspell php7.4-readline php7.4-soap php7.4-sqlite3 php7.4-sybase php7.4-tidy php7.4-xml php7.4-xmlrpc php7.4-zip php7.4-xsl php7.4-gmp php7.4-imagick
+apt install -y php8.1-bcmath php8.1-bz2 php8.1-cgi php8.1-cli php8.1-common php8.1-curl php8.1-dba php8.1-dev php8.1-enchant php8.1-gd php8.1-gmp php8.1-imap php8.1-intl php8.1-mbstring php8.1-mysql php8.1-opcache php8.1-pgsql php8.1-pspell php8.1-readline php8.1-soap php8.1-sqlite3 php8.1-sybase php8.1-tidy php8.1-xml php8.1-xmlrpc php8.1-zip php8.1-xsl php8.1-gmp
 
-apt install -y libapache2-mod-php7.4
+apt install -y libapache2-mod-php8.1
 
-
-a2enmod php7.4
+a2dismod php7.4
+a2enmod php8.1
 
 service apache2 restart
 
 apt-get -y install mariadb-client mariadb-server
-systemctl enable mariadb
-
+update-rc.d mysql enable
 apt install automysqlbackup -y
 
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
@@ -40,8 +37,8 @@ echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-sel
 
 apt-get install -y postfix
 
-systemctl enable apache2
-systemctl restart apache2
+service apache2 stop
+service apache2 start
 
 apt install -y monit
 ln -s /etc/monit/conf-available/apache2 /etc/monit/conf-enabled/
