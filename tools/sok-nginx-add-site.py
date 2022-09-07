@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Author: ServerOK Software
+# Author: ServerOK
 # Web: https://serverok.in
 # Mail: admin@serverok.in
 # Create web site in Nginx.
@@ -12,6 +12,14 @@ import os
 import crypt
 import requests
 import argparse
+
+def verify_php_version(php_version):
+    php_socket = "/var/run/php/php" + php_version + "-fpm.sock"
+    if not os.path.exists(php_socket):
+        print(f"ERROR: PHP version {php_version} not found. Missing socket {php_socket}")
+        sys.exit(1)
+    else:
+        return True
 
 def update_password(password, char):
     replace_index = random.randrange(len(password)-1)
@@ -82,11 +90,11 @@ def get_url_content(url):
     f = requests.get(url)
     return f.text
 
-def create_phpfpm_config(username):
+def create_phpfpm_config(username, php_version):
     content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/nginx/php-fpm-pool.txt")
     content = content.replace("POOL_NAME", username)
     content = content.replace("FPM_USER", username)
-    file_location = "/etc/php/7.4/fpm/pool.d/" + username + ".conf"
+    file_location = "/etc/php/" + php_version + "/fpm/pool.d/" + username + ".conf"
     fpm_file = open(file_location,'w')
     fpm_file.write(content)
     fpm_file.close()
@@ -117,11 +125,11 @@ parser = argparse.ArgumentParser(description=text)
 parser.add_argument("-d", "--domain", help="domain name for your web site")
 parser.add_argument("-u", "--user", help="user name for your web site")
 parser.add_argument("-p", "--password", help="sftp password for site")
+parser.add_argument("-P", "--php", help="select PHP version")
 
 args = parser.parse_args()
 
 if args.domain:
-    print("domain = %s" % args.domain)
     domain_name = args.domain.strip()
 else:
     domain_name = input("Enter domain name: ")
@@ -130,25 +138,35 @@ else:
 if args.user:
     username = args.user
 else:
-    username = generate_username(domain_name)
-
-print("user = %s" % username)
+    print(f"ERROR: Please specify username with -u option.")
+    sys.exit(1)
 
 if args.password:
     password = args.password
 else:
     password = generate_password()
 
+if args.php:
+    php_version = args.php
+else:
+    print(f"ERROR: Please specify PHP version with --php option.")
+    sys.exit(1)
+
+verify_php_version(php_version)
 verify_username(username)
 verify_domain(domain_name)
 verify_password(password)
+
+if linux_user_exists(username):
+    print(f"ERROR: User {username} already exists!")
+    sys.exit(1)
 
 password_mysql = generate_password()
 ip_address = find_ip()
 
 linux_add_user(domain_name, username, password)
 
-create_phpfpm_config(username)
+create_phpfpm_config(username, php_version)
 create_nginx_config(domain_name, username)
 
 doc_root = "/home/" + domain_name + "/html/"
@@ -159,7 +177,7 @@ os.system("chmod -R 755 /home/" + domain_name)
 os.system("openssl genrsa -out /etc/ssl/" + domain_name + ".key 2048")
 os.system("openssl req -new -x509 -key /etc/ssl/{}.key -out /etc/ssl/{}.crt -days 3650 -subj /CN={}".format(domain_name, domain_name, domain_name))
 
-os.system("systemctl restart php7.4-fpm")
+os.system("systemctl restart php" + php_version + "-fpm")
 os.system("systemctl restart nginx")
 
 
