@@ -62,6 +62,17 @@ elif [ "$OS" == "Ubuntu" ]; then
         apt-get install -y python3-certbot-nginx 
     fi
 
+elif [ "$OS" == "AlmaLinux" ]; then
+    echo "Installing LetsEncrypt for AlmaLinux"
+    dnf install -y certbot
+    if [ -f /usr/sbin/httpd ]; then
+        echo "Installing Apache module for certbot"
+        dnf install -y python3-certbot-apache
+    fi
+    if [ -f /usr/sbin/nginx ]; then
+        echo "Installing Nginx module for certbot"
+        dnf install -y python3-certbot-nginx
+    fi
 else
     cd /usr/bin
     wget https://dl.eff.org/certbot-auto
