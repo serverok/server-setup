@@ -67,10 +67,17 @@ if [ -f /etc/php/8.0/fpm/php.ini ]; then
 fi
 
 if [ -f /etc/php/8.1/fpm/php.ini ]; then
-    echo "Found PHP 8.0 php-fpm"
+    echo "Found PHP 8.1 php-fpm"
     cd /etc/php/8.1/fpm
     update_php_ini
     systemctl restart php8.1-fpm
+fi
+
+if [ -f /etc/php/8.2/fpm/php.ini ]; then
+    echo "Found PHP 8.2 php-fpm"
+    cd /etc/php/8.2/fpm
+    update_php_ini
+    systemctl restart php8.2-fpm
 fi
 
 if [ -f /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini ]; then

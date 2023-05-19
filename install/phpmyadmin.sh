@@ -1,24 +1,24 @@
 # https://www.phpmyadmin.net/
 
-
-mkdir /usr/serverok
+mkdir /usr/serverok/
 rm -rf /usr/serverok/phpmyadmin
 
 cd /usr/local/src
 rm -f phpMyAdmin-latest-all-languages.tar.gz
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 tar xvf phpMyAdmin-latest-all-languages.tar.gz
-mv phpMyAdmin-5.1.1-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-5.2.1-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
 tar xvf phpMyAdmin-4.9.7-all-languages.tar.gz
 mv phpMyAdmin-4.9.7-all-languages /usr/serverok/phpmyadmin
 
-mkdir /usr/serverok/phpmyadmin/tmp/
-chmod 777 /usr/serverok/phpmyadmin/tmp/
-cp /usr/serverok/phpmyadmin/config.sample.inc.php /usr/serverok/phpmyadmin/config.inc.php
-sed -i  's/$cfg\[.blowfish_secret.\] = .*$/$cfg\["blowfish_secret"\] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";/g' /usr/serverok/phpmyadmin/config.inc.php
+cd /usr/serverok/phpmyadmin/
+mkdir tmp
+chmod 777 tmp
+cp config.sample.inc.php config.inc.php
+sed -i  's/$cfg\[.blowfish_secret.\] = .*$/$cfg\["blowfish_secret"\] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";/g' config.inc.php
 
 vi /etc/httpd/conf.d/phpmyadmin.conf
 vi /etc/apache2/conf-enabled/phpmyadmin.conf
@@ -41,6 +41,8 @@ Alias /phpmyadmin "/usr/serverok/phpmyadmin"
 
 systemctl restart apache2
 service httpd restart
+
+chcon -R -t httpd_sys_rw_content_t /usr/serverok/phpmyadmin/tmp/
 
 
 https://gist.github.com/serverok/9627c6fcb39d4ba11c4a109222ec36b1
@@ -188,8 +190,9 @@ GRANT ALL PRIVILEGES ON DB_NAME.* to 'USERNAME'@'localhost' IDENTIFIED BY 'MYSQL
 
 MySQL 8
 
-CREATE USER 'USERNAME-HERE'@'localhost' IDENTIFIED BY 'PASSWORD_HERE';
-GRANT ALL PRIVILEGES ON DB_NAME_HERE.* TO 'USERNAME-HERE'@'localhost';
+CREATE DATABASE DB_NAME;
+CREATE USER 'USERNAME'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD';
+GRANT ALL PRIVILEGES ON DB_NAME.* TO 'USERNAME'@'localhost';
 FLUSH PRIVILEGES;
 
 
@@ -238,4 +241,3 @@ UPDATE mysql.user SET Plugin='' WHERE user='root';
 UPDATE mysql.user SET Plugin='auth_socket' WHERE user='root';
 UPDATE mysql.user SET Plugin='caching_sha2_password' WHERE user='root';
 UPDATE mysql.user SET Plugin='mysql_native_password' WHERE user='root';
-

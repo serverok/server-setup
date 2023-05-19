@@ -11,7 +11,26 @@
     validate_certs: no
     repo: 'ppa:ondrej/php'
     state: present
-- name: inatall php
+- name: inatall PHP 7.4
+  apt:
+    pkg:
+    - php7.4-bcmath
+    - php7.4-cli
+    - php7.4-common
+    - php7.4-curl
+    - php7.4-gd
+    - php7.4-imap
+    - php7.4-intl
+    - php7.4-mbstring
+    - php7.4-mysql
+    - php7.4-readline
+    - php7.4-soap
+    - php7.4-xml
+    - php7.4-xmlrpc
+    - php7.4-zip
+    - php7.4-imagick
+    - php7.4-fpm
+- name: inatall PHP 8.1
   apt:
     pkg:
     - php8.1-bcmath
@@ -35,6 +54,25 @@
   apt:
     name: php8.1-fpm
     state: latest
+- name: inatall PHP 8.2
+  apt:
+    pkg:
+    - php8.2-bcmath
+    - php8.2-cli
+    - php8.2-common
+    - php8.2-curl
+    - php8.2-gd
+    - php8.2-imap
+    - php8.2-intl
+    - php8.2-mbstring
+    - php8.2-mysql
+    - php8.2-readline
+    - php8.2-soap
+    - php8.2-xml
+    - php8.2-xmlrpc
+    - php8.2-zip
+    - php8.2-imagick
+    - php8.2-fpm
 - name: install MariaDB
   apt:
     pkg:

@@ -27,7 +27,7 @@ apt install -y libapache2-mod-php8.0
 a2dismod php7.4
 a2enmod php8.0
 
-service apache2 restart
+systemctl restart apache2
 
 apt-get -y install mariadb-client mariadb-server
 update-rc.d mysql enable

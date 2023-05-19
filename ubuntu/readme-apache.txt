@@ -95,3 +95,12 @@ http://SERVER_IP_HERE:7777
 User = USERNAME_db
 PW = MYSQL_PASSWORD
 
+
+
+SSLEngine on
+SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+SSLCipherSuite "EECDH+ECDSA+AESGCM EECDH+aRSA+AESGCM EECDH+ECDSA+SHA384 EECDH+ECDSA+SHA256 EECDH+aRSA+SHA384 EECDH+aRSA+SHA256 EECDH+aRSA+RC4 EECDH EDH+aRSA RC4 !aNULL !eNULL !LOW !3DES !MD5 !EXP !PSK !SRP !DSS"
+SSLCertificateFile /etc/ssl/DOMAIN.crt
+SSLCertificateKeyFile /etc/ssl/DOMAIN.key
+SSLCACertificateFile /etc/ssl/DOMAIN.ca
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"

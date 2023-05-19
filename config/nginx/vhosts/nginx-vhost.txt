@@ -16,7 +16,7 @@ server {
     rewrite ^/([^/]+?)-sitemap([0-9]+)?.xml$ /index.php?sitemap=$1&sitemap_n=$2 last;
 
     # Forbidden files or directories
-    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project) {
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|\.env) {
         return 404;
     }
 

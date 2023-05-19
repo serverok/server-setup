@@ -20,6 +20,7 @@ mv wp-cli.phar /usr/local/bin/wp
 chmod 755 /usr/local/bin/wp
 
 wp core download
+wp core download --locale=pt_BR
 wp core config --dbname=wordpress_db --dbuser=wordpress_db --dbpass=DB_PASSWORD_HERE
 wp core install --url=http://YOURDOMAIN.COM --title='My Site' --admin_user=admin --admin_email=admin@YOURDOMAIN.COM --admin_password=password
 
