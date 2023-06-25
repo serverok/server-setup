@@ -12,7 +12,7 @@
     state: absent
 - name: download phpmyadmin
   get_url:
-    url: https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.tar.gz
+    url: https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.tar.gz
     dest: /usr/local/src/phpMyAdmin-sok.tar.gz
 - name: extract phpmyadmin
   unarchive:
@@ -20,7 +20,7 @@
     dest: /usr/serverok/
     remote_src: yes
 - name: rename phpmyadmin folder
-  command: mv /usr/serverok/phpMyAdmin-5.2.0-all-languages/ /usr/serverok/phpmyadmin/
+  command: mv /usr/serverok/phpMyAdmin-5.2.1-all-languages/ /usr/serverok/phpmyadmin/
 - name: /usr/serverok/phpmyadmin/tmp/
   file:
     path: /usr/serverok/phpmyadmin/tmp/
