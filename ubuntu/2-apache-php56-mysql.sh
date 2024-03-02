@@ -4,7 +4,7 @@
 
 apt-get -y install apache2
 apt -y install libapache2-mod-ruid2
-update-rc.d apache2 enable
+systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
 
@@ -20,7 +20,7 @@ a2dismod php7.4
 a2enmod php5.6
 
 apt-get -y install mariadb-client mariadb-server
-update-rc.d mysql enable
+systemctl enable mysql
 
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
 echo "postfix postfix/main_mailer_type string 'Internet Site'" | debconf-set-selections

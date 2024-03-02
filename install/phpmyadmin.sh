@@ -127,7 +127,7 @@ server {
         fastcgi_intercept_errors on;
         fastcgi_buffers 16 16k;
         fastcgi_buffer_size 32k;
-        fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
     }
 }
 

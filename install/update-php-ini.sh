@@ -5,7 +5,7 @@
 function update_php_ini() {
     sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini
     sed -i "s/max_input_time\s*=.*/max_input_time = 6000/g" php.ini
-    sed -i "s/memory_limit\s*=.*/memory_limit = 256M/g" php.ini
+    sed -i "s/memory_limit\s*=.*/memory_limit = 512M/g" php.ini
     sed -i "s/display_errors\s*=.*/display_errors = On/g" php.ini
     sed -i "s/file_uploads\s*=.*/file_uploads = On/g" php.ini
     sed -i "s/post_max_size\s*=.*/post_max_size = 4000M/g" php.ini
@@ -17,68 +17,16 @@ function update_php_ini() {
     sed -i "s/^enable_dl = On/enable_dl = Off/g" php.ini
 }
 
-if [ -f /etc/php/5.6/fpm/php.ini ]; then
-    echo "Found PHP 5.6 php-fpm"
-    cd /etc/php/5.6/fpm
-    update_php_ini
-    systemctl restart php5.6-fpm
-fi
+php_versions=(5.6 7.0 7.1 7.2 7.3 7.4 8.0 8.1 8.2 8.3 8.4)
 
-if [ -f /etc/php/7.0/fpm/php.ini ]; then
-    echo "Found PHP 7.0 php-fpm"
-    cd /etc/php/7.0/fpm
+for version in "${php_versions[@]}"; do
+  if [ -f "/etc/php/${version}/fpm/php.ini" ]; then
+    echo "Found PHP ${version} php-fpm"
+    cd "/etc/php/${version}/fpm"
     update_php_ini
-    systemctl restart php7.0-fpm
-fi
-
-if [ -f /etc/php/7.1/fpm/php.ini ]; then
-    echo "Found PHP 7.1 php-fpm"
-    cd /etc/php/7.1/fpm
-    update_php_ini
-    systemctl restart php7.1-fpm
-fi
-
-if [ -f /etc/php/7.2/fpm/php.ini ]; then
-    echo "Found PHP 7.2 php-fpm"
-    cd /etc/php/7.2/fpm
-    update_php_ini
-    systemctl restart php7.2-fpm
-fi
-
-if [ -f /etc/php/7.3/fpm/php.ini ]; then
-    echo "Found PHP 7.3 php-fpm"
-    cd /etc/php/7.3/fpm
-    update_php_ini
-    systemctl restart php7.3-fpm
-fi
-
-if [ -f /etc/php/7.4/fpm/php.ini ]; then
-    echo "Found PHP 7.4 php-fpm"
-    cd /etc/php/7.4/fpm
-    update_php_ini
-    systemctl restart php7.4-fpm
-fi
-
-if [ -f /etc/php/8.0/fpm/php.ini ]; then
-    echo "Found PHP 8.0 php-fpm"
-    cd /etc/php/8.0/fpm
-    update_php_ini
-    systemctl restart php8.0-fpm
-fi
-
-if [ -f /etc/php/8.1/fpm/php.ini ]; then
-    echo "Found PHP 8.1 php-fpm"
-    cd /etc/php/8.1/fpm
-    update_php_ini
-    systemctl restart php8.1-fpm
-fi
-
-if [ -f /etc/php/8.2/fpm/php.ini ]; then
-    echo "Found PHP 8.2 php-fpm"
-    cd /etc/php/8.2/fpm
-    update_php_ini
-    systemctl restart php8.2-fpm
-fi
+    systemctl restart "php${version}-fpm"
+  fi
+done
 
 if [ -f /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini ]; then
     echo "OpenLiteSpeed lsphp73"
@@ -96,6 +44,9 @@ PHP_INI_APACHE_PATHS=(
 /etc/php/7.4/apache2/php.ini
 /etc/php/8.0/apache2/php.ini
 /etc/php/8.1/apache2/php.ini
+/etc/php/8.2/apache2/php.ini
+/etc/php/8.3/apache2/php.ini
+/etc/php/8.4/apache2/php.ini
 )
 
 for php_ini_path in ${PHP_INI_APACHE_PATHS[@]}; do

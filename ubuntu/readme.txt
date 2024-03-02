@@ -43,8 +43,8 @@ bash ./lego.sh
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/swap.sh
 bash swap.sh
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench-5.sh
-bash ./geekbench-5.sh
+wget https://raw.githubusercontent.com/serverok/server-setup/master/benchmark/geekbench-6.sh
+bash ./geekbench-6.sh
 
 wget -qO- https://get.docker.com/ | sh
 sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose

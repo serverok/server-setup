@@ -99,8 +99,11 @@ def create_phpfpm_config(username, php_version):
     fpm_file.write(content)
     fpm_file.close()
 
-def create_nginx_config(domain_name, username):
-    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/nginx/vhosts/nginx-vhost-ssl.txt")
+def create_nginx_config(domain_name, username, app_type):
+    if app_type == "laravel":
+        content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/nginx/vhosts/nginx-laravel-vhost-ssl.txt")
+    else:
+        content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/nginx/vhosts/nginx-vhost-ssl.txt")
     content = content.replace("POOL_NAME", username)
     content = content.replace("FQDN", domain_name)
     file_location = "/etc/nginx/sites-enabled/" + domain_name + ".conf"
@@ -119,13 +122,14 @@ def find_ip():
         sys.exit(1)
 
 
-text = 'This is a test program. It demonstrates how to use the argparse module with a program description.'
+text = 'ServerOK Nginx Manager.'
 
 parser = argparse.ArgumentParser(description=text)
 parser.add_argument("-d", "--domain", help="domain name for your web site")
 parser.add_argument("-u", "--user", help="user name for your web site")
 parser.add_argument("-p", "--password", help="sftp password for site")
-parser.add_argument("-P", "--php", help="select PHP version")
+parser.add_argument("--php", help="select PHP version. Example --php 8.3")
+parser.add_argument("--app", help="select App. Eg --app laravel")
 
 args = parser.parse_args()
 
@@ -152,6 +156,13 @@ else:
     print(f"ERROR: Please specify PHP version with --php option.")
     sys.exit(1)
 
+if args.app:
+    app_type = args.app.strip()
+    if app_type != "laravel":
+        app_type = "wp"
+else:
+    app_type = "wp"
+
 verify_php_version(php_version)
 verify_username(username)
 verify_domain(domain_name)
@@ -167,7 +178,7 @@ ip_address = find_ip()
 linux_add_user(domain_name, username, password)
 
 create_phpfpm_config(username, php_version)
-create_nginx_config(domain_name, username)
+create_nginx_config(domain_name, username, app_type)
 
 doc_root = "/home/" + domain_name + "/html/"
 os.system("mkdir " + doc_root)
@@ -176,6 +187,12 @@ os.system("chmod -R 755 /home/" + domain_name)
 os.system("chmod -R 755 /home/" + domain_name)
 os.system("openssl genrsa -out /etc/ssl/" + domain_name + ".key 2048")
 os.system("openssl req -new -x509 -key /etc/ssl/{}.key -out /etc/ssl/{}.crt -days 3650 -subj /CN={}".format(domain_name, domain_name, domain_name))
+
+if app_type == "laravel":
+    doc_root = "/home/" + domain_name + "/html/public/"
+    os.system("mkdir " + doc_root)
+    os.system("chown -R " + username + ":" + username + " " + doc_root)
+
 
 os.system("systemctl restart php" + php_version + "-fpm")
 os.system("systemctl restart nginx")
@@ -202,7 +219,7 @@ print("PW = {}".format(password_mysql))
 
 print("\n")
 
-print("certbot --authenticator webroot --webroot-path /home/" + domain_name + "/html/ --installer nginx -m admin@serverok.in --agree-tos --no-eff-email -d " + domain_name + " -d www." + domain_name)
+print("certbot --authenticator webroot --webroot-path " + doc_root + " --installer nginx -m admin@serverok.in --agree-tos --no-eff-email -d " + domain_name + " -d www." + domain_name)
 print("mysql")
 print("create database {}_db;".format(username))
 print("grant all on {}_db.* to '{}_db'@'localhost' identified by '{}';".format(username, username, password_mysql))

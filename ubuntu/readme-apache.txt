@@ -25,7 +25,7 @@ passwd USERNAME
 
 SFTP_PASSWORD
 
-vi /etc/apache2/sites-available/DOMAIN_NAME.conf
+vi /etc/apache2/sites-enabled/DOMAIN_NAME.conf
 
 <VirtualHost *:80>
     ServerName DOMAIN_NAME
@@ -53,7 +53,7 @@ vi /etc/apache2/sites-available/DOMAIN_NAME.conf
     </Directory>
 </VirtualHost>
 
-a2ensite DOMAIN_NAME
+
 
 mkdir /home/DOMAIN_NAME/html/
 echo "<?php phpinfo();" > /home/DOMAIN_NAME/html/index.php

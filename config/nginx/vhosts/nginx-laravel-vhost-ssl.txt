@@ -1,0 +1,61 @@
+server {
+    listen 80;
+    listen 443 ssl http2;
+    ssl_certificate /etc/ssl/FQDN.crt;
+    ssl_certificate_key /etc/ssl/FQDN.key;
+    server_name FQDN www.FQDN;
+    root /home/FQDN/html/public/;
+    index index.php;
+    access_log /var/log/nginx/FQDN.log;
+    error_log /var/log/nginx/FQDN-error.log;
+    client_max_body_size 1000M;
+    proxy_read_timeout 600s;
+    fastcgi_read_timeout 600s;
+    fastcgi_send_timeout 600s;
+
+    # Forbidden files or directories
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|\.env) {
+        return 404;
+    }
+
+    location / {
+            try_files $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_intercept_errors on;
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 256 16k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_temp_file_write_size 256k;
+        fastcgi_send_timeout 600;
+        fastcgi_read_timeout 600;
+        fastcgi_param HTTP_PROXY "";
+        fastcgi_pass unix:/run/php/php-fpm-POOL_NAME.sock;
+    }
+   
+    gzip on;
+    gzip_http_version  1.1;
+    gzip_comp_level    5;
+    gzip_min_length    256;
+    gzip_proxied       any;
+    gzip_vary          on;
+    gzip_types
+        application/atom+xml
+        application/javascript
+        application/x-javascript
+        application/json
+        application/rss+xml
+        application/vnd.ms-fontobject
+        application/x-font-ttf
+        application/x-web-app-manifest+json
+        application/xhtml+xml
+        application/xml
+        font/opentype
+        image/svg+xml
+        image/x-icon
+        text/css
+        text/plain
+        text/x-component;
+}
