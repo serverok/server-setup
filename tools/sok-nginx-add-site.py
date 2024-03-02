@@ -31,7 +31,7 @@ def generate_password():
     password_chars = "abcdefghjkmnpqrstuvwxyz234567890"
     my_password = ""
     have_number = False
-    for i in range(12):
+    for i in range(20):
         next_index = random.randrange(len(password_chars))
         if (i < 2):
             next_index = random.randrange(10)
@@ -40,7 +40,7 @@ def generate_password():
             my_char = password_chars[next_index].upper()
         else:
             my_char = password_chars[next_index]
-        if i == 12:
+        if i == 17:
             if not have_number:
                 my_char =  str(random.randrange(0,9))
         if my_char.isdigit():
