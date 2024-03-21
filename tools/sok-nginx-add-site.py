@@ -221,5 +221,6 @@ print("\n")
 
 print("certbot --authenticator webroot --webroot-path " + doc_root + " --installer nginx -m admin@serverok.in --agree-tos --no-eff-email -d " + domain_name + " -d www." + domain_name)
 print("mysql")
-print("create database {}_db;".format(username))
-print("grant all on {}_db.* to '{}_db'@'localhost' identified by '{}';".format(username, username, password_mysql))
+print("CREATE DATABASE {}_db;".format(username))
+print("CREATE USER '{}_db'@'localhost' IDENTIFIED BY '{}';".format(username, password_mysql))
+print("GRANT ALL PRIVILEGES ON {}_db.* TO '{}_db'@'localhost';".format(username, username))
