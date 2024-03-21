@@ -76,8 +76,8 @@
 - name: install MariaDB
   apt:
     pkg:
-    - mariadb-client
-    - mariadb-server
+    - mysql-client
+    - mysql-server
 - name: install automysqlbackup
   apt:
     name: automysqlbackup
