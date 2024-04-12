@@ -183,8 +183,8 @@ create_nginx_config(domain_name, username, app_type)
 doc_root = "/home/" + domain_name + "/html/"
 os.system("mkdir " + doc_root)
 os.system("chown -R " + username + ":" + username + " " + doc_root)
-os.system("chmod -R 755 /home/" + domain_name)
-os.system("chmod -R 755 /home/" + domain_name)
+os.system("chmod -R 750 /home/" + domain_name)
+os.system("usermod -aG " + username + " www-data")
 os.system("openssl genrsa -out /etc/ssl/" + domain_name + ".key 2048")
 os.system("openssl req -new -x509 -key /etc/ssl/{}.key -out /etc/ssl/{}.crt -days 3650 -subj /CN={}".format(domain_name, domain_name, domain_name))
 
@@ -193,10 +193,8 @@ if app_type == "laravel":
     os.system("mkdir " + doc_root)
     os.system("chown -R " + username + ":" + username + " " + doc_root)
 
-
 os.system("systemctl restart php" + php_version + "-fpm")
 os.system("systemctl restart nginx")
-
 
 print("SFTP " + domain_name + "\n")
 print("IP = {}".format(ip_address))
