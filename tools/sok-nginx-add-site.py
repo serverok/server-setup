@@ -112,7 +112,7 @@ def create_nginx_config(domain_name, username, app_type):
     fpm_file.close()
 
 def create_apache_config(domain_name, username, app_type):
-    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/apache2/vhost.conf")
+    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/apache/vhost.conf")
     content = content.replace("POOL_NAME", username)
     content = content.replace("FQDN", domain_name)
     file_location = "/etc/apache2/sites-enabled/" + domain_name + ".conf"
