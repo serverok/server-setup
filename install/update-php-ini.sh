@@ -13,7 +13,7 @@ function update_php_ini() {
     sed -i "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" php.ini
     sed -i "s/error_reporting\s*=.*/error_reporting = E_COMPILE_ERROR|E_ERROR|E_CORE_ERROR/g" php.ini
     sed -i "s/max_file_uploads = On/max_file_uploads = 1000/g" php.ini
-    sed -i 's/;\s*max_input_vars = 1000/max_input_vars = 3000/g' php.ini
+    sed -i 's/;\s*max_input_vars =.*/max_input_vars = 6000/g' php.ini
     sed -i "s/^enable_dl = On/enable_dl = Off/g" php.ini
 }
 
