@@ -12,6 +12,7 @@ import os
 import crypt
 import requests
 import argparse
+import subprocess
 
 def verify_php_version(php_version):
     php_socket = "/var/run/php/php" + php_version + "-fpm.sock"
@@ -120,6 +121,24 @@ def create_apache_config(domain_name, username, app_type):
     fpm_file.write(content)
     fpm_file.close()
 
+def detect_server():
+    try:
+        output = subprocess.check_output(['ss', '-nltp'])
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing ss command: {e}")
+        sys.exit(1)
+
+    output_str = output.decode('utf-8')
+
+    if ('*:80' in output_str or '*:443' in output_str) and 'nginx' in output_str.lower():
+        server = "nginx"
+    elif ('*:80' in output_str or '*:443' in output_str) and 'apache' in output_str.lower():
+        server = "apache"
+    else:
+        print("Error: Neither Apache nor Nginx is listening on port 80 or 443.")
+        sys.exit(1)
+
+    return server
 
 def find_ip():
     r = requests.get("http://checkip.amazonaws.com")
@@ -140,7 +159,6 @@ parser.add_argument("-u", "--user", help="user name for your web site")
 parser.add_argument("-p", "--password", help="sftp password for site")
 parser.add_argument("--php", help="select PHP version. Example --php 8.3")
 parser.add_argument("--app", help="select App. Eg --app laravel")
-parser.add_argument("--server", help="select server (apache or nginx). Eg --server apache")
 
 args = parser.parse_args()
 
@@ -150,15 +168,8 @@ else:
     domain_name = input("Enter domain name: ")
     domain_name = domain_name.strip()
 
-if args.server:
-    server = args.server.strip()
-else:
-    server = 'nginx'
+server = detect_server()
 
-if server not in ["apache", "nginx"]:
-    print(f"Invalid server value: {server}. Expected 'apache' or 'nginx'.")
-    sys.exit(1)
-    
 if args.user:
     username = args.user
 else:
