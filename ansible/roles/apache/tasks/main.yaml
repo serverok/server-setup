@@ -1,0 +1,77 @@
+- name: apt update
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+- name: Install Apache
+  apt:
+    name: apache2
+    state: latest
+- name: Enable Apache Modules
+  command: a2enmod rewrite ssl headers proxy proxy_fcgi
+- name: add ppa
+  apt_repository:
+    validate_certs: no
+    repo: 'ppa:ondrej/php'
+    state: present
+- name: inatall PHP 8.3
+  apt:
+    pkg:
+    - php8.3-bcmath
+    - php8.3-cli
+    - php8.3-common
+    - php8.3-curl
+    - php8.3-gd
+    - php8.3-imap
+    - php8.3-intl
+    - php8.3-mbstring
+    - php8.3-mysql
+    - php8.3-readline
+    - php8.3-soap
+    - php8.3-xml
+    - php8.3-xmlrpc
+    - php8.3-zip
+    - php8.3-imagick
+    - php8.3-fpm
+- name: enable php-fpm
+  systemd:
+    name: php8.3-fpm
+    state: started
+    enabled: yes
+- name: install MySQL
+  apt:
+    pkg:
+    - mysql-client
+    - mysql-server
+- name: Enable MySQL
+  systemd:
+    name: mysql
+    state: started
+    enabled: yes
+- name: install automysqlbackup
+  apt:
+    name: automysqlbackup
+    state: latest
+- name: Enable Apache
+  systemd:
+    name: apache2
+    state: started
+    enabled: yes
+- name: download update-php-ini
+  get_url:
+    url: https://raw.githubusercontent.com/serverok/server-setup/master/install/update-php-ini.sh
+    dest: /usr/local/bin/update-php-ini
+    mode: '0755'
+- name: update php.ini
+  command: /usr/local/bin/update-php-ini
+- name: enable password authentication
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication no$'
+    replace: 'PasswordAuthentication yes'
+- name: restart ssh
+  command: systemctl restart ssh
+- name: add add-site script
+  get_url:
+    url: https://raw.githubusercontent.com/serverok/server-setup/master/tools/sok-nginx-add-site.py
+    dest: /usr/local/bin/sok-site-add
+    mode: '0755'

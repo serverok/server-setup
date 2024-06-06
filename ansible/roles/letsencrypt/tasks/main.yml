@@ -32,8 +32,8 @@
 - name: Creates cronjob
   ansible.builtin.cron:
     name: "renew SSL"
-    special_time: weekly
-    job: "/usr/serverok/ssl-renew >> /var/log/le-renew.log"
+    special_time: daily
+    job: "/usr/serverok/ssl-renew > /var/log/le-renew.log 2>&1"
 
 - name: mkdir /usr/serverok/
   file:
