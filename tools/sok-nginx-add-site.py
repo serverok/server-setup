@@ -120,7 +120,6 @@ def create_apache_config(domain_name, username, app_type):
     fpm_file = open(file_location,'w')
     fpm_file.write(content)
     fpm_file.close()
-
 def detect_server():
     try:
         output = subprocess.check_output(['ss', '-nltp'])
@@ -128,17 +127,20 @@ def detect_server():
         print(f"Error executing ss command: {e}")
         sys.exit(1)
 
-    output_str = output.decode('utf-8')
+    output_str = output.decode('utf-8').lower()
 
-    if ('*:80' in output_str or '*:443' in output_str) and 'nginx' in output_str.lower():
-        server = "nginx"
-    elif ('*:80' in output_str or '*:443' in output_str) and 'apache' in output_str.lower():
-        server = "apache"
-    else:
-        print("Error: Neither Apache nor Nginx is listening on port 80 or 443.")
-        sys.exit(1)
+    if '*:80' in output_str or '0.0.0.0:80' in output_str:
+        if 'apache2' in output_str:
+            return "apache"
+        if 'nginx' in output_str:
+            return "nginx"
+    
+    print("Error: Neither Apache nor Nginx is listening on port 80 or 443.")
+    sys.exit(1)
 
-    return server
+server = detect_server()
+print(server)
+
 
 def find_ip():
     r = requests.get("http://checkip.amazonaws.com")
