@@ -111,6 +111,16 @@ def create_nginx_config(domain_name, username, app_type):
     fpm_file.write(content)
     fpm_file.close()
 
+def create_apache_config(domain_name, username, app_type):
+    content = get_url_content("https://raw.githubusercontent.com/serverok/server-setup/master/config/apache2/vhost.conf")
+    content = content.replace("POOL_NAME", username)
+    content = content.replace("FQDN", domain_name)
+    file_location = "/etc/apache2/sites-enabled/" + domain_name + ".conf"
+    fpm_file = open(file_location,'w')
+    fpm_file.write(content)
+    fpm_file.close()
+
+
 def find_ip():
     r = requests.get("http://checkip.amazonaws.com")
     if r.status_code == 200:
@@ -130,6 +140,7 @@ parser.add_argument("-u", "--user", help="user name for your web site")
 parser.add_argument("-p", "--password", help="sftp password for site")
 parser.add_argument("--php", help="select PHP version. Example --php 8.3")
 parser.add_argument("--app", help="select App. Eg --app laravel")
+parser.add_argument("--server", help="select server (apache or nginx). Eg --server apache")
 
 args = parser.parse_args()
 
@@ -139,6 +150,15 @@ else:
     domain_name = input("Enter domain name: ")
     domain_name = domain_name.strip()
 
+if args.server:
+    server = args.server.strip()
+else:
+    server = 'nginx'
+
+if server not in ["apache", "nginx"]:
+    print(f"Invalid server value: {server}. Expected 'apache' or 'nginx'.")
+    sys.exit(1)
+    
 if args.user:
     username = args.user
 else:
@@ -178,7 +198,11 @@ ip_address = find_ip()
 linux_add_user(domain_name, username, password)
 
 create_phpfpm_config(username, php_version)
-create_nginx_config(domain_name, username, app_type)
+
+if server == "nginx":
+    create_nginx_config(domain_name, username, app_type)
+else:
+    create_apache_config(domain_name, username, app_type)
 
 doc_root = "/home/" + domain_name + "/html/"
 os.system("mkdir " + doc_root)
@@ -194,7 +218,11 @@ if app_type == "laravel":
     os.system("chown -R " + username + ":" + username + " " + doc_root)
 
 os.system("systemctl restart php" + php_version + "-fpm")
-os.system("systemctl restart nginx")
+
+if server == "nginx":
+    os.system("systemctl restart nginx")
+else:
+    os.system("systemctl restart apache2")
 
 print("SFTP " + domain_name + "\n")
 print("IP = {}".format(ip_address))
@@ -217,7 +245,11 @@ print("PW = {}".format(password_mysql))
 
 print("\n")
 
-print("certbot --authenticator webroot --webroot-path " + doc_root + " --installer nginx -m admin@serverok.in --agree-tos --no-eff-email -d " + domain_name + " -d www." + domain_name)
+if server == "nginx":
+    print("certbot --authenticator webroot --webroot-path " + doc_root + " --installer nginx -m admin@serverok.in --agree-tos --no-eff-email -d " + domain_name + " -d www." + domain_name)
+else:
+    print("certbot --authenticator webroot --webroot-path " + doc_root + " --installer apache -m admin@serverok.in --agree-tos --no-eff-email -d " + domain_name + " -d www." + domain_name)
+
 print("mysql")
 print("CREATE DATABASE {}_db;".format(username))
 print("CREATE USER '{}_db'@'localhost' IDENTIFIED BY '{}';".format(username, password_mysql))
