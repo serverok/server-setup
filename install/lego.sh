@@ -13,7 +13,7 @@ mkdir -p /etc/lego/certificates/
 chmod -R 755 /etc/lego/
 
 crontab -l > /root/crontab-backup
-echo "@weekly /usr/serverok/lego-renew >> /var/log/lego-renew.log" >> /root/crontab-backup
+echo "0 9 * * * /usr/serverok/lego-renew > /var/log/lego-renew.log 2>&1" >> /root/crontab-backup
 crontab /root/crontab-backup
 mv /root/crontab-backup /tmp/crontab-backup-$(date "+%Y-%m-%d-%H-%M-%S")
 
