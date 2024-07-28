@@ -10,7 +10,7 @@ ldconfig
 
 
 if [ -f /etc/redhat-release ]; then
-    yum update
+    yum -y update
     yum -y upgrade
     yum -y install git
     yum -y install unzip wget bzip2 curl lynx jwhois
@@ -66,7 +66,7 @@ ldconfig
 # http://sourceforge.net/projects/faac/files/
 
 cd /usr/local/src/
-wget -c https://excellmedia.dl.sourceforge.net/project/faac/faac-src/faac-1.30/faac-1_30.tar.gz
+wget -c https://downloads.sourceforge.net/project/faac/faac-src/faac-1.30/faac-1_30.tar.gz
 tar -zxvf faac-1_30.tar.gz
 cd /usr/local/src/faac-1_30
 sed -i '/char \*strcasestr(const char \*haystack, const char \*needle);/d' ./common/mp4v2/mpeg4ip.h
@@ -140,6 +140,18 @@ cd /usr/local/src/libtheora-1.1.1
 make
 make install
 
+# For CentOS 8
+# 2022-01-12  commit 7180717276af1ebc7da15c83162d6c5d6203aabf
+
+cd /usr/local/src
+git clone https://gitlab.xiph.org/xiph/theora.git
+cd theora
+./autogen.sh
+./configure --prefix=/usr
+make
+make install
+
+
 if [ $? -ne 0 ]; then
     echo "libtheora failed to install"
     exit 1
@@ -203,7 +215,7 @@ mv yamdi /usr/bin/
 cd /usr/local/src/
 wget -c http://liba52.sourceforge.net/files/a52dec-0.7.4.tar.gz
 tar xvf a52dec-0.7.4.tar.gz
-cd /usr/local/src/a52dec*
+cd /usr/local/src/a52dec-0.7.4
 ./configure
 make
 make install
@@ -359,12 +371,18 @@ ln -sf /usr/local/lib/codecs /usr/lib/win32
 ldconfig
 
 # http://www.mplayerhq.hu/design7/dload.html
-# Updated on 2017-08-09
+
+cd /usr/local/src
+wget http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.4.tar.xz
+tar xvf MPlayer-1.4.tar.xz
+cd MPlayer-1.4
+echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
+make && make install
 
 cd /usr/local/src
 wget http://www.mplayerhq.hu/MPlayer/releases/mplayer-checkout-snapshot.tar.bz2
 tar xvf mplayer-checkout-snapshot.tar.bz2
-cd mplayer-checkout-2018-10-23
+cd mplayer-checkout-2022-01-12
 echo y | ./configure --prefix=/usr --codecsdir=/usr/local/lib/codecs/ --enable-theora
 make && make install
 
@@ -419,4 +437,13 @@ make tools/qt-faststart
 cp -a tools/qt-faststart /usr/bin/
 
 ldconfig
+
+# if cloudlinux
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/data/cagefs_git.cfg -O /etc/cagefs/conf.d/git.cfg
+wget https://raw.githubusercontent.com/serverok/server-setup/master/data/cagefs_vshare.cfg -O /etc/cagefs/conf.d/vshare.cfg
+
+/usr/sbin/cagefsctl --enable-all
+
+cagefsctl --force-update
 

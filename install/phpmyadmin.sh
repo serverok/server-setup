@@ -196,6 +196,9 @@ GRANT ALL PRIVILEGES ON DB_NAME.* TO 'USERNAME'@'localhost';
 FLUSH PRIVILEGES;
 
 
+ALTER USER 'admin'@'%' IDENTIFIED BY 'NewPassword';
+
+
 
 =============================================================================
 ROOT USER
@@ -209,7 +212,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'admin'@'%' WITH GRANT OPTION;
 
 MySQL 8
 
-CREATE USER 'admin'@'localhost' IDENTIFIED WITH mysql_native_password BY '123';
+CREATE USER 'admin'@'localhost' IDENTIFIED BY '123';
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 

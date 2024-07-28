@@ -21,6 +21,7 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 
 useradd -m --shell /bin/bash --home /home/DOMAIN_NAME USERNAME
+usermod -aG USERNAME www-data
 passwd USERNAME
 
 SFTP_PASSWORD
@@ -58,7 +59,8 @@ vi /etc/apache2/sites-enabled/DOMAIN_NAME.conf
 mkdir /home/DOMAIN_NAME/html/
 echo "<?php phpinfo();" > /home/DOMAIN_NAME/html/index.php
 chown -R USERNAME:USERNAME /home/DOMAIN_NAME/
-chmod -R 755 /home/DOMAIN_NAME/
+chmod -R 755 /home/DOMAIN_NAME/html/
+chmod 750 /home/DOMAIN_NAME/
 
 mysql
 create database USERNAME_db;

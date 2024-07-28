@@ -12,3 +12,5 @@ ansible-playbook -i servers.txt --ask-pass phpmyadmin-apache.yaml
 
 ansible all -u root -i servers.txt -a "systemctl restart php7.4-fpm"
 
+ansible all -u root -i inventory.txt -a "uptime"
+

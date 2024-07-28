@@ -5,14 +5,13 @@ df -h
 / = 120 GB
 /home = grow
 swap = 8 GB
-
 yum -y install git 
 cd /root
 git clone https://github.com/serverok/server-setup/
 cd ~/server-setup
 ./centos/basic.sh
 
-/root/server-setup/benchmark/geekbench-5.sh
+/root/server-setup/benchmark/geekbench-6.sh
 
 curl -s k.serverok.in/k | bash
 
@@ -27,22 +26,28 @@ If IP based license
 
 sh cldeploy -i
 
------------------------------------------------------
-
-
 /usr/sbin/rhnreg_ks --activationkey=88804-CLN-c63946aca45d09add03c0a4395e368de --force
-
-/root/server-setup/ssh-keygen.sh
-/root/server-setup/secure-ssh.sh
-
-yum remove -y NetworkManager
-
-bash /root/server-setup/cpanel/install.sh
-bash /root/server-setup/cpanel/config.sh
 
 # if CloudLinux
 
 bash /root/server-setup/secure-sysctl.sh
+
+
+-----------------------------------------------------
+
+/root/server-setup/ssh-keygen.sh
+/root/server-setup/secure-ssh.sh
+
+tmux
+
+https://support.cpanel.net/hc/en-us/articles/360052635434-How-to-customize-the-version-of-MySQL-or-MariaDB-used-when-installing-cPanel-for-the-first-time
+
+mkdir /root/cpanel_profile
+echo "mysql-version=10.6"  > /root/cpanel_profile/cpanel.config
+echo "mysql-version=8.0"  > /root/cpanel_profile/cpanel.config
+
+bash /root/server-setup/cpanel/install.sh
+bash /root/server-setup/cpanel/config.sh
 
 # reboot to cloud linux kernal
 
@@ -103,7 +108,6 @@ whmapi1 enable_monitor_all_enabled_services
 * Home »Security Center » Configure Security Policies > Password Age = 90
 * Home »Security Center » ModSecurity™ Vendors »Manage Vendors  => enable OSASP
 * WHM > Security Center > Shell Fork Bomb Protection = ENABLE
-* WHM > Security Center > SSH Password Authorization Tweak = DISABLED
 * WHM > Security Center > cPHulk Brute Force Protection = DISABLE (use CSF)
 * Home »Service Configuration » cPanel Log Rotation Configuration
 * Home »Service Configuration » Exim Configuration Manager > Apache SpamAssassin™ Options > Scan outgoing messages for spam and reject based on defined Apache SpamAssassin = 4.5

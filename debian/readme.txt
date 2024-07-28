@@ -32,6 +32,13 @@ bash upgrade-debian-9.sh
 
 apt install automysqlbackup -y
 
+wget https://raw.githubusercontent.com/serverok/server-setup/master/tools/sok-nginx-add-site.py -O /usr/local/bin/sok-site-add
+chmod 755 /usr/local/bin/sok-site-add
+
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+mv wp-cli.phar /usr/local/bin/wp
+chmod 755 /usr/local/bin/wp
+
 
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' IDENTIFIED BY 'MYSQL_PASSWORD' WITH GRANT OPTION;
 GRANT PROXY ON ''@'' TO 'admin'@'localhost' WITH GRANT OPTION;

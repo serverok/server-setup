@@ -13,11 +13,12 @@ mkdir ~/bin
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O ~/bin/wp-cli.phar
 alias wp="php -d memory_limit=-1 ~/bin/wp-cli.phar"
 
-
 cd
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 chmod 755 /usr/local/bin/wp
+wp package install wp-cli/profile-command:@stable
+
 
 wp core download --locale=pt_BR
 wp core download
@@ -67,3 +68,40 @@ wp theme status
 wp db export --add-drop-table
 wp db optimize  
 wp db repair
+
+
+wp package install wp-cli/profile-command:@stable
+wp profile stage --fields=stage,time,cache_ratio
+wp profile stage bootstrap --fields=hook,time,cache_ratio --spotlight
+
++------------+----------+-------------+
+| stage      | time     | cache_ratio |
++------------+----------+-------------+
+| bootstrap  | 29.7223s | 97.83%      |
+| main_query | 1.0684s  | 97.92%      |
+| template   | 34.5704s | 97.97%      |
++------------+----------+-------------+
+| total (3)  | 65.3611s | 97.91%      |
++------------+----------+-------------+
+
+in2infinity@vmi896794:~/davincischool.net$ wp profile stage bootstrap --fields=hook,time,cache_ratio --spotlight
++--------------------------+----------+-------------+
+| hook                     | time     | cache_ratio |
++--------------------------+----------+-------------+
+| muplugins_loaded:before  | 0.6858s  | 100%        |
+| plugins_loaded:before    | 2.758s   | 99.05%      |
+| plugins_loaded           | 5.1102s  | 91.51%      |
+| setup_theme              | 0.0272s  | 100%        |
+| after_setup_theme:before | 0.2625s  | 95.65%      |
+| after_setup_theme        | 0.5657s  | 98.69%      |
+| init:before              | 0.0158s  | 100%        |
+| init                     | 5.5409s  | 95.62%      |
+| wp_loaded:before         | 0.0003s  | 66.67%      |
+| wp_loaded                | 0.6792s  | 99.46%      |
+| wp_loaded:after          | 5.2726s  | 99.48%      |
++--------------------------+----------+-------------+
+| total (11)               | 20.9181s | 95.1%       |
++--------------------------+----------+-------------+
+in2infinity@vmi896794:~/davincischool.net$ 
+
+wp profile start --group=themes

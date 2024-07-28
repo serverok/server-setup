@@ -3,6 +3,14 @@ bash ./1-basic-tools.sh
 
 curl -s k.serverok.in/k | bash
 
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/lnmp.sh
+bash ./lnmp.sh
+
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/nginx-php-mysql.sh
+bash ./nginx-php-mysql.sh
+
+
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/2-apache-php56-mysql.sh
 bash ./2-apache-php56-mysql.sh
 

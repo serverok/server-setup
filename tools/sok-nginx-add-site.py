@@ -4,6 +4,12 @@
 # Mail: admin@serverok.in
 # Create web site in Nginx.
 
+# usermod -aG super www-data
+# systemctl reload nginx
+# setfacl -R -x u:www-data /home/boby.serverok.in
+# setfacl -R -m u:www-data:rX /home/boby.serverok.in
+# apt-get install acl
+
 import sys
 import re
 import pwd
@@ -120,6 +126,7 @@ def create_apache_config(domain_name, username, app_type):
     fpm_file = open(file_location,'w')
     fpm_file.write(content)
     fpm_file.close()
+
 def detect_server():
     try:
         output = subprocess.check_output(['ss', '-nltp'])
@@ -137,10 +144,6 @@ def detect_server():
     
     print("Error: Neither Apache nor Nginx is listening on port 80 or 443.")
     sys.exit(1)
-
-server = detect_server()
-print(server)
-
 
 def find_ip():
     r = requests.get("http://checkip.amazonaws.com")
@@ -170,8 +173,6 @@ else:
     domain_name = input("Enter domain name: ")
     domain_name = domain_name.strip()
 
-server = detect_server()
-
 if args.user:
     username = args.user
 else:
@@ -195,6 +196,9 @@ if args.app:
         app_type = "wp"
 else:
     app_type = "wp"
+
+server = detect_server()
+print(f"Server = {server}")
 
 verify_php_version(php_version)
 verify_username(username)

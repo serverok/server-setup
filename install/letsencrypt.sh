@@ -83,7 +83,7 @@ else
 fi
 
 crontab -l > /root/crontab-backup
-echo "@weekly /usr/serverok/ssl-renew >> /var/log/le-renew.log" >> /root/crontab-backup
+echo "0 9 * * * /usr/serverok/ssl-renew > /var/log/le-renew.log 2>&1" >> /root/crontab-backup
 crontab /root/crontab-backup
 mv /root/crontab-backup /tmp/crontab-backup-$(date "+%Y-%m-%d-%H-%M-%S")
 
