@@ -55,6 +55,8 @@ apt -y install php${PHP_VERSION}-fpm
 systemctl enable php${PHP_VERSION}-fpm
 systemctl restart php${PHP_VERSION}-fpm
 
+curl -sS https://getcomposer.org/installer |  php -- --install-dir=/usr/local/bin --filename=composer
+
 apt -y install mariadb-client mariadb-server
 systemctl enable mysql
 systemctl restart mysql
