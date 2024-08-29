@@ -75,7 +75,7 @@ apt -y install automysqlbackup
 systemctl enable nginx
 systemctl restart nginx
 
-echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config.d/sok.conf
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config.d/00-serverok.conf
 systemctl restart ssh
 
 apt install -y monit
