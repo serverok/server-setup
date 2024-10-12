@@ -4,11 +4,10 @@
 
 apt-get -y install apache2
 apt -y install libapache2-mod-ruid2
-update-rc.d apache2 enable
+systemctl enable apache2
 a2enmod rewrite
 a2enmod ssl
 a2enmod headers
-
 
 sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
 
@@ -30,7 +29,7 @@ a2enmod php8.0
 systemctl restart apache2
 
 apt-get -y install mariadb-client mariadb-server
-update-rc.d mysql enable
+systemctl enable mysql
 apt install automysqlbackup -y
 
 echo "postfix postfix/mailname string `hostname`" | debconf-set-selections
