@@ -33,6 +33,34 @@ if [ -f /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini ]; then
     touch /usr/local/lsws/admin/tmp/.lsphp_restart.txt
 fi
 
+if [ -f /usr/local/lsws/lsphp74/etc/php/7.4/litespeed/php.ini ]; then
+    echo "OpenLiteSpeed lsphp74"
+    cd /usr/local/lsws/lsphp74/etc/php/7.4/litespeed/
+    update_php_ini
+    touch /usr/local/lsws/admin/tmp/.lsphp_restart.txt
+fi
+
+if [ -f /usr/local/lsws/lsphp81/etc/php/8.1/litespeed/php.ini ]; then
+    echo "OpenLiteSpeed lsphp81"
+    cd /usr/local/lsws/lsphp81/etc/php/8.1/litespeed/
+    update_php_ini
+    touch /usr/local/lsws/admin/tmp/.lsphp_restart.txt
+fi
+
+if [ -f /usr/local/lsws/lsphp82/etc/php/8.2/litespeed/php.ini ]; then
+    echo "OpenLiteSpeed lsphp82"
+    cd /usr/local/lsws/lsphp82/etc/php/8.2/litespeed/
+    update_php_ini
+    touch /usr/local/lsws/admin/tmp/.lsphp_restart.txt
+fi
+
+if [ -f /usr/local/lsws/lsphp83/etc/php/8.3/litespeed/php.ini ]; then
+    echo "OpenLiteSpeed lsphp83"
+    cd /usr/local/lsws/lsphp83/etc/php/8.3/litespeed/
+    update_php_ini
+    touch /usr/local/lsws/admin/tmp/.lsphp_restart.txt
+fi
+
 PHP_INI_APACHE_PATHS=(
 /etc/php/5.6/apache2/php.ini
 /etc/php/7.0/apache2/php.ini
