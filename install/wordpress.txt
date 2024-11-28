@@ -13,9 +13,7 @@ mkdir ~/bin
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O ~/bin/wp-cli.phar
 alias wp="php -d memory_limit=-1 ~/bin/wp-cli.phar"
 
-cd
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-mv wp-cli.phar /usr/local/bin/wp
+wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
 chmod 755 /usr/local/bin/wp
 wp package install wp-cli/profile-command:@stable
 
