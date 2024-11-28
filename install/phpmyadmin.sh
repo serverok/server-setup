@@ -159,6 +159,24 @@ Listen 7777
 </VirtualHost>
 
 
+Listen 7777
+
+<VirtualHost *:7777>
+    DocumentRoot /usr/serverok/phpmyadmin/
+    CustomLog ${APACHE_LOG_DIR}/pma.log combined
+    <FilesMatch \.php$>
+        SetHandler "proxy:unix:/run/php/php8.2-fpm.sock|fcgi://localhost/"
+    </FilesMatch>
+    <Directory "/usr/serverok/phpmyadmin">
+        Options All
+        AllowOverride All
+        Require all granted
+        Order allow,deny
+        allow from all
+    </Directory>
+</VirtualHost>
+
+
 vi /etc/httpd/conf.d/phpmyadmin.conf
 
 Listen 7777
@@ -244,3 +262,15 @@ UPDATE mysql.user SET Plugin='' WHERE user='root';
 UPDATE mysql.user SET Plugin='auth_socket' WHERE user='root';
 UPDATE mysql.user SET Plugin='caching_sha2_password' WHERE user='root';
 UPDATE mysql.user SET Plugin='mysql_native_password' WHERE user='root';
+
+
+
+
+ALTER USER 'colegiomedico_atom'@'localhost' IDENTIFIED BY 'new_password_here';
+
+SET PASSWORD FOR 'colegiomedico_atom'@'localhost' = PASSWORD('new_password_here');
+FLUSH PRIVILEGES;
+
+If you're changing your own password (the user you're currently logged in as), you can simply use:
+
+ALTER USER USER() IDENTIFIED BY 'new_password_here';
