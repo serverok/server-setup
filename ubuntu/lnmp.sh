@@ -122,7 +122,7 @@ cd /usr/local/src
 rm -f phpMyAdmin-latest-all-languages.tar.gz
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 tar xvf phpMyAdmin-latest-all-languages.tar.gz
-mv phpMyAdmin-5.2.1-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-5.2.2-all-languages /usr/serverok/phpmyadmin
 cd /usr/serverok/phpmyadmin/
 mkdir tmp
 chmod 777 tmp
