@@ -7,6 +7,11 @@ curl -s k.serverok.in/k | bash
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/lnmp.sh
 bash ./lnmp.sh
 
+Apache
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/lamp.sh
+bash ./lamp.sh
+
+
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/nginx-php-mysql.sh
 bash ./nginx-php-mysql.sh
 

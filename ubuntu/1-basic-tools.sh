@@ -17,6 +17,7 @@ apt install -y sysstat
 sed -i 's/ENABLED="false"/ENABLED="true"/g' /etc/default/sysstat
 systemctl enable sysstat.service sysstat-collect.timer
 systemctl restart sysstat.service sysstat-collect.timer
+# systemctl status sysstat.service sysstat-collect.timer
 
 systemctl status apparmor
 systemctl stop apparmor

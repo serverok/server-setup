@@ -31,5 +31,4 @@ php_admin_flag[log_errors] = on
 listen.backlog = 511
 
 ; Number of requests a worker handles before restarting.
-pm.max_requests = 1000            
-
+pm.max_requests = 1000

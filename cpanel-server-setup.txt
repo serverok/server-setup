@@ -43,7 +43,7 @@ tmux
 https://support.cpanel.net/hc/en-us/articles/360052635434-How-to-customize-the-version-of-MySQL-or-MariaDB-used-when-installing-cPanel-for-the-first-time
 
 mkdir /root/cpanel_profile
-echo "mysql-version=10.6"  > /root/cpanel_profile/cpanel.config
+echo "mysql-version=10.11"  > /root/cpanel_profile/cpanel.config
 echo "mysql-version=8.0"  > /root/cpanel_profile/cpanel.config
 
 bash /root/server-setup/cpanel/install.sh

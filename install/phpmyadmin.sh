@@ -7,12 +7,12 @@ cd /usr/local/src
 rm -f phpMyAdmin-latest-all-languages.tar.gz
 wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
 tar xvf phpMyAdmin-latest-all-languages.tar.gz
-mv phpMyAdmin-5.2.1-all-languages /usr/serverok/phpmyadmin
+mv phpMyAdmin-5.2.2-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/local/src
-wget https://files.phpmyadmin.net/phpMyAdmin/4.9.7/phpMyAdmin-4.9.7-all-languages.tar.gz
-tar xvf phpMyAdmin-4.9.7-all-languages.tar.gz
-mv phpMyAdmin-4.9.7-all-languages /usr/serverok/phpmyadmin
+wget https://files.phpmyadmin.net/phpMyAdmin/4.9.11/phpMyAdmin-4.9.11-all-languages.tar.gz
+tar xvf phpMyAdmin-4.9.11-all-languages.tar.gz
+mv phpMyAdmin-4.9.11-all-languages /usr/serverok/phpmyadmin
 
 cd /usr/serverok/phpmyadmin/
 mkdir tmp
@@ -158,6 +158,7 @@ Listen 7777
     </Directory>
 </VirtualHost>
 
+systemctl restart apache2
 
 Listen 7777
 

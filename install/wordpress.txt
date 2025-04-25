@@ -40,7 +40,7 @@ wp cache flush
 
 wp rewrite structure '/%postname%/'
 
-wp user update USERNAME --user_pass="new_password"
+wp user update USERNAME --user_pass='new_password'
 wp user update admin --user_email=brunadias.seo@gmail.com
 
 
