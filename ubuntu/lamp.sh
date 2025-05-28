@@ -46,6 +46,9 @@ a2enmod headers
 a2enmod proxy_fcgi
 
 sed -i 's/#Mutex file:..APACHE_LOCK_DIR. default/Mutex posixsem/g'  /etc/apache2/apache2.conf
+sed -i "s/ServerSignature On/ServerSignature Off/g" /etc/apache2/conf-available/security.conf
+sed -i "s/^ServerTokens .*/ServerTokens Prod/g" /etc/apache2/conf-available/security.conf
+sed -i "s/TraceEnable On/TraceEnable Off/g" /etc/apache2/conf-available/security.conf
 
 systemctl enable apache2
 systemctl restart apache2
