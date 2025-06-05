@@ -35,6 +35,9 @@ echo 'export HISTTIMEFORMAT="%d/%m/%y %T "' >> ~/.bashrc
 apt-get install -y sysstat
 sed -i 's/ENABLED="false"/ENABLED="true"/g' /etc/default/sysstat
 
+echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config.d/00-serverok.conf
+systemctl restart ssh
+
 systemctl stop apparmor
 systemctl disable apparmor
 
@@ -85,6 +88,43 @@ ln -s /etc/monit/conf-available/apache2 /etc/monit/conf-enabled/apache2
 systemctl enable monit
 systemctl restart monit
 
+mkdir /usr/serverok/
+rm -rf /usr/serverok/phpmyadmin
+
+cd /usr/local/src
+rm -f phpMyAdmin-latest-all-languages.tar.gz
+wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
+tar xvf phpMyAdmin-latest-all-languages.tar.gz
+mv phpMyAdmin-5.2.2-all-languages /usr/serverok/phpmyadmin
+
+cd /usr/serverok/phpmyadmin/
+mkdir tmp
+chmod 777 tmp
+cp config.sample.inc.php config.inc.php
+sed -i  's/$cfg\[.blowfish_secret.\] = .*$/$cfg\["blowfish_secret"\] = "ohhae8Fa6oJohrohng0ieV0to3aiThae";/g' config.inc.php
+
+cat <<EOF > /etc/apache2/sites-available/phpmyadmin.conf
+Listen 7777
+
+<VirtualHost *:7777>
+  DocumentRoot /usr/serverok/phpmyadmin/
+  CustomLog \${APACHE_LOG_DIR}/pma.log combined
+  <FilesMatch \.php\$>
+    SetHandler "proxy:unix:/run/php/php${PHP_VERSION}-fpm.sock|fcgi://localhost/"
+  </FilesMatch>
+  <Directory "/usr/serverok/phpmyadmin">
+    Options All
+    AllowOverride All
+    Require all granted
+    Order allow,deny
+    allow from all
+  </Directory>
+</VirtualHost>
+EOF
+
+a2ensite phpmyadmin.conf
+
+systemctl restart apache2
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/install/update-php-ini.sh
 bash ./update-php-ini.sh
