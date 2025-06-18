@@ -2,27 +2,23 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-echo "Select PHP version to install:"
-echo "1) 7.4"
-echo "2) 8.0"
-echo "3) 8.1"
-echo "4) 8.2"
-echo "5) 8.3"
-read -p "Enter the number corresponding to the PHP version (1-5): " choice
+PHP_VERSIONS=("7.2" "7.4" "8.0" "8.1" "8.2" "8.3")
 
-if ! [[ "$choice" =~ ^[1-5]$ ]]; then
-  echo "Invalid input. Please enter a number between 1 and 5."
+echo "Select PHP version to install:"
+for i in "${!PHP_VERSIONS[@]}"; do
+    echo "$((i+1))) ${PHP_VERSIONS[$i]}"
+done
+
+read -p "Enter the number corresponding to the PHP version (1-${#PHP_VERSIONS[@]}): " choice
+
+if ! [[ "$choice" =~ ^[1-9][0-9]*$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "${#PHP_VERSIONS[@]}" ]; then
+  echo "Invalid input. Please enter a number between 1 and ${#PHP_VERSIONS[@]}."
   exit 1
 fi
 
-case $choice in
-    1) PHP_VERSION="7.4" ;;
-    2) PHP_VERSION="8.0" ;;
-    3) PHP_VERSION="8.1" ;;
-    4) PHP_VERSION="8.2" ;;
-    5) PHP_VERSION="8.3" ;;
-    *) PHP_VERSION="8.3" ;;
-esac
+PHP_VERSION="${PHP_VERSIONS[$((choice-1))]}"
+
+echo "You selected PHP $PHP_VERSION"
 
 apt update
 apt -y upgrade

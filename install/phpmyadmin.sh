@@ -142,7 +142,7 @@ location ~ \.php$ {
     include fastcgi_params;
 }
 
-vi /etc/apache2/conf-enabled/phpmyadmin.conf
+vi /etc/apache2/sites-enabled/phpmyadmin.conf
 
 Listen 7777
 
