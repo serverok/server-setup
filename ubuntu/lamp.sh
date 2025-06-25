@@ -2,7 +2,7 @@
 
 export DEBIAN_FRONTEND=noninteractive
 
-PHP_VERSIONS=("7.2" "7.4" "8.0" "8.1" "8.2" "8.3")
+PHP_VERSIONS=("7.2" "7.4" "8.0" "8.1" "8.2" "8.3" "8.4")
 
 echo "Select PHP version to install:"
 for i in "${!PHP_VERSIONS[@]}"; do
