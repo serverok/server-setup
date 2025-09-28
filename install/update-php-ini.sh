@@ -6,7 +6,7 @@ function update_php_ini() {
     sed -i "s/max_execution_time\s*=.*/max_execution_time = 600/g" php.ini
     sed -i "s/max_input_time\s*=.*/max_input_time = 6000/g" php.ini
     sed -i "s/memory_limit\s*=.*/memory_limit = 512M/g" php.ini
-    sed -i "s/display_errors\s*=.*/display_errors = On/g" php.ini
+    #sed -i "s/display_errors\s*=.*/display_errors = On/g" php.ini
     sed -i "s/post_max_size\s*=.*/post_max_size = 4000M/g" php.ini
     sed -i "s/upload_max_filesize\s*=.*/upload_max_filesize = 4000M/g" php.ini
     sed -i "s/session.gc_maxlifetime\s*=.*/session.gc_maxlifetime = 14400/g" php.ini

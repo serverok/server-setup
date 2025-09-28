@@ -4,6 +4,7 @@
 # Email: admin@serverOk.in
 # This script is used to generate disk usage for web sites on a cpanel server.
 # cd /home; du -k --max-depth=1 | sort -n > /root/disk_usage.txt
+# curl https://raw.githubusercontent.com/serverok/server-setup/refs/heads/master/tools/cpanel-disk-usage.php > /root/du.php
 # php /root/du.php > /usr/local/apache/htdocs/usage.txt
 # chmod 777 /usr/local/apache/htdocs/usage.txt
 # ifconfig | grep inet
