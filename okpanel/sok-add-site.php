@@ -148,7 +148,7 @@ function findIp() {
     return trim($ip);
 }
 
-function createSiteDataFile($domainName, $username, $docRoot) {
+function createSiteDataFile($domainName, $username, $docRoot, $phpVersion, $appType) {
     $sitedataDir = "/usr/serverok/sitedata/";
     if (!is_dir($sitedataDir)) {
         mkdir($sitedataDir, 0755, true);
@@ -161,6 +161,8 @@ function createSiteDataFile($domainName, $username, $docRoot) {
         'username' => $username,
         'dbname' => $username . '_db',
         'creation_date' => date('Y-m-d H:i:s'),
+        'php_version' => $phpVersion,
+        'app_type' => $appType,
     ];
 
     $jsonData = json_encode($data, JSON_PRETTY_PRINT);
@@ -260,7 +262,7 @@ if ($server == "nginx") {
     shell_exec("systemctl restart apache2");
 }
 
-createSiteDataFile($domainName, $username, $docRoot);
+createSiteDataFile($domainName, $username, $docRoot, $phpVersion, $appType);
 
 echo "SFTP {$domainName}\n\n";
 echo "IP = {$ipAddress}\n";

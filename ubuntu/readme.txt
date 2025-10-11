@@ -11,6 +11,10 @@ Apache
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/lamp.sh
 bash ./lamp.sh
 
+Apache
+wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/install-php.sh
+bash ./install-php.sh
+
 
 wget https://raw.githubusercontent.com/serverok/server-setup/master/ubuntu/nginx-php-mysql.sh
 bash ./nginx-php-mysql.sh
