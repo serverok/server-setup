@@ -170,7 +170,44 @@ function createSiteDataFile($domainName, $username, $docRoot, $phpVersion, $appT
     file_put_contents($filePath, $jsonData);
 }
 
-$text = 'ServerOK Server Manager.';
+function createMysqlDatabaseAndUser($username, $passwordMysql) {
+    $dbName = $username . '_db';
+    $dbUser = $username . '_db';
+
+    // Connect to MySQL as root (passwordless)
+    $mysqli = new mysqli('localhost', 'root', '');
+    if ($mysqli->connect_error) {
+        echo "MySQL Connection failed: " . $mysqli->connect_error . "\n";
+        exit(1);
+    }
+
+    // Create Database
+    if (!$mysqli->query("CREATE DATABASE `{$dbName}`")) {
+        echo "Error creating database {$dbName}: " . $mysqli->error . "\n";
+        $mysqli->close();
+        exit(1);
+    }
+
+    // Create User
+    if (!$mysqli->query("CREATE USER '{$dbUser}'@'localhost' IDENTIFIED BY '{$passwordMysql}'")) {
+        echo "Error creating user {$dbUser}: " . $mysqli->error . "\n";
+        $mysqli->close();
+        exit(1);
+    }
+
+    // Grant Privileges
+    if (!$mysqli->query("GRANT ALL PRIVILEGES ON `{$dbName}`.* TO '{$dbUser}'@'localhost'")) {
+        echo "Error granting privileges to {$dbUser}: " . $mysqli->error . "\n";
+        $mysqli->close();
+        exit(1);
+    }
+
+    $mysqli->query("FLUSH PRIVILEGES");
+    $mysqli->close();
+    echo "Successfully created MySQL database and user.\n";
+}
+
+$text = 'ServerOK Nginx Manager.';
 
 $options = getopt("d:u:p:", ["domain:", "user:", "password:", "php:", "app:"]);
 
@@ -228,6 +265,7 @@ if (linuxUserExists($username)) {
 }
 
 $passwordMysql = generatePassword();
+createMysqlDatabaseAndUser($username, $passwordMysql);
 $ipAddress = findIp();
 
 linuxAddUser($domainName, $username, $password);
@@ -287,10 +325,5 @@ if ($server == "nginx") {
 } else {
     echo "certbot --authenticator webroot --webroot-path " . escapeshellarg($docRoot) . " --installer apache -m admin@serverok.in --agree-tos --no-eff-email -d {$domainName} -d www.{$domainName}\n";
 }
-
-echo "\nmysql\n";
-echo "CREATE DATABASE {$username}_db;\n";
-echo "CREATE USER '{$username}_db'@'localhost' IDENTIFIED BY '{$passwordMysql}';\n";
-echo "GRANT ALL PRIVILEGES ON {$username}_db.* TO '{$username}_db'@'localhost';\n";
 
 ?>
