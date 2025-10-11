@@ -67,8 +67,7 @@ wget -qO- https://get.docker.com/ | sh
 sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod 755 /usr/local/bin/docker-compose
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/okpanel/sok-add-site.php -O /usr/local/bin/sok-site-add
-chmod 755 /usr/local/bin/sok-site-add
+curl -s https://raw.githubusercontent.com/serverok/server-manager/master/install.sh | bash
 
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
