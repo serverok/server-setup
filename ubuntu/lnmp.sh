@@ -93,9 +93,7 @@ wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 chmod 755 /usr/local/bin/wp
 
-wget https://raw.githubusercontent.com/serverok/server-setup/master/okpanel/sok-add-site.php -O /usr/local/bin/sok-site-add
-chmod 755 /usr/local/bin/sok-site-add
-
+curl -s https://raw.githubusercontent.com/serverok/server-manager/master/install.sh | bash
 
 # Add swap if not available
 
@@ -119,10 +117,11 @@ mkdir /usr/serverok/
 rm -rf /usr/serverok/phpmyadmin
 
 cd /usr/local/src
-rm -f phpMyAdmin-latest-all-languages.tar.gz
-wget https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz
-tar xvf phpMyAdmin-latest-all-languages.tar.gz
-mv phpMyAdmin-5.2.2-all-languages /usr/serverok/phpmyadmin
+rm -f phpMyAdmin-5.2.3-all-languages.tar.xz
+wget https://files.phpmyadmin.net/phpMyAdmin/5.2.3/phpMyAdmin-5.2.3-all-languages.tar.xz
+tar xvf phpMyAdmin-5.2.3-all-languages.tar.xz
+mv phpMyAdmin-5.2.3-all-languages /usr/serverok/phpmyadmin
+
 cd /usr/serverok/phpmyadmin/
 mkdir tmp
 chmod 777 tmp
