@@ -148,7 +148,27 @@ function findIp() {
     return trim($ip);
 }
 
-$text = 'ServerOK Nginx Manager.';
+function createSiteDataFile($domainName, $username, $docRoot) {
+    $sitedataDir = "/usr/serverok/sitedata/";
+    if (!is_dir($sitedataDir)) {
+        mkdir($sitedataDir, 0755, true);
+    }
+
+    $data = [
+        'servername' => $domainName,
+        'serveralias' => 'www.' . $domainName,
+        'documentroot' => $docRoot,
+        'username' => $username,
+        'dbname' => $username . '_db',
+        'creation_date' => date('Y-m-d H:i:s'),
+    ];
+
+    $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+    $filePath = $sitedataDir . $domainName;
+    file_put_contents($filePath, $jsonData);
+}
+
+$text = 'ServerOK Server Manager.';
 
 $options = getopt("d:u:p:", ["domain:", "user:", "password:", "php:", "app:"]);
 
@@ -239,6 +259,8 @@ if ($server == "nginx") {
 } else {
     shell_exec("systemctl restart apache2");
 }
+
+createSiteDataFile($domainName, $username, $docRoot);
 
 echo "SFTP {$domainName}\n\n";
 echo "IP = {$ipAddress}\n";
