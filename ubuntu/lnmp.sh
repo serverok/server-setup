@@ -161,3 +161,6 @@ server {
 EOL
 
 systemctl restart nginx
+
+mkdir -p /usr/serverok/okpanel/config/
+echo "nginx" > /usr/serverok/okpanel/config/webserver

@@ -133,3 +133,8 @@ mv wp-cli.phar /usr/local/bin/wp
 chmod 755 /usr/local/bin/wp
 
 curl -s https://raw.githubusercontent.com/serverok/server-manager/master/install.sh | bash
+
+
+mkdir -p /usr/serverok/okpanel/config/
+echo "apache" > /usr/serverok/okpanel/config/webserver
+
